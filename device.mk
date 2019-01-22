@@ -491,6 +491,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-service.qti
 
+# Touch
+PRODUCT_PACKAGES += \
+    vendor.lineage.touch@1.0-service.RMX1931
+
 # USB
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
