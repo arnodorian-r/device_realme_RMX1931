@@ -1,8 +1,6 @@
 # Audio
 af.fast_track_multiplier=1
 audio.deep_buffer.media=true
-ro.config.media_vol_steps=25
-ro.config.vc_call_vol_steps=7
 persist.vendor.audio.ambisonic.auto.profile=false
 persist.vendor.audio.ambisonic.capture=false
 persist.vendor.audio.avs.afe_api_version=2
@@ -10,12 +8,16 @@ persist.vendor.audio.fluence.audiorec=true
 persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.tmic.enabled=false
 persist.vendor.audio.fluence.voicecall=true
-persist.vendor.audio.voicecall.speaker.stereo=true
 persist.vendor.audio.fluence.voicerec=true
+persist.vendor.audio.voicecall.speaker.stereo=true
 persist.vendor.audio.hifi.int_codec=true
 persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.spv3.enable=true
-ro.vendor.audio.sdk.fluencetype=none
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
+ro.af.client_heap_size_kbyte=7168
+ro.config.media_vol_steps=25
+ro.config.vc_call_vol_steps=7
+ro.vendor.audio.sdk.fluencetype=fluence
 ro.vendor.audio.sdk.ssr=false
 vendor.audio.apptype.multirec.enabled=false
 vendor.audio.dolby.ds2.enabled=true
