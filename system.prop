@@ -55,6 +55,8 @@ persist.vendor.overlay.izat.optin=rro
 persist.vendor.ims.disableUserAgent=0
 persist.data.iwlan.enable=true
 persist.dbg.ims_volte_enable=1
+persist.vendor.radio.report_codec=1
+persist.vendor.radio.vdp_on_ims_cap=1
 
 # IO Prefetcher
 vendor.iop.enable_uxe=1
