@@ -14,3 +14,5 @@ get_prop(hal_camera_default, vendor_camera_prop)
 
 get_prop(hal_camera_default, oppo_vendor_prop)
 set_prop(hal_camera_default, oppo_vendor_prop)
+
+allow hal_camera_default public_adsprpcd_file:file r_file_perms;

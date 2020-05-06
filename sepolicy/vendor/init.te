@@ -15,3 +15,5 @@ allow init proc_oppo_extra:file rw_file_perms;
 allow init {
 engineer_vendor_prop
 oppo_vendor_prop }:file { relabelto write read map };
+
+allow init adsprpcd_file:file mounton;
