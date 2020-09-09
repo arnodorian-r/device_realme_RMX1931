@@ -30,64 +30,6 @@
 
 target=`getprop ro.board.platform`
 
-function configure_zram_parameters() {
-    MemTotalStr=`cat /proc/meminfo | grep MemTotal`
-    MemTotal=${MemTotalStr:16:8}
-
-    low_ram=`getprop ro.config.low_ram`
-
-    # Zram disk - 75% for Go devices.
-    # For 512MB Go device, size = 384MB, set same for Non-Go.
-    # For 1GB Go device, size = 768MB, set same for Non-Go.
-    # For >=2GB Non-Go devices, size = 50% of RAM size. Limit the size to 4GB.
-    # And enable lz4 zram compression for Go targets.
-
-    RamSizeGB=`echo "($MemTotal / 1048576 ) + 1" | bc`
-    zRamSizeBytes=`echo "$RamSizeGB * 1024 * 1024 * 1024 / 2" | bc`
-    if [ $zRamSizeBytes -gt 4294967296 ]; then
-        zRamSizeBytes=4294967296
-    fi
-
-    if [ "$low_ram" == "true" ]; then
-        echo lz4 > /sys/block/zram0/comp_algorithm
-    fi
-
-    if [ -f /sys/block/zram0/disksize ]; then
-#ifdef VENDOR_EDIT //Huacai.Zhou@PSW.Kernel.mm,config zramsize according to ramsize
-        echo lz4 > /sys/block/zram0/comp_algorithm
-        if [ $MemTotal -le 524288 ]; then
-            echo 402653184 > /sys/block/zram0/disksize
-        elif [ $MemTotal -le 1048576 ]; then
-            echo 805306368 > /sys/block/zram0/disksize
-        elif [ $MemTotal -le 2097152 ]; then
-            #config 1GB+256M zram size with memory 2 GB
-            echo 1342177280 > /sys/block/zram0/disksize
-        elif [ $MemTotal -le 3145728 ]; then
-            #config 1GB +512M+256M zram size with memory 3 GB
-            echo 1879048192 > /sys/block/zram0/disksize
-        elif [ $MemTotal -le 4194304 ]; then
-            #config 2GB+512M zram size with memory 4 GB
-            echo 2684354560 > /sys/block/zram0/disksize
-            #wen.luo@PSW.Kernel.mm, config almk_totalram_ratio according to diff total Dram
-            echo 4 > /sys/module/lowmemorykiller/parameters/almk_totalram_ratio
-        elif [ $MemTotal -le 6291456 ]; then
-            #config 2GB+192M zram size with memory 6 GB
-            echo 2348810240 > /sys/block/zram0/disksize
-            #wen.luo@PSW.Kernel.mm, config almk_totalram_ratio according to diff total Dram
-            echo 6 > /sys/module/lowmemorykiller/parameters/almk_totalram_ratio
-        else
-            #config 2GB+256M zram size with memory greater than 6GB
-            echo 2415919104 > /sys/block/zram0/disksize
-        fi
-        echo 160 > /proc/sys/vm/swappiness
-        echo 60 > /proc/sys/vm/direct_swappiness
-#endif /*VENDOR_EDIT*/
-        mkswap /dev/block/zram0
-        swapon /dev/block/zram0 -p 32758
-    fi
-}
-
-
 case "$target" in
     "msmnile")
     # Setting b.L scheduler parameters

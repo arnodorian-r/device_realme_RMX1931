@@ -130,6 +130,9 @@ on boot
     #endif /*VENDOR_EDIT*/
     write /dev/cpuset/system-background/cpus 0-7
 
+    # Enable ZRAM on boot_complete
+    swapon_all /vendor/etc/fstab.qcom
+
 # Add a cpuset for the camera daemon
 # We want all cores for camera
     mkdir /dev/cpuset/camera-daemon

@@ -16,6 +16,7 @@
 
 #Kang.Zou@PSW.AD.Storage.1398012, 2019/08/20, Add for enable fbe
 /dev/block/bootdevice/by-name/userdata                  /data                  ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,discard,errors=panic,inlinecrypt latemount,wait,check,fileencryption=ice,wrappedkey,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128M
+
 /dev/block/bootdevice/by-name/userdata                  /data                  f2fs    noatime,nosuid,nodev,discard,fsync_mode=nobarrier,inlinecrypt latemount,wait,check,fileencryption=ice,wrappedkey,sysfs_path=/sys/devices/platform/soc/1d84000.ufshc,checkpoint=fs,keydirectory=/metadata/vold/metadata_encryption,quota,formattable,reservedsize=128M,resize
 
 /devices/platform/soc/8804000.sdhci/mmc_host*           /storage/sdcard1       vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto
@@ -32,8 +33,10 @@
 # Need to have this entry in here even though the mount point itself is no longer needed.
 # The update_engine code looks for this entry in order to determine the boot device address
 # and fails if it does not find it.
+
 /dev/block/bootdevice/by-name/misc                       /misc                 emmc    defaults                                             defaults
 /devices/platform/soc/*.ssusb/*.dwc3/xhci-hcd.*.auto*    /storage/usbotg       vfat    nosuid,nodev    wait,voldmanaged=usbotg:auto
 
 #Runsheng.Pei@PSW.AD.Storage.ReservePartition.1207580, 2017/12/29, Add for new reserve partition
 /dev/block/bootdevice/by-name/opporeserve2      /mnt/vendor/opporeserve        ext4    nosuid,nodev,noatime,barrier=1                       wait,check
+/dev/block/zram0                                         none                  swap    defaults                                             zramsize=2147483648
