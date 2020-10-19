@@ -1070,3 +1070,13 @@ on boot
     setprop persist.vendor.radio.force_on_dc true
     chmod 0660 /dev/mdmreason
     chown system system /dev/mdmreason
+
+service vendor.hwcomposer-2-4 /vendor/bin/hw/android.hardware.graphics.composer@2.4-service
+    override
+    class hal animation
+    user system
+    group graphics drmrpc
+    capabilities SYS_NICE
+    onrestart restart surfaceflinger
+    writepid /dev/cpuset/system-background/tasks
+    socket pps stream 0660 system system
