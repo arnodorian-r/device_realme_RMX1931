@@ -628,7 +628,8 @@
     <bool name="config_proximityCheckOnWake">true</bool>
     <integer name="config_proximityCheckTimeout">100</integer>
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
-    
+    <!-- Default state for LiveDisplay -->
+    <bool name="config_liveDisplayAvailable">true</bool>
     <!-- Does the device support handwave for doze pulse?
          Handwave sensor type must be set and must be a proximity
          type sensor -->
