@@ -22,7 +22,7 @@ TARGET_SCREEN_WIDTH := 1080
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-evolution
+    $(LOCAL_PATH)/overlay-rr
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
@@ -182,7 +182,7 @@ PRODUCT_COPY_FILES += \
 
 # Lineage Specific perms
 PRODUCT_COPY_FILES += \
-    vendor/aosp/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
+    vendor/rr/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # Framework detect
 PRODUCT_PACKAGES += \
@@ -361,7 +361,6 @@ PRODUCT_PACKAGES += \
     init.qti.qseecomd.sh \
     init.insmod.sh \
     fstab.qcom \
-    init.artemis.rc \
     init.devicesetting.rc \
     init.msm.usb.configfs.rc \
     init.oppo.debug.diag.rc \

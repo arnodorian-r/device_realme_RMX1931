@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020 The AOSP Project
+# Copyright (C) 2020 The rr Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +15,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_RMX1931.mk
+    $(LOCAL_DIR)/rr_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_RMX1931-userdebug \
-    aosp_RMX1931-user \
-    aosp_RMX1931-eng
+    rr_RMX1931-userdebug \
+    rr_RMX1931-user \
+    rr_RMX1931-eng
