@@ -121,6 +121,13 @@ ro.vendor.display.sensortype=2
 
 # Display post-processing
 ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
+ro.lcd.backlight.config_boe=11,1013,18,375,551,837,1108,1369,1664,1806,2029,2047
+ro.lcd.backlight.config_truly=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
+ro.lcd.backlight.config_tianma=11,950,11,333,497,781,1043,1315,1605,1760,2008,2047
+ro.lcd.backlight.config_dsjm=11,958,13,334,517,794,1055,1325,1617,1770,1989,2047
+ro.lcd.backlight.config_jdi=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
+ro.lcd.backlight.samsung_tenbit=16,159,7,39,61,115,197,313,476,592,893,1023,1185,1297,1571,1799,2047
+ro.lcd.backlight.config_samsung=8,44,5,22,48,78,128,206,255
 
 # DRM
 drm.service.enabled=true
@@ -185,7 +192,7 @@ persist.rcs.supported=0
 # Sensors
 persist.vendor.sensors.enable.mag_filter=true
 ro.display.underscreen.lightsensor.support=1
-ro.lcd.display.screen.underlightsensor.region=624,28,672,76
+ro.lcd.display.screen.underlightsensor.region=677,19,707,49
 persist.sys.oppo.fusionlight=true
 persist.sys.oppo.proximity=true
 ro.qti.sensors.wu=false
