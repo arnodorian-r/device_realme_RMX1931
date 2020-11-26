@@ -207,6 +207,7 @@ TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 # Sepolicy
 TARGET_SEPOLICY_DIR := msmnile
 include device/qcom/sepolicy-legacy-um/sepolicy.mk
+BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
 
 # Security patch level
