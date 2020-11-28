@@ -1,0 +1,6 @@
+get_prop(hal_sensors_default, oppo_debug_prop);
+
+r_dir_file(hal_sensors_default, proc_touchpanel);
+
+get_prop(hal_sensors_default, sensors_prop);
+allow hal_sensors_default proc_touchpanel:file write;

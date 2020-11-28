@@ -1,0 +1,11 @@
+# Oppo display
+genfscon sysfs /kernel/oppo_display      u:object_r:sysfs_oppo_display:s0
+
+# Touchpanel
+genfscon proc /touchpanel              u:object_r:proc_touchpanel:s0
+
+# Oppo Project Version
+genfscon proc /oppoVersion                      u:object_r:proc_oppoversion:s0
+
+# Oppo FP
+genfscon proc /fp_id                     u:object_r:proc_oppo_fp:s0

@@ -205,9 +205,15 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 
 # Sepolicy
-TARGET_SEPOLICY_DIR := msmnile
-include device/qcom/sepolicy-legacy-um/sepolicy.mk
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+
+SELINUX_IGNORE_NEVERALLOWS := true
+
+BOARD_SEPOLICY_DIRS += device/qcom/sepolicy/qva/public \
+     device/qcom/sepolicy/generic/public \
+     device/qcom/sepolicy/legacy/vendor/ssg \
+     device/qcom/sepolicy/legacy/vendor/test \
+     device/qcom/sepolicy/legacy/vendor/common \
+     $(DEVICE_PATH)/sepolicy/vendor
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
