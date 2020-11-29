@@ -92,17 +92,31 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio@5.0-impl \
     android.hardware.audio.effect@5.0-impl \
-    android.hardware.soundtrigger@2.2-impl \
+    android.hardware.audio.common@2.0-util \
+    android.hardware.audio.common@5.0-util \
+    android.hardware.soundtrigger@2.1-impl \
+    android.hardware.bluetooth.audio@2.0-impl \
     audio.a2dp.default \
+    audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
+    libaudio-resampler \
+    libaudioroute \
+    libbatterylistener \
+    libcirrusspkrprot \
+    libcomprcapture \
+    libexthwplugin \
+    libhdmiedid \
+    libhfp \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libtinycompress \
-    libtinycompress.vendor \
+    libsndmonitor \
+    libspkrprot \
     libvolumelistener \
-    tinymix
+    tinymix \
+    libtinycompress \
+    libtinycompress.vendor
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/audio/,$(TARGET_COPY_OUT_VENDOR)/etc)
@@ -269,6 +283,7 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libOmxVidcCommon \
+    libstagefright_softomx \
     libstagefrighthw
 
 PRODUCT_COPY_FILES += \
@@ -299,7 +314,8 @@ PRODUCT_PACKAGES += \
     com.android.nfc_extras \
     com.gsma.services.nfc \
     NfcNci \
-    SecureElement \
+    android.hardware.secure_element@1.0:64 \
+    android.hardware.secure_element@1.1:64 \
     Tag
 
 # Permissions
