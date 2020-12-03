@@ -24,7 +24,7 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-rr
 
-PRODUCT_ENFORCE_RRO_TARGETS := *
+#PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
@@ -412,7 +412,7 @@ PRODUCT_COPY_FILES += \
 
 # Sensors
 PRODUCT_PACKAGES += \
-    android.hardware.sensors@1.0-service \
+    android.hardware.sensors@1.0-service.RMX1931 \
     android.hardware.sensors@1.0-impl.RMX1931 \
     libsensorndkbridge
 

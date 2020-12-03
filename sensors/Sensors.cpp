@@ -18,6 +18,7 @@
 #include <sensors/convert.h>
 #include "multihal.h"
 
+#include <time.h>
 #include <android-base/logging.h>
 
 #include <sys/stat.h>
@@ -56,7 +57,8 @@ static Result ResultFromStatus(status_t err) {
 Sensors::Sensors()
     : mInitCheck(NO_INIT),
       mSensorModule(nullptr),
-      mSensorDevice(nullptr) {
+      mSensorDevice(nullptr),
+      mSensorHandleProximity(-1){
     status_t err = OK;
     if (UseMultiHal()) {
         mSensorModule = ::get_multi_hal_module_info();
@@ -126,15 +128,11 @@ Return<void> Sensors::getSensorsList(getSensorsList_cb _hidl_cb) {
 
         convertFromSensor(*src, dst);
 
-        if (dst->typeAsString == "qti.sensor.wise_light") {
-            dst->type = SensorType::LIGHT;
-            dst->typeAsString = "";
-        }
-	if (dst->typeAsString == "qti.sensor.proximity_fake") {
+	    if (dst->typeAsString == "android.sensor.tp_proximity") {
             dst->type = SensorType::PROXIMITY;
+            mSensorHandleProximity = dst->sensorHandle;
             dst->typeAsString = "";
         }
-
     }
 
     _hidl_cb(out);
