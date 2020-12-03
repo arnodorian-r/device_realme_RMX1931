@@ -206,14 +206,23 @@ TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 
 # Sepolicy
 
-SELINUX_IGNORE_NEVERALLOWS := true
+#SELINUX_IGNORE_NEVERALLOWS := true
 
-BOARD_SEPOLICY_DIRS += device/qcom/sepolicy/qva/public \
-     device/qcom/sepolicy/generic/public \
-     device/qcom/sepolicy/legacy/vendor/ssg \
-     device/qcom/sepolicy/legacy/vendor/test \
-     device/qcom/sepolicy/legacy/vendor/common \
-     $(DEVICE_PATH)/sepolicy/vendor
+#BOARD_SEPOLICY_DIRS += device/qcom/sepolicy/qva/public \
+#     device/qcom/sepolicy/generic/public \
+#     device/qcom/sepolicy/legacy/vendor/ssg \
+#     device/qcom/sepolicy/legacy/vendor/test \
+#     device/qcom/sepolicy/legacy/vendor/common \
+#     $(DEVICE_PATH)/sepolicy/vendor
+
+
+# Sepolicy
+include device/qcom/sepolicy-legacy-um/sepolicy.mk
+BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+
+# Security patch level
+VENDOR_SECURITY_PATCH := 2020-05-01
+
 
 # Verified Boot
 BOARD_AVB_ENABLE := true
