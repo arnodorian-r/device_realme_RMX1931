@@ -57,8 +57,8 @@ static Result ResultFromStatus(status_t err) {
 Sensors::Sensors()
     : mInitCheck(NO_INIT),
       mSensorModule(nullptr),
-      mSensorDevice(nullptr),
-      mSensorHandleProximity(-1){
+      mSensorDevice(nullptr)
+    {
     status_t err = OK;
     if (UseMultiHal()) {
         mSensorModule = ::get_multi_hal_module_info();
@@ -128,9 +128,13 @@ Return<void> Sensors::getSensorsList(getSensorsList_cb _hidl_cb) {
 
         convertFromSensor(*src, dst);
 
-	    if (dst->typeAsString == "android.sensor.tp_proximity") {
+        if (dst->typeAsString == "qti.sensor.wise_light") {
+            dst->type = SensorType::LIGHT;
+            dst->typeAsString = "";
+        }
+		
+		if (dst->typeAsString == "qti.sensor.proximity_fake") {
             dst->type = SensorType::PROXIMITY;
-            mSensorHandleProximity = dst->sensorHandle;
             dst->typeAsString = "";
         }
     }

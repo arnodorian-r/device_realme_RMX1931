@@ -69,11 +69,9 @@ private:
     sensors_poll_device_1_t *mSensorDevice;
     std::mutex mPollLock;
 
-    int32_t mSensorHandleProximity;
-
     int getHalDeviceVersion() const;
 
-    void convertFromSensorEvents(
+    static void convertFromSensorEvents(
             size_t count, const sensors_event_t *src, hidl_vec<Event> *dst);
 
     DISALLOW_COPY_AND_ASSIGN(Sensors);
