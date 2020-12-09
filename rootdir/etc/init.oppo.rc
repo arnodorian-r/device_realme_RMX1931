@@ -1,0 +1,103 @@
+##################################################################################
+### VENDOR_EDIT, OPPO All rights reserved.
+###
+### File: - init.oppo.rc
+### Author: jiangyg@PM
+###
+### ------------------------------- Revision History: ----------------------------
+### <author>                        <data>       <version>   <desc>
+### ------------------------------------------------------------------------------
+### jiangyg@PM                     2013-10-21                Create this file
+##################################################################################
+
+#chenghao@Swdp.shanghai 2018/08/08, add for joystick RUS feature
+    mkdir /data/joystick 0700 system system
+
+#ifdef VENDOR_EDIT
+#Pingping.Yang@swdp 2018/11/07, add for omedia RUS feature
+    mkdir /data/oppo_lib/omedia 0700 system system
+
+#Rongchun.zhang@PSW.MM.Display.SF.Feature.1129602, 2018/06/11, add dor rom update
+    chmod 0644 /data/oppo/multimedia/oppo_display_perf_list.xml
+
+#Jianrong.Zheng@PSW.AD.Power.Breathing.1055235, 2015/12/14, Add for oppo breath light
+on boot
+    chown system system /sys/class/leds/white/brightness
+    chown system system /sys/class/leds/white/device/grpfreq
+    chown system system /sys/class/leds/white/device/grppwm
+    chown system system /sys/class/leds/white/device/blink
+    chown system system /sys/class/leds/white/blink
+
+#shiguang.han@Swdp.shanghai, 2017/5/23 Add for elsa
+#Jindian.Guan@Camera, 2018/04/03, Add for led calibration
+on boot
+    mkdir /persist/camera 0777 system system
+    chmod 0755 /dev/cpuset
+    mkdir /dev/freezer
+    mount cgroup none /dev/freezer freezer
+    chown system system /dev/freezer
+    chmod 0755 /dev/freezer/
+
+    chown system system /dev/freezer/cgroup.procs
+    chmod 0666 /dev/freezer/cgroup.procs
+    chown system system /dev/freezer/tasks
+    chmod 0666 /dev/freezer/tasks
+
+    chown system system /dev/cpuset/cgroup.procs
+    chown system system /dev/cpuset/foreground/cgroup.procs
+    chown system system /dev/cpuset/foreground/boost/cgroup.procs
+    chown system system /dev/cpuset/background/cgroup.procs
+    chown system system /dev/cpuset/system-background/cgroup.procs
+    chown system system /dev/cpuset/top-app/cgroup.procs
+
+    chmod 0666 /dev/cpuset/foreground/cgroup.procs
+    chmod 0666 /dev/cpuset/foreground/boost/cgroup.procs
+    chmod 0666 /dev/cpuset/background/cgroup.procs
+    chmod 0666 /dev/cpuset/system-background/cgroup.procs
+    chmod 0666 /dev/cpuset/top-app/cgroup.procs
+    chmod 0666 /dev/cpuset/cgroup.procs
+
+    chown system system /dev/stune/background/cgroup.procs
+    chown system system /dev/stune/top-app/cgroup.procs
+    chown system system /dev/stune/foreground/cgroup.procs
+    chown system system /dev/stune/rt/cgroup.procs
+    chmod 0666 /dev/stune/background/cgroup.procs
+    chmod 0666 /dev/stune/top-app/cgroup.procs
+    chmod 0666 /dev/stune/foregroud/cgroup.procs
+    chmod 0666 /dev/stune/rt/cgroup.procs
+
+#yangmingjin@BSP.POWER.Basic 2019/05/24 add for RM_TAG_POWER_RAMDUMP
+    chown system system /sys/power/ramdump_by_key
+
+#wenhua.Leng@SWDP.MM.Display.LCD, 2018/4/18 Add for display
+    chown system system /sys/kernel/oppo_display/dump_info
+    chown system system /sys/kernel/oppo_display/hbm
+    chown system system /sys/kernel/oppo_display/seed
+    chown system system /sys/kernel/oppo_display/ffl_set
+    chown system system /sys/kernel/oppo_display/dimlayer_hbm
+    chown system system /sys/kernel/oppo_display/force_screenfp
+    chown system system /sys/kernel/oppo_display/notify_fppress
+    chown system system /sys/kernel/oppo_display/aod_light_mode_set
+
+    chmod 0666 /sys/kernel/oppo_display/dump_info
+    chmod 0666 /sys/kernel/oppo_display/hbm
+    chmod 0666 /sys/kernel/oppo_display/seed
+    chmod 0666 /sys/kernel/oppo_display/ffl_set
+    chmod 0666 /sys/kernel/oppo_display/dimlayer_hbm
+    chmod 0666 /sys/kernel/oppo_display/force_screenfp
+    chmod 0666 /sys/kernel/oppo_display/notify_fppress
+    chmod 0666 /sys/kernel/oppo_display/aod_light_mode_set
+#Jie.Hu@SWDP.MM.Display.LCD, 2018/4/19 Add for display
+    chown system system /sys/kernel/oppo_display/power_status
+    chown system system /sys/kernel/oppo_display/sau_closebl_node
+    chown system system /sys/kernel/oppo_display/esd_status
+
+    chmod 0666 /sys/kernel/oppo_display/power_status
+    chmod 0666 /sys/kernel/oppo_display/sau_closebl_node
+    chmod 0666 /sys/kernel/oppo_display/esd_status
+    #/*Anbao.Shao@Camera.Driver 20190220 add for [aiNight]*/
+    chmod 0666 /mnt/vendor/persist/camera/megvii/cache
+
+#Le.Li@SWDP.MM.Audio.SmartPa, 2018/12/08, Add for smartPa calibrate
+on post-fs-data
+    mkdir /mnt/vendor/persist/media 0775 media media

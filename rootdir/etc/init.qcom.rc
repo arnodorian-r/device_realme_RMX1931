@@ -26,29 +26,28 @@
 #
 
 import /vendor/etc/init/init.safailnet.rc
-
 import /vendor/etc/init/init.devicesetting.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.msm.usb.configfs.rc
-import /vendor/etc/init/hw/init.qcom.test.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.qcom.factory.rc
-import init.oppo.rc
+#ifdef VENDOR_EDIT
+#Kai.Huang@BSP.Kernel.Stability 2020/2/12  Case:04451596 solve the testPocCVE_2016_6753 fail 
+import /vendor/etc/init/hw/init.qcom.test.rc
+#endif
+import /vendor/etc/init/hw/init.oppo.bsp.common.rc
 
+#ifdef VENDOR_EDIT
 #Fei.Mo@BSP.senosor 2018/10/30 add for init.oppo.vendor.motor.rc
 import /vendor/etc/init/hw/init.oppo.vendor.motor.rc
 #Xuefeng.Peng@PSW.AD.Storage.0, 2019/06/10, Add for init.oppo.reserve.rc
 import /vendor/etc/init/hw/init.oppo.reserve.rc
+#endif /*VENDOR_EDIT*/
+
 #ifdef VENDOR_EDIT
 #Junhao.Liang@PSW.AD.OppoDebug.LogKit.1080426, 2018/12/04, Add for import init.oppo.debug.diag.rc
 import /vendor/etc/init/hw/init.oppo.debug.diag.rc
 #endif /*VENDOR_EDIT*/
-
-#ifdef VENDOR_EDIT
-#qiuzuolin@BSP.sensor [2019/05/16] [add for init.oppo.sensor.rc]
-import /vendor/etc/init/hw/init.oppo.sensor.rc
-#endif /*VENDOR_EDIT*/
-
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
@@ -71,14 +70,9 @@ on early-init
     chown root system /dev/kmsg
     chmod 0620 /dev/kmsg
     # Load WIGIG platform driver
-#ifdef ODM_LQ_EDIT
-#Qingya.Wu@ODM.CN.WiFi.Basic, 2020/01/07
-#remove WiFi 11ad , for reduce bootup time
     # exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules msm_11ad_proxy
-#endif
 
 on init
-
     # Loading kernel modules in background
     start insmod_sh
 
@@ -92,11 +86,11 @@ on init
     write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
-
 #ifdef VENDOR_EDIT
 # Gou shengjun@SWDP.MM.Display.LCD, 2018/12/02 Add for display
     chown system system /sys/kernel/oppo_display/hbm
     chown system system /sys/kernel/oppo_display/seed
+    chown system system /sys/kernel/oppo_display/cabc
     chown system system /sys/kernel/oppo_display/dimlayer_bl_en
     chown system system /sys/kernel/oppo_display/ffl_set
     chown system system /sys/kernel/oppo_display/dump_info
@@ -108,9 +102,13 @@ on init
     chown system system /sys/kernel/oppo_display/sau_closebl_node
     chown system system /sys/kernel/oppo_display/panel_serial_number
     chown system system /sys/kernel/oppo_display/audio_ready
+    chown system system /sys/kernel/oppo_display/aod_light_mode_set
+    chown system system /sys/kernel/oppo_display/serial_number
+    chown system system /sys/kernel/oppo_display/hdr10
 
     chmod 0666 /sys/kernel/oppo_display/hbm
     chmod 0666 /sys/kernel/oppo_display/seed
+    chmod 0666 /sys/kernel/oppo_display/cabc
     chmod 0666 /sys/kernel/oppo_display/dimlayer_bl_en
     chmod 0666 /sys/kernel/oppo_display/ffl_set
     chmod 0666 /sys/kernel/oppo_display/dump_info
@@ -122,13 +120,16 @@ on init
     chmod 0666 /sys/kernel/oppo_display/sau_closebl_node
     chmod 0666 /sys/kernel/oppo_display/panel_serial_number
     chmod 0666 /sys/kernel/oppo_display/audio_ready
+    chmod 0666 /sys/kernel/oppo_display/aod_light_mode_set
+    chmod 0666 /sys/kernel/oppo_display/serial_number
+    chmod 0666 /sys/kernel/oppo_display/hdr10
 #endif VENDOR_EDIT
 
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
-
-    # Start services for bootanim
+	# Start services for bootanim
     start surfaceflinger
+    start themed_bootanimation
     start bootanim
     start vendor.hwcomposer-2-3
     start vendor.configstore-hal
@@ -136,8 +137,12 @@ on post-fs
 
 on early-boot
     # Wait for devices
+    write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
+    write /sys/devices/virtual/npu/msm_npu/boot 1
+    write /sys/kernel/boot_slpi/boot 1
+    write /sys/devices/virtual/cvp/cvp/boot 1
     wait_for_prop vendor.all.devices.ready 1
-
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
     exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qti.can.sh
 
@@ -289,38 +294,6 @@ on boot
     #sensors log dir
     mkdir /data/vendor/sensors
     chown system system /data/vendor/sensors
-#ifdef VENDOR_EDIT
-#wenhua.Leng@SWDP.MM.Display.LCD, 2018/4/18 Add for display
-    chown system system /sys/kernel/oppo_display/dump_info
-    chown system system /sys/kernel/oppo_display/hbm
-    chown system system /sys/kernel/oppo_display/seed
-    chown system system /sys/kernel/oppo_display/dimlayer_bl_en
-    chown system system /sys/kernel/oppo_display/ffl_set
-    chown system system /sys/kernel/oppo_display/dimlayer_hbm
-    chown system system /sys/kernel/oppo_display/force_screenfp
-    chown system system /sys/kernel/oppo_display/notify_fppress
-    chown system system /sys/kernel/oppo_display/aod_light_mode_set
-
-    chmod 0666 /sys/kernel/oppo_display/dump_info
-    chmod 0666 /sys/kernel/oppo_display/hbm
-    chmod 0666 /sys/kernel/oppo_display/seed
-    chmod 0666 /sys/kernel/oppo_display/dimlayer_bl_en
-    chmod 0666 /sys/kernel/oppo_display/ffl_set
-    chmod 0666 /sys/kernel/oppo_display/dimlayer_hbm
-    chmod 0666 /sys/kernel/oppo_display/force_screenfp
-    chmod 0666 /sys/kernel/oppo_display/notify_fppress
-    chmod 0666 /sys/kernel/oppo_display/aod_light_mode_set
-#Jie.Hu@SWDP.MM.Display.LCD, 2018/4/19 Add for display
-    chown system system /sys/kernel/oppo_display/power_status
-    chown system system /sys/kernel/oppo_display/sau_closebl_node
-    chown system system /sys/kernel/oppo_display/esd_status
-
-    chmod 0666 /sys/kernel/oppo_display/power_status
-    chmod 0666 /sys/kernel/oppo_display/sau_closebl_node
-    chmod 0666 /sys/kernel/oppo_display/esd_status
-#Rongchun.zhang@PSW.MM.Display, 2017/07/03, Add for Rom Update.[From: Deliang.Peng@PSW.MM.Performance.Display]
-    chmod 0644 /data/oppo/multimedia/oppo_display_perf_list.xml
-#endif /* VENDOR_EDIT */
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -443,13 +416,13 @@ on post-fs-data
     chmod 2770 /data/vendor/perfd
     rm /data/vendor/perfd/default_values
 
-    mkdir /data/vendor/secure_element 0777 system system
-
 #ifdef VENDOR_EDIT
 #wenjie.liu@CN.NFC.Basic.Hardware.1338555, 2018/04/09
 #add for:NFC Open Slowly
     mkdir /data/vendor/nfc 0770 nfc nfc
 #end VENDOR_EDIT
+
+    mkdir /data/vendor/secure_element 0777 system system
 
     #Create IOP  deamon related dirs
     mkdir /data/vendor/iop 0700 root system
@@ -483,6 +456,11 @@ on post-fs-data
     mkdir /data/vendor/swap 0770 root system
     chmod 2770 /data/vendor/swap
 
+    # set aggressive read ahead for dm-0 and dm-1 during boot up
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
+    write /sys/block/dm-2/queue/read_ahead_kb 2048
+
     # Create vpp directory
     mkdir /data/vendor/vpp 0770 media media
 
@@ -505,18 +483,17 @@ service iop /system/vendor/bin/iop
     disabled
     socket iop seqpacket 0666 root system
 
-#yunqing.zeng@bsp.power.basic 2019-06-17 Modify for qcomsysd ddaemon because of that it is only need for qcom factory
-#service qcomsysd /system/vendor/bin/qcom-system-daemon
-#    class main
-#    user root
-#    group root diag oem_2901
-#    disabled
-#
-#on property:persist.vendor.qcomsysd.enabled=1
-#    enable qcomsysd
-#
-#on property:persist.vendor.qcomsysd.enabled=0
-#    stop qcomsysd
+service qcomsysd /system/vendor/bin/qcom-system-daemon
+    class main
+    user root
+    group root diag oem_2901
+    disabled
+
+on property:persist.vendor.qcomsysd.enabled=1
+    enable qcomsysd
+
+on property:persist.vendor.qcomsysd.enabled=0
+    stop qcomsysd
 
 service vendor.ssr_setup /system/vendor/bin/ssr_setup
     oneshot
@@ -604,12 +581,13 @@ on property:oppo.wifi.ftmstoptest=0
      stop wifi_diag_stop
 
 on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
+    setprop persist.sys.adddevdiag 1
     start wifitestdiag
 #endif /* VENDOR_EDIT */
 #ifdef VENDOR_EDIT
 #Min.Yi@PSW.CN.WiFi.Hardware.1075545, 2017/11/02
 #Add for : Wifi ftm from the engineer app
-service wifi_ftm /system/bin/wififtmtest
+service wifi_ftm /system/vendor/bin/wififtmtest
     class late_start
     user root
     seclabel u:r:rutilsdaemon:s0
@@ -644,7 +622,7 @@ on property:oppo.wifi.ftm=0
 #ifdef VENDOR_EDIT
 #Qiulei@PSW.CN.WiFi.Hardware.1075545, 2016/07/23
 #Add for : Wifi HW ftm
-service wifihwftm /system/bin/wifihwftm
+service wifihwftm /vendor/bin/wifihwftm
     class late_start
     user root
     seclabel u:r:rutilsdaemon:s0
@@ -706,22 +684,12 @@ on property:vendor.wifi.sar.idx=*
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-
+    #Reset read ahead for dm-0 and dm-1 to 512kb
+    write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/dm-1/queue/read_ahead_kb 512
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
     chown media audio /sys/kernel/wcd_cpe0/fw_name
-
-    # Back to default VM settings
-    write /proc/sys/vm/dirty_expire_centisecs 3000
-    write /proc/sys/vm/dirty_background_ratio 10
-
-    # Block layer tuning: discard chunk size up to 128MB
-    # Otherwise, contiguous discards can be merged
-    write /sys/block/sda/queue/discard_max_bytes 134217728
-
-    # Enable ZRAM on boot_complete
-    rm /data/unencrypted/zram_swap
-    swapon_all /vendor/etc/fstab.qcom
 
 on property:persist.vendor.radio.atfwd.start=false
     stop vendor.atfwd
@@ -768,14 +736,14 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
-# ifdef VENDOR_EDIT
-# ZhongWenjie@Bsp.Group.Tp, 2019-04-26, Add to aceess data fw files
+#ifdef VENDOR_EDIT
+#laichenhui@PSW.Bsp.Tp, 2018/08/21, Add to aceess data fw files
     start bspFwUpdate
-# endif /* VENDOR_EDIT */
+#endif /* VENDOR_EDIT */
     start wcnss-service
 
 # ifdef VENDOR_EDIT
-# ZhongWenjie@Bsp.Group.Tp, 2019-04-26, Add for start fw update service
+# Xiong.xing@BSP.TP, 2018/03/01, Add for start fw update service
 on property:ro.crypto.state=unencrypted
     start bspFwUpdate
 
@@ -797,12 +765,15 @@ service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     user root
     oneshot
 
-#natao.lin@Camera for Laser daemon, 2019/09/20
-service vl53l1_daemon_main /vendor/bin/vl53l1_daemon_main
-    class late_start
+service vendor.rmt_storage /vendor/bin/rmt_storage
+    class core
     user root
-    group root
-    socket vl53l1_daemon stream 660 root system
+    shutdown critical
+    ioprio rt 0
+
+service vendor.tftp_server /vendor/bin/tftp_server
+   class core
+   user root
 
 service vendor.bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
@@ -1014,15 +985,11 @@ service ssgqmigd /vendor/bin/ssgqmigd
     group radio gps system
     socket ssgqmig seqpacket 0660 radio inet
 
-service vendor.ssgtzd /vendor/bin/ssgtzd
+service ssgtzd /vendor/bin/ssgtzd
     class late_start
     user system
     group system
-    disabled
     socket ssgtzd stream 0660 system inet
-
-on property:sys.boot_completed=1 
-     start vendor.ssgtzd 
 
 service mlid /vendor/bin/mlid
     class late_start
@@ -1093,19 +1060,9 @@ service wifi-crda /vendor/bin/init.crda.sh
    disabled
    oneshot
 
-##ifndef VENDOR_EDIT
-# on property:sys.boot_completed=1
-#     start qcom-post-boot
-#     start qti-testscripts
-##else /*VENDOR_EDIT*/
-#dukai@vanyol.com, 2692367, 2020/03/16, only userdebug have init.qcom.testscripts.sh
 on property:sys.boot_completed=1
     start qcom-post-boot
-    #start qti-testscripts
-
-on property:sys.boot_completed=1 && property:ro.build.type=userdebug
     start qti-testscripts
-##endif /*VENDOR_EDIT*/
 
 on property:ro.vendor.ril.mbn_copy_completed=1
     write /data/vendor/radio/copy_complete 1
@@ -1227,6 +1184,14 @@ service diag_mdlog_start /vendor/bin/diag_mdlog -c
 ##endif /*VENDOR_EDIT*/
     disabled
     oneshot
+#ifdef VENDOR_EDIT
+#natao.lin@Camera for Laser daemon, 2019/09/20
+service vl53l1_daemon_main /vendor/bin/vl53l1_daemon_main
+    class late_start
+    user root
+    group root
+    socket vl53l1_daemon stream 660 root system
+#endif
 
 ##ifndef VENDOR_EDIT
 #Wentian.mai@PSW.NW.EM.1139269, 2017/10/31
@@ -1361,12 +1326,12 @@ on property:ro.vendor.radio.noril=*
     setprop ro.radio.noril ${ro.vendor.radio.noril}
 
 #ifdef VENDOR_EDIT
-#xing.xiong@BSP.Kernel.Driver,2019/08/28, remove seemp healthd
+#Bingshu.Zhou@PSW.AD.Memory.2256865, 2019/9/24, Remove for remove qssp feature
 #service seemp_healthd /vendor/bin/seemp_healthd
 #    class late_start
 #    user system
 #    group system
-#endif
+#endif /*VENDOR_EDIT*/
 
 service vendor.power_off_alarm /vendor/bin/power_off_alarm
     class core
@@ -1382,24 +1347,23 @@ service vendor.move_time_data /system/bin/move_time_data.sh
     oneshot
 
 #ifndef VENDOR_EDIT
-#ZhongWenjie@Bsp.Group.Tp, 2019-04-26 del for closing hbtp
+#Guqcai@psw.bsp.tp 2018/03/12 del for closing hbtp
 #service vendor.hbtp /vendor/bin/hbtp_daemon
 #     class main
 #     user system
 #     group system
 #     capabilities SYS_NICE
 #     disabled
-#endif /*VENDOR_EDIT*/
+#endif
 
-#ifdef VENDOR_EDIT
-#qiuzuolin@PSW.BSP.Sensor [checklist] [2019/04/30] [add to remove the useless chre for power]
+#ifndef VENDOR_EDIT
+#Xiebaixue@PSW.BSP.Sensor 2019/11/11 add to remove the useless chre for power.
 #service chre /vendor/bin/chre
 #    class late_start
 #    user system
 #    group system
 #    socket chre seqpacket 0660 root system
 #    shutdown critical
-#endif
 
 on property:vendor.chre.enabled=0
    stop chre
@@ -1424,8 +1388,8 @@ service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
     user audioserver
     # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
     #ifndef VENDOR_EIDT
-    #Jianfeng.Qiu@PSW.MM.AudioDriver.feature.1924582, 2019/03/29,
-    #Modify for add 'readproc' for audio hal to read /proc/[pid]/cmdline
+    #Zhao.Pan@PSW.MM.AudioDriver.feature.1611397, 2019/02/19
+    #Add 'readproc' for audio hal to read /proc/[gamepid]/cmdline
     #group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock
     #else /* VENDOR_EDIT */
     group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock readproc
@@ -1440,6 +1404,15 @@ service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
     interface android.hardware.audio@5.0::IDevicesFactory default
     interface android.hardware.audio@4.0::IDevicesFactory default
     interface android.hardware.audio@2.0::IDevicesFactory default
+
+service vendor.contexthub-hal-1-0 /vendor/bin/hw/android.hardware.contexthub@1.0-service
+    override
+    class hal
+    interface android.hardware.contexthub@1.0::IContexthub default
+    user system
+    group system
+    disabled
+
 #ifdef VENDOR_EIDT
 #wushuxun@PSW.CN.Wifi.Network.internet.1074197, 2018/11/08,
 #Add for make WCNSS_qcom_cfg.ini Rom-update.
@@ -1458,23 +1431,7 @@ on property:oppo.wifi.enablepersistaccess=*
 # To restore /mnt/vendor/persist folder access right for ini romupdate feature
 on property:oppo.wifi.restorepersistaccess=*
     chmod 0771 /mnt/vendor/persist
-
 #endif /* VENDOR_EDIT */
-#ifdef VENDOR_EDIT
-#Guotian.Wu@PSW.CN.WiFi.Hardware.1070277 2019/07/24  Add for wifi rf testing
-service wifirfmodetest /system/bin/wifirftest
-    class main
-    socket wifirf stream 0660 system system
-    user root
-    oneshot
-    disabled
-
-on property:oppo.wifirftest.enable=1
-    start wifirfmodetest
-
-on property:oppo.wifirftest.enable=0
-    stop wifirfmodetest
-#endif
 
 #ifdef VENDOR_EDIT
 #Qiang.shao@PSW.AD.OppoFeature.CommonSoft.1181235, 2016/07/30, Add for self_init domain to access block_device for init prop
@@ -1510,11 +1467,12 @@ on property:ro.oppo.reconcile_media_resource=1
     start media-resource-reconciliation
 #endif
 
-service vendor.contexthub-hal-1-0 /vendor/bin/hw/android.hardware.contexthub@1.0-service
-    override
-    class hal
-    interface android.hardware.contexthub@1.0::IContexthub default
-    user system
-    group system
-    disabled
-
+#zhunn@OnLineRD.AirService.RIL, 2015/1/28, Add for cdma card cannot send sms in Yiwu
+#WeiHong.Li@Mobile.Network, 2015/09/11, Add suid_dumpable to capture rild's tombstone according to case 02090380
+#Zhengpeng@OnLineRD.AirService.RIL, 2013/11/4, Add for create opponvitems dir
+on boot
+    mkdir /data/opponvitems  0771 radio radio
+    write /proc/sys/fs/suid_dumpable 1
+    setprop persist.vendor.radio.force_on_dc true
+    chmod 0660 /dev/mdmreason
+    chown system system /dev/mdmreason
