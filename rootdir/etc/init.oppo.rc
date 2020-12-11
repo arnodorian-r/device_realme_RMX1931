@@ -98,6 +98,29 @@ on boot
     #/*Anbao.Shao@Camera.Driver 20190220 add for [aiNight]*/
     chmod 0666 /mnt/vendor/persist/camera/megvii/cache
 
+#change ownership and premission for awinic haptic shock with music
+    chown system audio /dev/aw8697_haptic
+    chmod 0660 /dev/aw8697_haptic
+    chown system audio /sys/class/leds/vibrator/haptic_audio
+    chmod 0660 /sys/class/leds/vibrator/haptic_audio
+    mkdir /data/awinic 0770 system audio
+    # enable awinic haptic sync wirh audio algo
+    setprop audio.awinic.haptic.support  false
+
+    mkdir /data/misc/keystore 0700 keystore keystore
+    mkdir /data/misc/gatekeeper 0700 system system
+    mkdir /data/misc/keychain 0771 system system
+    mkdir /data/misc/net 0750 root shell
+    mkdir /data/misc/radio 0770 system radio
+    mkdir /data/misc/sms 0770 system radio
+    mkdir /data/misc/carrierid 0770 system radio
+    mkdir /data/misc/apns 0770 system radio
+    mkdir /data/misc/zoneinfo 0775 system system
+    mkdir /data/misc/network_watchlist 0774 system system
+    mkdir /data/misc/textclassifier 0771 system system
+    mkdir /data/misc/vpn 0770 system vpn
+
 #Le.Li@SWDP.MM.Audio.SmartPa, 2018/12/08, Add for smartPa calibrate
 on post-fs-data
     mkdir /mnt/vendor/persist/media 0775 media media
+

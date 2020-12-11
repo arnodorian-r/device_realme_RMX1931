@@ -1,30 +1,26 @@
-# FOD Hal
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.RMX1931    u:object_r:hal_lineage_fod_default_exec:s0
-
 # Goodix Fingerprint device
 /dev/goodix_fp                                                                                           u:object_r:goodix_device:s0
 
 # Biometrics
-/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.RMX1931           u:object_r:hal_fingerprint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.RMX1931          u:object_r:hal_fingerprint_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.biometrics\.fingerprint@2\.1-service              u:object_r:hal_fingerprint_default_exec:s0       
 
 # Light Hal
-/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                      u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                            u:object_r:hal_light_default_exec:s0
 
 # Rootfs files
 /bt_firmware(/.*)?                            u:object_r:bt_firmware_file:s0
 /firmware(/.*)?                               u:object_r:firmware_file:s0
 /persist(/.*)?                                u:object_r:persist_file:s0
 
-# Oppo HIDL hals
-/(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.camera\.oppoAlgoProcessService@1\.0-service u:object_r:hal_camera_default_exec:s0
-/(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.mmdisplayfeature@1\.0-service               u:object_r:oppo_display_default_exec:s0
+# Neural Networks Hal
+/(vendor|system/vendor)/bin/hw/android\.hardware\.neuralnetworks@1\.2-service-qti                        u:object_r:hal_neuralnetworks_default_exec:s0
 
 # Camera
-/mnt/vendor/persist/camera(/.*)?                                                             u:object_r:persist_camera_file:s0
+/mnt/vendor/persist/camera(/.*)?                                                                         u:object_r:persist_camera_file:s0
 
 # Sensors
 /persist/sensors(/.*)?          u:object_r:sensors_persist_file:s0
 
-# Sensor
-/(vendor|system/vendor)/bin/hw/android\.hardware\.sensors@1\.0-service                    u:object_r:hal_sensors_default_exec:s0
+# mdmreason device
+/dev/mdmreason                  u:object_r:mdmreason_device:s0
