@@ -1,0 +1,4 @@
+init_daemon_domain(hal_gatekeeper_qti)
+
+allow hal_gatekeeper_qti spcom_device:chr_file rw_file_perms;
+get_prop(hal_gatekeeper_qti, spcomlib_prop)

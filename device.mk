@@ -28,6 +28,11 @@ PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# HALS
+SRC_AUDIO_HAL_DIR := hardware/qcom-caf/sm8150/audio
+SRC_DISPLAY_HAL_DIR := hardware/qcom-caf/sm8150/display
+SRC_MEDIA_HAL_DIR := hardware/qcom-caf/sm8150/media
+
 # Screen density
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -100,6 +105,7 @@ PRODUCT_PACKAGES += \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
+    sound_trigger.primary.msmnile \
     libaudio-resampler \
     libaudioroute \
     libbatterylistener \
@@ -131,6 +137,7 @@ PRODUCT_COPY_FILES += \
 # Bluetooth
 PRODUCT_PACKAGES += \
     android.hardware.bluetooth.a2dp@1.0-impl \
+    libldacBT_dec \
     libbthost_if
 
 # Camera
@@ -160,20 +167,22 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.mapper@2.0-impl-qti-display \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
+    hwcomposer.msmnile \
     gralloc.msmnile \
     libdisplayconfig \
     libtinyxml \
     libvulkan \
     memtrack.msmnile \
-    vendor.display.config@1.9 \
+    vendor.display.config@1.11 \
     vendor.display.config@1.11.vendor \
     vendor.qti.hardware.display.allocator-service
 
 # Display interfaces
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.display.composer@1.0.vendor \
-    vendor.qti.hardware.display.composer@2.0.vendor \
-    vendor.qti.hardware.display.mapper@1.1.vendor
+    vendor.qti.hardware.display.allocator@1.0.vendor \
+    vendor.qti.hardware.display.mapper@2.0.vendor \
+    vendor.qti.hardware.display.mapperextensions@1.0.vendor \
+    vendor.qti.hardware.display.mapperextensions@1.1.vendor
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -212,6 +221,7 @@ PRODUCT_PACKAGES += \
     android.hardware.gnss@2.0-impl-qti \
     android.hardware.gnss@2.0-service-qti \
     libbatching \
+    libgps.utils \
     libgeofencing \
     libgnss
 
@@ -313,11 +323,11 @@ PRODUCT_PACKAGES += \
 
 # NFC
 PRODUCT_PACKAGES += \
+    android.hardware.nfc@1.2-service \
     com.android.nfc_extras \
     com.gsma.services.nfc \
     NfcNci \
     android.hardware.secure_element@1.0:64 \
-    android.hardware.secure_element@1.1:64 \
     Tag
 
 # Permissions
@@ -331,6 +341,7 @@ PRODUCT_COPY_FILES += \
 # NFC namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH) \
+    hardware/qcom-caf/sm8150 \
     vendor/nxp/opensource/sn100u
 
 # Power
@@ -402,10 +413,10 @@ PRODUCT_PACKAGES += \
     rcs_service_aidl.xml \
     rcs_service_api \
     rcs_service_api.xml
- 
+
 # RenderScript
 PRODUCT_PACKAGES += \
-    android.hardware.renderscript@1.0-impl 
+    android.hardware.renderscript@1.0-impl
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -438,8 +449,8 @@ PRODUCT_PACKAGES += \
 
 # Thermal
 PRODUCT_PACKAGES += \
-    android.hardware.thermal@1.0-impl \
-    android.hardware.thermal@1.0-service \
+    android.hardware.thermal@2.0-impl \
+    android.hardware.thermal@2.0-service \
     thermal.msmnile
 
 # Touch

@@ -1,63 +1,179 @@
+# Audio
+audio.deep_buffer.media=true
+audio.offload.min.duration.secs=30
+audio.offload.video=true
+ro.af.client_heap_size_kbyte=7168
+audio.sys.noisy.broadcast.delay=600
+audio.sys.offload.pstimeout.secs=3
+
 # Bluetooth
+ro.bluetooth.wipower=false 
+ro.bluetooth.emb_wp_mode=false
+persist.vendor.bt.a2dp.aac_whitelist=false
+persist.vendor.bt.a2dp.mac_whitelist=false
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+persist.vendor.btsatck.absvolfeature=true
+persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=false
 vendor.bluetooth.soc=cherokee
 vendor.qcom.bluetooth.soc=cherokee
 
 # Camera
+ro.camera.hfr.enable=0
+persist.camera.HAL3.enabled=1
+ro.camera.relight.enable=0
+ro.camera.attr.detect.enable=1
+ro.camera.notify_nfc=1
+camera.disable_zsl_mode=true
 vendor.camera.aux.packagelist=org.codeaurora.snapcam,com.android.camera,org.lineageos.snap
 
 # CNE
 persist.vendor.cne.feature=1
 
-# Data
-persist.data.df.dev_name=rmnet_usb0
-persist.vendor.data.profile_update=true
+# Charger
+ro.charger.enable_suspend=true
+
+# Data modules
+persist.data.df.dev_name=rmnet_usb0 
+persist.vendor.data.mode=concurrent 
+ro.vendor.use_data_netmgrd=true 
+persist.data.df.agg.dl_pkt=10 
+persist.data.df.agg.dl_size=4096 
+persist.data.df.dl_mode=5 
+persist.data.df.iwlan_mux=9 
+persist.data.df.mux_count=8 
+persist.data.df.ul_mode=5 
+persist.data.netmgrd.qos.enable=true 
+persist.data.profile_update=true 
+persist.data.wda.enable=true 
+persist.rmnet.data.enable=true
+
+# Display - oppo
+persist.sys.enable.rc=1
+ro.display.rc.size=86,86,86,86
+ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
+ro.lcd.backlight.config_boe=11,1013,18,375,551,837,1108,1369,1664,1806,2029,2047
+ro.lcd.backlight.config_truly=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
+ro.lcd.backlight.config_tianma=11,950,11,333,497,781,1043,1315,1605,1760,2008,2047
+ro.lcd.backlight.config_dsjm=11,958,13,334,517,794,1055,1325,1617,1770,1989,2047
+ro.lcd.backlight.config_jdi=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
+ro.lcd.backlight.samsung_tenbit=16,159,7,39,61,115,197,313,476,592,893,1023,1185,1297,1571,1799,2047
+ro.lcd.backlight.config_samsung=8,44,5,22,48,78,128,206,255
+ro.vendor.display.backlightapp=1
+ro.display.underscreenfingerprint=1
+ro.display.underscreen.lightsensor.support=1
+ro.lcd.display.screen.underlightsensor.region=677,19,707,49
+ro.display.underscreen.lightsensor.screenshot.period=50
+persist.debug.wfd.enable=1
+ro.oppo.screen.heteromorphism=483,0:597,67
+
+# Dex
+dalvik.vm.dex2oat64.enabled=true
+ro.vendor.qti.am.reschedule_service=true
+ro.sys.fw.dex2oat_thread_count=8
+dalvik.vm.boot-dex2oat-threads=8
+dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.dex2oat-filter=quicken
+dalvik.vm.dex2oat-threads=8
+dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7
+dalvik.vm.image-dex2oat-filter=quicken
+dalvik.vm.image-dex2oat-threads=8
+
+# Display post-processing
+ro.qualcomm.cabl=0
+ro.vendor.display.ad=1
+ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
+ro.vendor.display.sensortype=2
 
 # DPM
 persist.vendor.dpm.feature=1
 persist.vendor.dpm.loglevel=0
 persist.vendor.dpm.nsrm.bkg.evt=3955
 
+# Gboard
+ro.com.google.ime.kb_pad_port_l=7
+ro.com.google.ime.kb_pad_port_r=7
+ro.com.google.ime.kb_pad_land_l=14
+ro.com.google.ime.kb_pad_land_r=14
+
 # Graphics
-ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
-ro.surface_flinger.has_wide_color_display=true
-ro.surface_flinger.has_HDR_display=true
-ro.surface_flinger.max_frame_buffer_acquired_buffers=3
-ro.surface_flinger.max_virtual_display_dimension=4096
-ro.surface_flinger.protected_contents=true
-ro.surface_flinger.use_color_management=true
-ro.surface_flinger.vsync_event_phase_offset_ns=2000000
-ro.surface_flinger.vsync_sf_event_phase_offset_ns=6000000
-ro.surface_flinger.wcg_composition_dataspace=143261696
+debug.sf.disable_backpressure=1
+debug.sf.latch_unsignaled=1
 persist.demo.hdmirotationlock=false
-persist.hwc.enable_vds=1
+persist.sys.sf.color_saturation=1.0
+persist.sys.sf.native_mode=0
+debug.hwui.renderer=skiavk
+
+# IMS
+persist.vendor.ims.disableUserAgent=0
+persist.data.iwlan.enable=true
+persist.dbg.ims_volte_enable=1
 
 # Media
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
-audio.offload.video=true
+ro.media.recorder-max-base-layer-fps=60
 
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true
 
-#Netflix custom property
+# Netflix custom property
 ro.netflix.bsp_rev=Q855-16947-1
 
-# system prop for NFC DT
+# QC framework value-adds
+ro.vendor.qti.va_aosp.support=1
+
+# RCS
+persist.rcs.supported=1
+
+# RIL
+DEVICE_PROVISIONED=1 
+persist.radio.multisim.config=dsds 
+persist.vendor.radio.apm_sim_not_pwdn=1 
+persist.vendor.radio.custom_ecc=1 
+persist.vendor.radio.flexmap_type=none 
+persist.vendor.radio.force_on_dc=true 
+persist.vendor.radio.procedure_bytes=SKIP 
+persist.vendor.radio.rat_on=combine 
+persist.vendor.radio.redir_party_num=1 
+persist.vendor.radio.report_codec=1 
+persist.vendor.radio.sib16_support=1 
+persist.radio.atfwd.start=true 
+persist.vendor.radio.lte_vrte_ltd=1 
+persist.vendor.radio.cs_srv_type=1 
+persist.radio.VT_ENABLE=1 
+persist.radio.volte.dan_support=true 
+persist.data.iwlan=1 
+persist.data.iwlan.ipsec.ap=1 
+persist.sys.cust.lte_config=true 
+service.qti.ims.enabled=1 
+persist.vendor.qti.telephony.vt_cam_interface=2
+ro.telephony.iwlan_operation_mode=legacy
+ril.subscription.types=NV,RUIM
+rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
+ro.com.android.dataroaming=true
+ro.telephony.default_network=22,22
+telephony.lteOnCdmaDevice=1
+
+# Sensors
+persist.sys.oppo.fusionlight=true
+persist.sys.oppo.proximity=true
+
+# Oppo
+ro.product.cuptsm=OPPO|ESE|01|02
 ro.nfc.port=I2C
 
-# Radio
-DEVICE_PROVISIONED=1
-persist.sys.fflag.override.settings_network_and_internet_v2=true
-persist.vendor.ims.disableADBLogs=1
-persist.vendor.ims.disableIMSLogs=1
-persist.vendor.radio.enable_temp_dds=true
-persist.vendor.radio.force_on_dc=true
-ril.subscription.types=RUIM
-use.voice.path.for.pcm.voip=true
+# Thermal
+persist.sys.enable.oscar=0
+persist.sys.oscar.dc=1
 
-# Time
-persist.vendor.delta_time.enable=true
+# SSR
+persist.vendor.ssr.enable_ramdumps=0
+persist.vendor.ssr.restart_level=ALL_ENABLE
 
-# Wireless display
-debug.sf.latch_unsignaled=1
-persist.debug.wfd.enable=1
-persist.sys.wfd.virtual=0
+# ZRAM writeback
+ro.zram.mark_idle_delay_mins=60
+ro.zram.first_wb_delay_mins=1440
+ro.zram.periodic_wb_delay_hours=24
+
+# Zygote
+persist.device_config.runtime_native.usap_pool_enabled=true
