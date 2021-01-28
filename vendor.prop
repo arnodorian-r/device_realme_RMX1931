@@ -80,12 +80,14 @@ ro.crypto.allow_encrypt_override=true
 ro.crypto.volume.filenames_mode=aes-256-cts
 
 # Dalvik
-dalvik.vm.heapstartsize=16m
-dalvik.vm.heapgrowthlimit=384m
-dalvik.vm.heapsize=512m
-dalvik.vm.heaptargetutilization=0.75
-dalvik.vm.heapminfree=4m
-dalvik.vm.heapmaxfree=16m
+pm.dexopt.boot=verify
+pm.dexopt.first-boot=verify
+pm.dexopt.install=speed-profile
+dalvik.vm.image-dex2oat-filter=speed
+dalvik.vm.image-dex2oat-threads=8
+dalvik.vm.dex2oat-filter=speed
+dalvik.vm.dex2oat-threads=8
+dalvik.vm.dex2oat64.enabled=true
 
 # Data modules
 persist.data.df.dev_name=rmnet_usb0 
