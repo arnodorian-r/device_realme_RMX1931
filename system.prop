@@ -56,6 +56,10 @@ persist.vendor.radio.vdp_on_ims_cap=1
 # IO Prefetcher
 vendor.iop.enable_uxe=1
 
+# LMKD
+ro.config.low_ram=false
+ro.lmk.log_stats=true
+
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true
 
