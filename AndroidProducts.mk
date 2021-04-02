@@ -15,9 +15,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/rr_RMX1931.mk
+    $(LOCAL_DIR)/derp_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    rr_RMX1931-userdebug \
-    rr_RMX1931-user \
-    rr_RMX1931-eng
+    derp_RMX1931-userdebug \
+    derp_RMX1931-eng

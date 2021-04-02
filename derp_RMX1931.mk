@@ -7,14 +7,15 @@
 $(call inherit-product, device/realme/RMX1931/device.mk)
 
 # Inherit some common RR stuff.
-$(call inherit-product, vendor/rr/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosip/config/common_full_phone.mk)
 
-#FaceUnlock
-TARGET_FACE_UNLOCK_SUPPORTED := true
-
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_INCLUDE_WIFI_EXT := true
+IS_PHONE := true
+TARGET_GAPPS_ARCH := arm64
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := rr_RMX1931
+PRODUCT_NAME := derp_RMX1931
 PRODUCT_DEVICE := RMX1931
 PRODUCT_BRAND := realme
 PRODUCT_MODEL := realme X2 Pro

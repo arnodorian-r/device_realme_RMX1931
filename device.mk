@@ -105,6 +105,7 @@ PRODUCT_PACKAGES += \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
+    audio.primary.msmnile \
     sound_trigger.primary.msmnile \
     libaudio-resampler \
     libaudioroute \
@@ -204,10 +205,6 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.fingerprint.xml
-
-# Lineage Specific perms
-PRODUCT_COPY_FILES += \
-    vendor/rr/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # Framework detect
 PRODUCT_PACKAGES += \
@@ -452,14 +449,6 @@ PRODUCT_PACKAGES += \
     android.hardware.thermal@2.0-impl \
     android.hardware.thermal@2.0-service \
     thermal.msmnile
-
-# Touch
-PRODUCT_PACKAGES += \
-    lineage.touch@1.0-service.RMX1931
-
-# Trust HAL
-PRODUCT_PACKAGES += \
-    lineage.trust@1.0-service
 
 # USB
 PRODUCT_PACKAGES += \
