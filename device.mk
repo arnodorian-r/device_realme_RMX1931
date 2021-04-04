@@ -237,9 +237,10 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
     android.hidl.manager@1.0_system
 
-# HotwordEnrollement app permissions
+# Hotword Enrollment
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-hotword.xml
+    $(LOCAL_PATH)/configs/hotword-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-whitelist.xml \
+    $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -371,9 +372,7 @@ PRODUCT_PACKAGES += \
     init.class_main.sh \
     init.crda.sh \
     init.mdm.sh \
-    init.oppo.face.sh \
     init.oppo.fingerprints.sh \
-    init.oppo.wifi.sh \
     init.qcom.class_core.sh \
     init.qcom.coex.sh \
     init.qcom.crashdata.sh \
@@ -394,10 +393,6 @@ PRODUCT_PACKAGES += \
     fstab.qcom \
     init.devicesetting.rc \
     init.msm.usb.configfs.rc \
-    init.oppo.debug.diag.rc \
-    init.oppo.sensor.rc \
-    init.oppo.vendor.motor.rc \
-    init.oppo.vendor.steppermotor.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
     init.safailnet.rc \
