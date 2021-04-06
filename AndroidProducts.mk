@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/derp_RMX1931.mk
+    $(LOCAL_DIR)/havoc_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    derp_RMX1931-userdebug \
-    derp_RMX1931-eng
+    havoc_RMX1931-userdebug \
+    havoc_RMX1931-eng

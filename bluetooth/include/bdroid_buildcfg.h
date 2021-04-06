@@ -25,12 +25,18 @@
 
 #define BTM_DEF_LOCAL_NAME   "Realme X2 Pro"
 
-#pragma push_macro("PROPERTY_VALUE_MAX")
-
-#include <cutils/properties.h>
+#include <stdint.h>
 #include <string.h>
 
 #include "osi/include/osi.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+int property_get(const char *key, char *value, const char *default_value);
+#ifdef __cplusplus
+}
+#endif
 
 // Disables read remote device feature
 #define MAX_ACL_CONNECTIONS   16
@@ -40,7 +46,5 @@
 #define BT_CLEAN_TURN_ON_DISABLED 1
 // Increasing SEPs to 12 from 6 to support SHO/MCast i.e. two streams per codec
 #define AVDT_NUM_SEPS 12
-
-#pragma pop_macro("PROPERTY_VALUE_MAX")
 
 #endif

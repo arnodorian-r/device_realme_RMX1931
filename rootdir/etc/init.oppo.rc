@@ -10,10 +10,10 @@
 ### jiangyg@PM                     2013-10-21                Create this file
 ##################################################################################
 
+on boot
 #chenghao@Swdp.shanghai 2018/08/08, add for joystick RUS feature
     mkdir /data/joystick 0700 system system
 
-#ifdef VENDOR_EDIT
 #Pingping.Yang@swdp 2018/11/07, add for omedia RUS feature
     mkdir /data/oppo_lib/omedia 0700 system system
 
@@ -21,7 +21,6 @@
     chmod 0644 /data/oppo/multimedia/oppo_display_perf_list.xml
 
 #Jianrong.Zheng@PSW.AD.Power.Breathing.1055235, 2015/12/14, Add for oppo breath light
-on boot
     chown system system /sys/class/leds/white/brightness
     chown system system /sys/class/leds/white/device/grpfreq
     chown system system /sys/class/leds/white/device/grppwm
@@ -30,7 +29,6 @@ on boot
 
 #shiguang.han@Swdp.shanghai, 2017/5/23 Add for elsa
 #Jindian.Guan@Camera, 2018/04/03, Add for led calibration
-on boot
     mkdir /persist/camera 0777 system system
     chmod 0755 /dev/cpuset
     mkdir /dev/freezer
@@ -74,6 +72,7 @@ on boot
     chown system system /sys/kernel/oppo_display/hbm
     chown system system /sys/kernel/oppo_display/seed
     chown system system /sys/kernel/oppo_display/ffl_set
+    chown system system /sys/kernel/oppo_display/dimlayer_bl_en
     chown system system /sys/kernel/oppo_display/dimlayer_hbm
     chown system system /sys/kernel/oppo_display/force_screenfp
     chown system system /sys/kernel/oppo_display/notify_fppress
@@ -83,6 +82,7 @@ on boot
     chmod 0666 /sys/kernel/oppo_display/hbm
     chmod 0666 /sys/kernel/oppo_display/seed
     chmod 0666 /sys/kernel/oppo_display/ffl_set
+    chmod 0666 /sys/kernel/oppo_display/dimlayer_bl_en
     chmod 0666 /sys/kernel/oppo_display/dimlayer_hbm
     chmod 0666 /sys/kernel/oppo_display/force_screenfp
     chmod 0666 /sys/kernel/oppo_display/notify_fppress
@@ -107,6 +107,20 @@ on boot
     # enable awinic haptic sync wirh audio algo
     setprop audio.awinic.haptic.support  false
 
+#OTG Config
+    chown system system /sys/class/power_supply/usb/otg_switch
+    chmod 0666 /sys/class/power_supply/usb/otg_switch
+
+#TouchPanel(Gaming Config)
+    chown system system /proc/touchpanel/game_switch_enable
+    chown system system /proc/touchpanel/oppo_tp_direction
+    chown system system /proc/touchpanel/oppo_tp_limit_enable
+
+    chmod 0666 /proc/touchpanel/game_switch_enable
+    chmod 0666 /proc/touchpanel/oppo_tp_direction
+    chmod 0666 /proc/touchpanel/oppo_tp_limit_enable
+
+#Misc Dirs
     mkdir /data/misc/keystore 0700 keystore keystore
     mkdir /data/misc/gatekeeper 0700 system system
     mkdir /data/misc/keychain 0771 system system
@@ -120,7 +134,32 @@ on boot
     mkdir /data/misc/textclassifier 0771 system system
     mkdir /data/misc/vpn 0770 system vpn
 
+on post-fs
+    chmod 660 /sys/class/leds/vibrator/rtp
+    chmod 660 /sys/class/leds/vibrator/haptic_audio_tp_time
+    chmod 644 /sys/class/leds/vibrator/haptic_osc_data
+    chmod 660 /sys/class/leds/vibrator/ram_test
+    chmod 644 /sys/class/leds/vibrator/ram_update
+    chown system system /sys/class/leds/vibrator/activate
+    chown system system /sys/class/leds/vibrator/brightness
+    chown system system /sys/class/leds/vibrator/duration
+    chown system system /sys/class/leds/vibrator/state
+    chown system system /sys/class/leds/vibrator/rf_hz
+    chown system system /sys/class/leds/vibrator/lra_resistance
+    chown system system /sys/class/leds/vibrator/gain
+    chown system system /sys/class/leds/vibrator/vmax
+    chown system system /sys/class/leds/vibrator/index
+    chown system system /sys/class/leds/vibrator/activate_mode
+    chown system system /sys/class/leds/vibrator/seq
+    chown system audio /sys/class/leds/vibrator/rtp
+    chown system audio /sys/class/leds/vibrator/haptic_audio_tp_time
+    chown system system /sys/class/leds/vibrator/loop
+    chown system system /sys/class/leds/vibrator/ignore_store
+    chown system system /sys/class/leds/vibrator/osc_cali
+    chown system system /sys/class/leds/vibrator/haptic_osc_data
+    chown system system /sys/class/leds/vibrator/ram_test
+    chown system system /sys/class/leds/vibrator/ram_update
+
 #Le.Li@SWDP.MM.Audio.SmartPa, 2018/12/08, Add for smartPa calibrate
 on post-fs-data
     mkdir /mnt/vendor/persist/media 0775 media media
-

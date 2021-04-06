@@ -77,13 +77,17 @@ vendor.audio.volume.headset.gain.depcal=true
 vendor.audio_hal.period_size=192
 
 # Bluetooth
-persist.bluetooth.a2dp_offload.disabled=true
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
-persist.vendor.bt.aac_frm_ctl.enabled=true
-persist.vendor.bt.enable.splita2dp=true
+persist.bluetooth.a2dp_offload.disabled=true
+persist.vendor.bt.aac_frm_ctl.enabled=false
+persist.vendor.btstack.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aptxadaptive-aac-ldac
+persist.vendor.btstack.connect.peer_earbud=true
+persist.vendor.btstack.enable.twsplus=true
+persist.vendor.btstack.enable.twsplussho=true
+persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac-aptxadaptive
+persist.vendor.qcom.bluetooth.aac_frm_ctl.enabled=true
 persist.vendor.qcom.bluetooth.enable.splita2dp=true
-persist.vendor.qcom.bluetooth.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
+persist.vendor.qcom.bluetooth.twsp_state.enabled=true
 ro.bluetooth.a2dp_offload.supported=true
 vendor.qcom.bluetooth.soc=cherokee
 
@@ -98,6 +102,10 @@ persist.camera.HAL3.enabled=1
 debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
 
+# Crypto
+ro.crypto.allow_encrypt_override=true
+ro.crypto.volume.filenames_mode=aes-256-cts
+
 # Dalvik
 dalvik.vm.heapstartsize=16m
 dalvik.vm.heapgrowthlimit=384m
@@ -109,7 +117,6 @@ dalvik.vm.heapmaxfree=16m
 # Display
 vendor.display.enable_default_color_mode=1
 ro.vendor.display.cabl=2
-ro.sf.lcd_density=420
 
 # DRM
 drm.service.enabled=true
@@ -117,12 +124,19 @@ drm.service.enabled=true
 # FRP
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
+# Fingerprint
+persist.vendor.qfp=true
+
 # Graphics
 debug.egl.hw=0
 debug.sf.hw=1
 ro.opengles.version=196610
 ro.hardware.egl=adreno
 ro.hardware.vulkan=adreno
+vendor.gralloc.disable_ubwc=0
+
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
 
 # IMS
 persist.dbg.volte_avail_ovr=1
@@ -132,11 +146,18 @@ persist.dbg.ims_volte_enable=1
 persist.vendor.radio.data_ltd_sys_ind=1
 persist.vendor.radio.data_con_rprt=1
 
-# Misc tweaks
-pm.sleep_mode=1
+# Keystore
+ro.hardware.keystore_desede=true
+
+# PASR
+vendor.power.pasr.enabled=true
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.scroll.preobtain.enable=false
+
+# Qualcomm System Daemon
+persist.vendor.qcomsysd.enabled=1
 
 # Surfaceflinger properties
 ro.surface_flinger.has_wide_color_display=true

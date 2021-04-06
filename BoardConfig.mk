@@ -143,15 +143,6 @@ DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
-ODM_MANIFEST_SKUS += \
-	365 \
-	366 \
-	qva
-
-ODM_MANIFEST_365_FILES := $(DEVICE_PATH)/manifest_msmnile.xml
-ODM_MANIFEST_366_FILES := $(DEVICE_PATH)/manifest_msmnile.xml
-ODM_MANIFEST_QVA_FILES := $(DEVICE_PATH)/manifest-qva.xml
-
 # LMKD
 TARGET_LMKD_STATS_LOG := true
 
@@ -181,7 +172,7 @@ BOARD_USES_METADATA_PARTITION := true
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Power
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/double_tap_enable"
+TARGET_TAP_TO_WAKE_EVENT_NODE := "/proc/touchpanel/double_tap_enable"
 
 # Properties
 TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
@@ -202,7 +193,6 @@ TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 # RIL
 ENABLE_VENDOR_RIL_SERVICE := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
-TARGET_USES_PRE_UPLINK_FEATURES_NETMGRD := true
 
 # Sepolicy
 SELINUX_IGNORE_NEVERALLOWS := true
