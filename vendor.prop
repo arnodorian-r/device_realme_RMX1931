@@ -61,6 +61,10 @@ media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
 
+# Camera
+log.tag.CHIUSECASE=ERROR
+persist.vendor.camera.logInfoMask=false
+
 # Crypto
 ro.crypto.allow_encrypt_override=true
 ro.crypto.volume.filenames_mode=aes-256-cts
