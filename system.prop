@@ -3,11 +3,10 @@ audio.deep_buffer.media=true
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
 ro.af.client_heap_size_kbyte=7168
+ro.audio.monitorRotation=true
+audio.offload.min.duration.secs=30
 
 # Bluetooth
-persist.bt.enableAptXHD=true
-persist.service.btui.use_aptx=1
-persist.vendor.bt.a2dp.aac_whitelist=false
 ro.bluetooth.library_name=libbluetooth_qti.so
 
 # Camera
@@ -40,17 +39,7 @@ persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
 # Display - oppo
-persist.sys.enable.rc=1
-ro.display.rc.size=86,86,86,86
 ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
-ro.lcd.backlight.config_boe=11,1013,18,375,551,837,1108,1369,1664,1806,2029,2047
-ro.lcd.backlight.config_truly=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
-ro.lcd.backlight.config_tianma=11,950,11,333,497,781,1043,1315,1605,1760,2008,2047
-ro.lcd.backlight.config_dsjm=11,958,13,334,517,794,1055,1325,1617,1770,1989,2047
-ro.lcd.backlight.config_jdi=11,816,5,246,397,665,912,1177,1473,1627,1890,2047
-ro.lcd.backlight.samsung_tenbit=16,159,7,39,61,115,197,313,476,592,893,1023,1185,1297,1571,1799,2047
-ro.lcd.backlight.config_samsung=8,44,5,22,48,78,128,206,255
-ro.vendor.display.backlightapp=1
 ro.display.underscreenfingerprint=1
 ro.display.underscreen.lightsensor.support=1
 ro.lcd.display.screen.underlightsensor.region=677,19,707,49
@@ -73,7 +62,6 @@ dalvik.vm.image-dex2oat-threads=8
 # Display post-processing
 ro.qualcomm.cabl=0
 ro.vendor.display.ad=1
-ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
 ro.vendor.display.sensortype=2
 
 # DPM
@@ -87,16 +75,25 @@ debug.sf.latch_unsignaled=1
 persist.demo.hdmirotationlock=false
 persist.sys.sf.color_saturation=1.0
 persist.sys.sf.native_mode=0
-debug.hwui.renderer=skiavk
+debug.sf.enable_hwc_vds=1
+
+# GBoard Spacing
+ro.com.google.ime.kb_pad_port_b=1
+ro.com.google.ime.corner_key_r=32
 
 # IMS
 persist.vendor.ims.disableUserAgent=0
 persist.data.iwlan.enable=true
 persist.dbg.ims_volte_enable=1
 
+# IO Prefetcher
+vendor.iop.enable_uxe=0
+
 # Media
+av.offload.enable=true
 media.settings.xml=/vendor/etc/media_profiles_vendor.xml
-ro.media.recorder-max-base-layer-fps=60
+vendor.swvdec.log.level=1
+vendor.vidc.debug.level=1
 
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true
@@ -147,6 +144,7 @@ persist.sys.oppo.proximity=true
 ro.nfc.port=I2C
 ro.camera.notify_nfc=1
 persist.sys.nfc.disPowerSave=1
+persist.sys.nfc.antenna_area=bottom
 
 # SSR
 persist.vendor.ssr.enable_ramdumps=0

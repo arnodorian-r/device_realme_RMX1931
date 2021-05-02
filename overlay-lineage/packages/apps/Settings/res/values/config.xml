@@ -15,15 +15,19 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- Defines the location of the fingerprint sensor on the device
-       0 = back
-       1 = front
-       2 = left side
-       3 = right side
-       4 = FOD (front)
+         0 = back
+         1 = front
+         2 = left side
+         3 = right side
     -->
-    <integer name="config_fingerprintSensorLocation">4</integer>
+    <integer name="config_fingerprintSensorLocation">1</integer>
 
     <!-- Device specific doze package -->
     <string name="config_customDozePackage">org.lineageos.settings/org.lineageos.settings.doze.DozeSettingsActivity</string>
 
+    <!-- Battery Health -->
+    <bool name="config_supportBatteryHealth">true</bool>
+    <string name="config_batDesCap">/sys/class/power_supply/battery/charge_full</string>
+    <string name="config_batCurCap">/sys/class/power_supply/battery/charge_counter</string>
+    <string name="config_batChargeCycle">/sys/class/power_supply/battery/cycle_count</string>
 </resources>

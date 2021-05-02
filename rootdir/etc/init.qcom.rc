@@ -25,7 +25,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-import /vendor/etc/init/init.devicesetting.rc
 import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.oppo.rc
@@ -108,11 +107,10 @@ on init
 
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
-	# Start services for bootanim
+# Start services for bootanim
     start surfaceflinger
-    start themed_bootanimation
     start bootanim
-    start vendor.hwcomposer-2-3
+    start vendor.hwcomposer-2-4
     start vendor.configstore-hal
     start vendor.qti.hardware.display.allocator
 
@@ -124,8 +122,7 @@ on early-boot
     write /sys/kernel/boot_slpi/boot 1
     write /sys/devices/virtual/cvp/cvp/boot 1
     wait_for_prop vendor.all.devices.ready 1
-    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
-    exec u:r:qti_init_shell:s0 -- /vendor/bin/init.qti.can.sh
+    exec u:r:vendor_qti_init_shell:s0 -- /vendor/bin/init.qcom.early_boot.sh
 
     # for backward compatibility
     chown system system /persist/sensors
@@ -212,7 +209,6 @@ on boot
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
-
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
     setprop net.tcp.2g_init_rwnd 10
@@ -268,7 +264,6 @@ on boot
     # Create vpp directory
     mkdir /mnt/vendor/persist/vpp 0770 media media
 
-
     # Create hvdcp_opti directory
     mkdir /mnt/vendor/persist/hvdcp_opti 0770 root system
 
@@ -300,7 +295,6 @@ on post-fs-data
 
     #Create folder of camera
     mkdir /data/vendor/camera 0770 camera camera
-
 
     #Create directory for tftp
     mkdir /data/vendor/tombstones 0771 system system
@@ -397,12 +391,9 @@ on post-fs-data
     chmod 2770 /data/vendor/perfd
     rm /data/vendor/perfd/default_values
 
-#ifdef VENDOR_EDIT
 #wenjie.liu@CN.NFC.Basic.Hardware.1338555, 2018/04/09
 #add for:NFC Open Slowly
     mkdir /data/vendor/nfc 0770 nfc nfc
-#end VENDOR_EDIT
-
     mkdir /data/vendor/secure_element 0777 system system
 
     #Create IOP  deamon related dirs
@@ -528,15 +519,6 @@ on property:persist.vendor.sys.rawdump_copy=0
     write /sys/kernel/dload/emmc_dload 0
 
 #ifdef VENDOR_EDIT
-#Min.Yi@PSW.CN.Wifi.Production.1065227, 2017/11/21
-#Add for  :start init.oppo.wifi.sh
-service wifiserver /vendor/bin/init.oppo.wifi.sh
-    class core
-    user root
-    oneshot
-#endif
-
-#ifdef VENDOR_EDIT
 #Min.Yi@EXP.CN.WiFi.Hardware.1178256, 2017/12/28
 #Add for receive command from the PC tools
 service wifi_diag_stop /vendor/bin/wifistopftmtest
@@ -565,6 +547,7 @@ on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
     setprop persist.sys.adddevdiag 1
     start wifitestdiag
 #endif /* VENDOR_EDIT */
+
 #ifdef VENDOR_EDIT
 #Min.Yi@PSW.CN.WiFi.Hardware.1075545, 2017/11/02
 #Add for : Wifi ftm from the engineer app
@@ -644,25 +627,6 @@ service wifisar /system/vendor/bin/wifisar
     disabled
     oneshot
 
-# Any property change trigger wifisar setting
-on property:oppo.wifi.sar.idx=*
-    start wifisar
-#endif /* VENDOT_EDIT */
-
-#Zuofa.Liu@PSW.CN.WiFi.Basic, 2019/07/04
-#Add for wifi sar setting on Android P
-service wifisar_realme /system/vendor/bin/wifisar_realme
-    class main
-    user root
-    group root
-    disabled
-    oneshot
-
-# Any property change trigger wifisar setting
-on property:vendor.wifi.sar.idx=*
-    start wifisar_realme
-#endif /* VENDOT_EDIT */
-
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
     #Reset read ahead for dm-0 and dm-1 to 512kb
@@ -685,12 +649,6 @@ on property:persist.debug.trace=1
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
-
-on property:vendor.bluetooth.dun.status=running
-    start vendor.bt-dun
-
-on property:vendor.bluetooth.dun.status=stopped
-    stop vendor.bt-dun
 
 on property:ro.bluetooth.ftm_enabled=true
     start ftmd
@@ -717,20 +675,21 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
+
 #ifdef VENDOR_EDIT
 #laichenhui@PSW.Bsp.Tp, 2018/08/21, Add to aceess data fw files
     start bspFwUpdate
 #endif /* VENDOR_EDIT */
     start wcnss-service
 
-# ifdef VENDOR_EDIT
+#ifdef VENDOR_EDIT
 # Xiong.xing@BSP.TP, 2018/03/01, Add for start fw update service
 on property:ro.crypto.state=unencrypted
     start bspFwUpdate
 
 on property:ro.crypto.state=unsupported
     start bspFwUpdate
-# endif
+#endif
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
@@ -857,18 +816,6 @@ service vendor.move_wifi_data /system/bin/move_wifi_data.sh
     group wifi
     disabled
     oneshot
-
-service wigignpt /vendor/bin/wigignpt
-    interface vendor.qti.hardware.wigig.netperftuner@1.0::INetPerfTuner default
-    class hal
-    socket wigig/wigignpt stream 660 system wifi
-    user system
-    group wifi
-    capabilities NET_ADMIN
-    disabled
-
-on property:persist.vendor.wigig.npt.enable=1
-    start wigignpt
 
 service vendor.sensingdaemon /vendor/bin/sensingdaemon
     class hal
@@ -1010,11 +957,6 @@ service vendor-sensor-sh /vendor/bin/init.qcom.sensors.sh
     user root
     oneshot
 
-service crashdata-sh /vendor/bin/init.qcom.crashdata.sh
-    class late_start
-    user root
-    oneshot
-
 service qcom-post-boot /vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
@@ -1028,18 +970,6 @@ service qti-testscripts /system/bin/sh /system/etc/init.qcom.testscripts.sh
     disabled
     oneshot
     seclabel u:r:qti-testscripts:s0
-
-service wifi-sdio-on /vendor/bin/init.qcom.sdio.sh
-    class late_start
-    group wifi inet
-    disabled
-    oneshot
-
-service wifi-crda /vendor/bin/init.crda.sh
-   class late_start
-   user root
-   disabled
-   oneshot
 
 on property:sys.boot_completed=1
     start qcom-post-boot
@@ -1150,43 +1080,24 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-##ifndef VENDOR_EDIT
-#Wentian.mai@PSW.NW.EM.1139269, 2017/10/31
-#modify for on Rftoolkit
-#service diag_mdlog_start /system/vendor/bin/diag_mdlog
-#    class late_start
-#    user shell
-#    group system oem_2901 sdcard_rw sdcard_r media_rw
-##else /*VENDOR_EDIT*/
 service diag_mdlog_start /vendor/bin/diag_mdlog -c
     class late_start
     user shell
     group system diag  oem_2901 sdcard_rw sdcard_r media_rw
-##endif /*VENDOR_EDIT*/
     disabled
     oneshot
-#ifdef VENDOR_EDIT
+
 #natao.lin@Camera for Laser daemon, 2019/09/20
 service vl53l1_daemon_main /vendor/bin/vl53l1_daemon_main
     class late_start
     user root
     group root
     socket vl53l1_daemon stream 660 root system
-#endif
 
-##ifndef VENDOR_EDIT
-#Wentian.mai@PSW.NW.EM.1139269, 2017/10/31
-#modify for on device log permission
-#service diag_mdlog_stop /system/vendor/bin/diag_mdlog -k
-#    class late_start
-#    user shell
-#    group system oem_2901 sdcard_rw sdcard_r media_rw
-##else /*VENDOR_EDIT*/
 service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     class late_start
     user shell
     group system diag  oem_2901 sdcard_rw sdcard_r media_rw
-##endif /*VENDOR_EDIT*/
     disabled
     oneshot
 
@@ -1261,7 +1172,6 @@ service esepmdaemon /system/vendor/bin/esepmdaemon
 
 on charger
     setprop persist.sys.usb.config mass_storage
-    load_system_props
     start qcom-post-boot
 
 #add poweroffhandler
@@ -1306,14 +1216,6 @@ on property:vendor.rild.libpath=*
 on property:ro.vendor.radio.noril=*
     setprop ro.radio.noril ${ro.vendor.radio.noril}
 
-#ifdef VENDOR_EDIT
-#Bingshu.Zhou@PSW.AD.Memory.2256865, 2019/9/24, Remove for remove qssp feature
-#service seemp_healthd /vendor/bin/seemp_healthd
-#    class late_start
-#    user system
-#    group system
-#endif /*VENDOR_EDIT*/
-
 service vendor.power_off_alarm /vendor/bin/power_off_alarm
     class core
     group system
@@ -1326,25 +1228,6 @@ service vendor.move_time_data /system/bin/move_time_data.sh
     group system
     disabled
     oneshot
-
-#ifndef VENDOR_EDIT
-#Guqcai@psw.bsp.tp 2018/03/12 del for closing hbtp
-#service vendor.hbtp /vendor/bin/hbtp_daemon
-#     class main
-#     user system
-#     group system
-#     capabilities SYS_NICE
-#     disabled
-#endif
-
-#ifndef VENDOR_EDIT
-#Xiebaixue@PSW.BSP.Sensor 2019/11/11 add to remove the useless chre for power.
-#service chre /vendor/bin/chre
-#    class late_start
-#    user system
-#    group system
-#    socket chre seqpacket 0660 root system
-#    shutdown critical
 
 on property:vendor.chre.enabled=0
    stop chre
@@ -1363,28 +1246,15 @@ on property:vendor.opengles.version=*
 on property:vendor.gpu.available_frequencies=*
     setprop ro.vendor.gpu.available_frequencies ${vendor.gpu.available_frequencies}
 
-service vendor.audio-hal-2-0 /vendor/bin/hw/android.hardware.audio@2.0-service
+service vendor.audio-hal /vendor/bin/hw/android.hardware.audio.service
     override
     class hal
     user audioserver
-    # media gid needed for /dev/fm (radio) and for /data/misc/media (tee)
-    #ifndef VENDOR_EIDT
-    #Zhao.Pan@PSW.MM.AudioDriver.feature.1611397, 2019/02/19
-    #Add 'readproc' for audio hal to read /proc/[gamepid]/cmdline
-    #group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock
-    #else /* VENDOR_EDIT */
     group audio camera drmrpc inet media mediadrm net_bt net_bt_admin net_bw_acct oem_2901 wakelock readproc
-    #endif /* VENDOR_EDIT */
     capabilities BLOCK_SUSPEND
     ioprio rt 4
     writepid /dev/cpuset/foreground/tasks /dev/stune/foreground/tasks
-    # audioflinger restarts itself when it loses connection with the hal
-    # and its .rc file has an "onrestart restart audio-hal" rule, thus
-    # an additional auto-restart from the init process isn't needed.
-    oneshot
-    interface android.hardware.audio@5.0::IDevicesFactory default
-    interface android.hardware.audio@4.0::IDevicesFactory default
-    interface android.hardware.audio@2.0::IDevicesFactory default
+    onrestart restart audioserver
 
 service vendor.contexthub-hal-1-0 /vendor/bin/hw/android.hardware.contexthub@1.0-service
     override

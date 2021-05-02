@@ -2,25 +2,36 @@
 /dev/goodix_fp                                                                                           u:object_r:goodix_device:s0
 
 # Biometrics
-/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.RMX1931          u:object_r:hal_fingerprint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.RMX1931    u:object_r:hal_fingerprint_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.biometrics\.fingerprint@2\.1-service              u:object_r:hal_fingerprint_default_exec:s0       
 
+# FOD Hal
+/(vendor|system/vendor)/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.RMX1931    u:object_r:hal_lineage_fod_default_exec:s0
+
 # Light Hal
-/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                            u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                      u:object_r:hal_light_default_exec:s0
 
-# Vibrator Hal
-/(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator@1\.2-service\.RMX1931                         u:object_r:hal_vibrator_default_exec:s0
-
-# Rootfs files
-/bt_firmware(/.*)?                            u:object_r:bt_firmware_file:s0
-/firmware(/.*)?                               u:object_r:firmware_file:s0
-/persist(/.*)?                                u:object_r:persist_file:s0
+# Vibrator HAL
+/sys/devices/platform/soc/89c000.i2c/i2c-2/2-005a/leds/vibrator(/.*)?                      u:object_r:sysfs_vibrator:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.vibrator@1\.2-service\.RMX1931           u:object_r:hal_vibrator_default_exec:s0
 
 # Camera
-/mnt/vendor/persist/camera(/.*)?                                                                         u:object_r:persist_camera_file:s0
+/mnt/vendor/persist/camera(/.*)?                                                             u:object_r:persist_camera_file:s0
+
+# Dolby
+/(vendor|system/vendor)/bin/hw/vendor\.dolby\.hardware\.dms@1\.0-service                     u:object_r:hal_dms_default_exec:s0
 
 # Sensors
 /persist/sensors(/.*)?          u:object_r:sensors_persist_file:s0
 
+# Sensor
+/(vendor|system/vendor)/bin/hw/android\.hardware\.sensors@1\.0-service\.RMX1931                     u:object_r:hal_sensors_default_exec:s0
+
+# Oppo Partitions
+/dev/block/platform/soc/1d84000.ufshc/by-name/oppodycnvbk                                                u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/soc/1d84000.ufshc/by-name/oppostanvbk                                                u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/soc/1d84000.ufshc/by-name/opporeserve[0-9]                                                u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/soc/1d84000.ufshc/by-name/oppo_sec                                                u:object_r:modem_efs_partition_device:s0
+
 # mdmreason device
-/dev/mdmreason                  u:object_r:mdmreason_device:s0
+/dev/mdmreason             u:object_r:mdmreason_device:s0

@@ -1,0 +1,7 @@
+attribute hal_perf;
+attribute hal_perf_client;
+attribute hal_perf_server;
+
+attribute hal_dms;
+attribute hal_dms_client;
+attribute hal_dms_server; 

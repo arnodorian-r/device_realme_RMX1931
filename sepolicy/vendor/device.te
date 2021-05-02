@@ -3,3 +3,8 @@ type goodix_device, dev_type;
 
 # Mdmreason device
 type mdmreason_device, dev_type;
+
+type qdsp_device, dev_type, mlstrustedobject;
+type xdsp_device, dev_type;
+type modem_efs_partition_device, dev_type;
+

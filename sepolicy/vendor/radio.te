@@ -1,0 +1,4 @@
+allow radio vendor_ims_prop:file { read open map getattr };
+allow radio { vendor_hal_datafactory_hwservice vendor_hal_iwlan_hwservice }:hwservice_manager find;
+binder_call(radio, vendor_cnd)
+allow radio vendor_hal_cacert_hwservice:hwservice_manager { add find };
