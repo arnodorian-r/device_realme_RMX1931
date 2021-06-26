@@ -79,7 +79,6 @@ debug.sf.enable_hwc_vds=1
 
 # GBoard Spacing
 ro.com.google.ime.kb_pad_port_b=1
-ro.com.google.ime.corner_key_r=32
 
 # IMS
 persist.vendor.ims.disableUserAgent=0
@@ -87,7 +86,7 @@ persist.data.iwlan.enable=true
 persist.dbg.ims_volte_enable=1
 
 # IO Prefetcher
-vendor.iop.enable_uxe=0
+vendor.iop.enable_uxe=1
 
 # Media
 av.offload.enable=true
