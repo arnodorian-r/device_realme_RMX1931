@@ -53,7 +53,6 @@ public class DeviceSettings extends PreferenceFragment
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DC_SWITCH = "dc";
     public static final String KEY_OTG_SWITCH = "otg";
-    public static final String KEY_GAME_SWITCH = "game";
 
     private static final String KEY_CATEGORY_REFRESH = "refresh";
     public static final String KEY_REFRESH_RATE = "refresh_rate";
@@ -65,7 +64,6 @@ public class DeviceSettings extends PreferenceFragment
     private static TwoStatePreference mDCModeSwitch;
     private static TwoStatePreference mSRGBModeSwitch;
     private static TwoStatePreference mOTGModeSwitch;
-    private static TwoStatePreference mGameModeSwitch;
     private static TwoStatePreference mRefreshRate;
     private static SwitchPreference mAutoRefreshRate;
 
@@ -94,11 +92,6 @@ public class DeviceSettings extends PreferenceFragment
         mOTGModeSwitch.setEnabled(OTGModeSwitch.isSupported());
         mOTGModeSwitch.setChecked(OTGModeSwitch.isCurrentlyEnabled(this.getContext()));
         mOTGModeSwitch.setOnPreferenceChangeListener(new OTGModeSwitch());
-
-        mGameModeSwitch = (TwoStatePreference) findPreference(KEY_GAME_SWITCH);
-        mGameModeSwitch.setEnabled(GameModeSwitch.isSupported());
-        mGameModeSwitch.setChecked(GameModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mGameModeSwitch.setOnPreferenceChangeListener(new GameModeSwitch());
         
         mAutoRefreshRate = (SwitchPreference) findPreference(KEY_AUTO_REFRESH_RATE);
         mAutoRefreshRate.setChecked(AutoRefreshRateSwitch.isCurrentlyEnabled(this.getContext()));

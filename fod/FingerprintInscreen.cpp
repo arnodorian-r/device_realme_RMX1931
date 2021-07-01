@@ -25,7 +25,7 @@
 
 #define FP_PRESS_PATH "/sys/kernel/oppo_display/notify_fppress"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define POWER_STATUS_PATH "/sys/kernel/oppo_display/power_status"
+#define POWER_STATUS "/sys/kernel/oppo_display/power_status"
 #define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/notify_panel_blank"
 #define AOD_MODE_PATH "/sys/kernel/oppo_display/aod_light_mode_set"
 
@@ -82,20 +82,13 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
-    if (isDozeMode()) {
-        set(DIMLAYER_PATH, 1);
-        set(FP_PRESS_PATH, 1);
-    }
-    else {
-        set(FP_PRESS_PATH, 1);
-    }
+    set(DIMLAYER_PATH, 1);
+    set(FP_PRESS_PATH, 1);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
     set(FP_PRESS_PATH, 0);
-    if (isDozeMode())
-    set(DIMLAYER_PATH, 0);
     return Void();
 }
 
@@ -111,7 +104,6 @@ Return<void> FingerprintInscreen::onShowFODView() {
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
-    if(!isDozeMode())
     set(DIMLAYER_PATH, 0);
     return Void();
 }
@@ -139,7 +131,7 @@ Return<bool> FingerprintInscreen::shouldBoostBrightness() {
 }
 
 Return<bool> FingerprintInscreen::isDozeMode() {
-    return (get(POWER_STATUS_PATH, 0) == 1) || (get(POWER_STATUS_PATH, 0) == 3);
+    return (get(POWER_STATUS, 0) == 1) || (get(POWER_STATUS, 0) == 3);
 }
 
 Return<void> FingerprintInscreen::setCallback(const sp<::vendor::lineage::biometrics::fingerprint::inscreen::V1_0::IFingerprintInscreenCallback>& callback) {

@@ -226,7 +226,7 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    RealmeParts \
+    doze \
     devicesettings
 
 # DRM
