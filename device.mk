@@ -495,8 +495,7 @@ PRODUCT_PACKAGES += \
 
 # Vibrator
 PRODUCT_PACKAGES += \
-    android.hardware.vibrator@1.2-impl \
-    android.hardware.vibrator@1.2-service.RMX1931
+    vendor.qti.hardware.vibrator.service.RMX1931
 
 # Misc
 PRODUCT_COPY_FILES += \
