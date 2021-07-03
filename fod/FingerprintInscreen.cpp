@@ -25,8 +25,8 @@
 
 #define FP_PRESS_PATH "/sys/kernel/oppo_display/notify_fppress"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define POWER_STATUS "/sys/kernel/oppo_display/power_status"
-#define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/notify_panel_blank"
+#define DOZE_STATUS "/proc/touchpanel/on_doze"
+#define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/nofify_panel_blank"
 #define AOD_MODE_PATH "/sys/kernel/oppo_display/aod_light_mode_set"
 
 namespace {
@@ -58,7 +58,7 @@ namespace inscreen {
 namespace V1_0 {
 namespace implementation {
 
-FingerprintInscreen::FingerprintInscreen() {
+FingerprintInscreen::FingerprintInscreen():isDreaming{false} {
 }
 
 Return<int32_t> FingerprintInscreen::getPositionX() {
@@ -82,28 +82,41 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
+    if(isDreaming){
     set(DIMLAYER_PATH, 1);
+    std::thread([this]() {
+        std::this_thread::sleep_for(std::chrono::milliseconds(60));
+        if (isDreaming) {
+            set(FP_PRESS_PATH, 1);
+        }
+    }).detach();
+    } else {
     set(FP_PRESS_PATH, 1);
+    }
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
     set(FP_PRESS_PATH, 0);
+    if(isDreaming)
+    set(DIMLAYER_PATH, 0);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onShowFODView() {
-    if (isDozeMode() == 1) {
-        set(DIMLAYER_PATH, 1);
-        set(NOTIFY_BLANK_PATH, 1);
+    if(get(DOZE_STATUS, 0)) {
+    isDreaming = true;
+    set(NOTIFY_BLANK_PATH, 1);
+    set(AOD_MODE_PATH, 1);
     } else {
-        set(DIMLAYER_PATH, 1);
+    isDreaming = false;
+    set(DIMLAYER_PATH, 1);
     }
     return Void();
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
-    if (isDozeMode() == 0)
+    if(!isDreaming)
     set(DIMLAYER_PATH, 0);
     return Void();
 }
@@ -128,10 +141,6 @@ Return<int32_t> FingerprintInscreen::getDimAmount(int32_t) {
 
 Return<bool> FingerprintInscreen::shouldBoostBrightness() {
     return false;
-}
-
-Return<bool> FingerprintInscreen::isDozeMode() {
-    return (get(POWER_STATUS, 0) == 1) || (get(POWER_STATUS, 0) == 3);
 }
 
 Return<void> FingerprintInscreen::setCallback(const sp<::vendor::lineage::biometrics::fingerprint::inscreen::V1_0::IFingerprintInscreenCallback>& callback) {
