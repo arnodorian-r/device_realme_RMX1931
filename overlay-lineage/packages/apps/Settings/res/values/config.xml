@@ -14,16 +14,11 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <!-- Defines the location of the fingerprint sensor on the device
-         0 = back
-         1 = front
-         2 = left side
-         3 = right side
-    -->
-    <integer name="config_fingerprintSensorLocation">1</integer>
-
     <!-- Device specific doze package -->
     <string name="config_customDozePackage">org.lineageos.settings/org.lineageos.settings.doze.DozeSettingsActivity</string>
+
+    <!-- Hide rounded corner customisation -->
+    <bool name="config_showRoundedCornersCustomisation">false</bool>
 
     <!-- Battery Health -->
     <bool name="config_supportBatteryHealth">true</bool>

@@ -53,7 +53,7 @@ public:
 private:
     std::mutex mCallbackLock;
     sp<IFingerprintInscreenCallback> mCallback;
-    bool isDreaming;
+    Return<bool> isDozeMode();
 };
 
 }  // namespace implementation

@@ -160,15 +160,20 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     hardware/qcom-caf/sm8150/audio/configs/common/bluetooth_qti_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/bluetooth_qti_audio_policy_configuration.xml
 
+PRODUCT_COPY_FILES += \
+    vendor/qcom/opensource/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+
+
 # Camera
 PRODUCT_PACKAGES += \
-    android.frameworks.displayservice@1.0 \
     android.hardware.camera.provider@2.4-legacy \
     android.hardware.camera.provider@2.4-external \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
     libstdc++.vendor \
+    libcamera2ndk_vendor \
     libxml2 \
+    vendor.qti.hardware.camera.device@1.0.vendor \
     Snap
 
 # Context Hub
