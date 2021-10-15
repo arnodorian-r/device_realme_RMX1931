@@ -522,6 +522,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.servicetracker@1.2.vendor \
     vendor.qti.hardware.servicetracker@1.1.vendor
 
+# Shims
+PRODUCT_PACKAGES += \
+    lib-imsvt
+
 # Telephony
 PRODUCT_PACKAGES += \
     qti-telephony-hidl-wrapper \
