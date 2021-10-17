@@ -27,7 +27,8 @@
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
 #define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/nofify_panel_blank"
 #define DOZE_MODE "/sys/kernel/oppo_display/power_status"
-
+#define ON 1
+#define OFF 0
 namespace {
 
 template <typename T>
@@ -81,28 +82,28 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
-    set(FP_PRESS_PATH, 1);
-    set(DIMLAYER_PATH, 1);
+    set(FP_PRESS_PATH, ON);
+    set(DIMLAYER_PATH, ON);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onRelease() {
-    set(FP_PRESS_PATH, 0);
+    set(FP_PRESS_PATH, OFF);
     return Void();
 }
 
 Return<void> FingerprintInscreen::onShowFODView() {
     if (isDozeMode()) {
-    set(NOTIFY_BLANK_PATH, 1);
+    set(NOTIFY_BLANK_PATH, ON);
     } else {
-    set(DIMLAYER_PATH, 1);
+    set(DIMLAYER_PATH, ON);
     }
     return Void();
 }
 
 Return<void> FingerprintInscreen::onHideFODView() {
     if (!isDozeMode())
-    set(DIMLAYER_PATH, 0);
+    set(DIMLAYER_PATH, OFF);
     return Void();
 }
 
