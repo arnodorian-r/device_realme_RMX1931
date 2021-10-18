@@ -200,6 +200,9 @@ persist.vendor.vib.gain=0x55
 # Google Assistant
 ro.opa.eligible_device=true
 
+# System
+persist.sys.binary_xml=false
+
 # SoC
 ro.soc.manufacturer=Qualcomm
 ro.soc.model=SM8150
