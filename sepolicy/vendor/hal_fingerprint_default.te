@@ -15,7 +15,7 @@ allow hal_fingerprint_default proc_touchpanel:dir search;
 allow hal_fingerprint_default proc_touchpanel:file rw_file_perms;
 
 get_prop(hal_fingerprint_default, oppo_debug_prop);
-get_prop(hal_fingerprint_default, adsprpc_prop);
+get_prop(hal_fingerprint_default, vendor_adsprpc_prop);
 
 r_dir_file(hal_fingerprint_default, mnt_vendor_file);
 

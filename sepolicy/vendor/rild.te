@@ -1,7 +1,28 @@
-allow rild hal_oppo_hwservice:hwservice_manager find;
-
 get_prop(rild, oppo_debug_prop);
 
 r_dir_file(rild, proc_devinfo);
 
-set_prop(rild, oppo_debug_prop);
+allow rild cache_file:dir { add_name getattr create search write };
+allow rild cache_file:file { create open write };
+allow rild system_data_file:dir getattr;
+allow rild block_device:dir search;
+allow rild default_prop:property_service set;
+allow rild system_prop:property_service set;
+allow rild oppo_debug_prop:property_service set;
+allow rild opporadio_hwservice:hwservice_manager add;
+
+allow rild default_android_hwservice:hwservice_manager add;
+
+allow rild vendor_file:file ioctl;
+typeattribute rild data_between_core_and_vendor_violators;
+allow rild tombstone_data_file:dir rw_dir_perms;
+allow rild tombstone_data_file:file rw_file_perms;
+
+allow rild system_prop:property_service set;
+allow rild default_android_hwservice:hwservice_manager find;
+allow rild default_prop:property_service set;
+allow rild oppo_debug_prop:property_service set;
+allow rild cache_file:dir { search getattr write add_name };
+allow rild default_prop:property_service set;
+allow rild opporadio_hwservice:hwservice_manager find;
+allow rild cache_file:file { open read getattr write create };

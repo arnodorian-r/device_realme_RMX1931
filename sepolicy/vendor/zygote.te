@@ -1,1 +1,1 @@
-allow zygote vendor_file:file { execute getattr open read };
+allow zygote vendor_file:file { execute getattr open read map };

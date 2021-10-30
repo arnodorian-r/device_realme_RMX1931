@@ -1,0 +1,9 @@
+type vendor_rmt_storage, domain;
+type vendor_rmt_storage_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(vendor_rmt_storage)
+allow vendor_rmt_storage mdmreason_device:chr_file rw_file_perms;
+
+get_prop(vendor_rmt_storage, oppo_debug_prop);
+
+r_dir_file(vendor_rmt_storage, proc_oppoversion);
