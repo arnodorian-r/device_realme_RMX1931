@@ -79,6 +79,7 @@ on boot
     chown system system /sys/kernel/oppo_display/aod_light_mode_set
     chown system system /sys/kernel/oppo_display/serial_number
     chown system system /sys/kernel/oppo_display/hdr10
+    chown system system /sys/kernel/hbtp/display_pwr
 
     chmod 0666 /sys/kernel/oppo_display/hbm
     chmod 0666 /sys/kernel/oppo_display/seed
