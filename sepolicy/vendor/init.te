@@ -3,7 +3,7 @@ allow init vendor_file:file { execute execute_no_trans };
 allow init hal_audio_default:file { read open map getattr };
 allow init self:qipcrtr_socket { create read write getattr setopt };
 allow init sysfs_wake_lock:file { read write };
-allow init hwservicemanager:binder { call transfer }
+allow init hwservicemanager:binder { call transfer };
 allow init self:capability2 block_suspend;
 allow init init:sock_file create_file_perms;
 

@@ -7,3 +7,4 @@ type mdmreason_device, dev_type;
 type qdsp_device, dev_type, mlstrustedobject;
 type xdsp_device, dev_type;
 type modem_efs_partition_device, dev_type;
+type vl53l1_device, dev_type;

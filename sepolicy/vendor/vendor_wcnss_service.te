@@ -1,5 +1,5 @@
-type vendor_wcnss_service, domain;
-type vendor_wcnss_service_exec, exec_type, vendor_file_type, file_type;
+#type vendor_wcnss_service, domain;
+#type vendor_wcnss_service_exec, exec_type, vendor_file_type, file_type;
 
 init_daemon_domain(vendor_wcnss_service)
 net_domain(vendor_wcnss_service)
