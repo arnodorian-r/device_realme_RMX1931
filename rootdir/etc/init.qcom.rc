@@ -698,6 +698,15 @@ on property:ro.crypto.state=unsupported
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
+on property:gsm.version.baseband=*
+     start fix_baseband
+
+service fix_baseband /vendor/bin/fix_baseband.sh
+     class late_start
+     user system
+     group system
+     oneshot
+
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core
     user vendor_qrtr

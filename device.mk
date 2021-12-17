@@ -430,6 +430,7 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+    fix_baseband.sh \
     init.class_main.sh \
     init.qcom.class_core.sh \
     init.qcom.early_boot.sh \
