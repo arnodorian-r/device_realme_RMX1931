@@ -1,7 +1,3 @@
-on boot
-    chmod 0444 /proc/touchpanel/on_doze
-    chown system system /proc/touchpanel/on_doze
-
 service vendor.fingerprint-inscreen-1-0 /vendor/bin/hw/vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.RMX1931
     interface vendor.lineage.biometrics.fingerprint.inscreen@1.0::IFingerprintInscreen default
     class hal

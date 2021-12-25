@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 #ifndef VENDOR_LINEAGE_BIOMETRICS_FINGERPRINT_INSCREEN_V1_0_FINGERPRINTINSCREEN_H
 #define VENDOR_LINEAGE_BIOMETRICS_FINGERPRINT_INSCREEN_V1_0_FINGERPRINTINSCREEN_H
 
 #include <vendor/lineage/biometrics/fingerprint/inscreen/1.0/IFingerprintInscreen.h>
+#include <vendor/oppo/hardware/biometrics/fingerprint/2.1/IBiometricsFingerprint.h>
 
 namespace vendor {
 namespace lineage {
@@ -30,13 +30,12 @@ namespace implementation {
 using ::android::sp;
 using ::android::hardware::Return;
 using ::android::hardware::Void;
+using ::vendor::oppo::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint;
 
 class FingerprintInscreen : public IFingerprintInscreen {
-public:
+  public:
     FingerprintInscreen();
-    Return<int32_t> getPositionX() override;
-    Return<int32_t> getPositionY() override;
-    Return<int32_t> getSize() override;
+
     Return<void> onStartEnroll() override;
     Return<void> onFinishEnroll() override;
     Return<void> onPress() override;
@@ -46,14 +45,21 @@ public:
     Return<bool> handleAcquired(int32_t acquiredInfo, int32_t vendorCode) override;
     Return<bool> handleError(int32_t error, int32_t vendorCode) override;
     Return<void> setLongPressEnabled(bool enabled) override;
-    Return<int32_t> getDimAmount(int32_t brightness) override;
+    Return<int32_t> getDimAmount(int32_t cur_brightness) override;
     Return<bool> shouldBoostBrightness() override;
-    Return<void> setCallback(const sp<::vendor::lineage::biometrics::fingerprint::inscreen::V1_0::IFingerprintInscreenCallback>& callback) override;
+    Return<void> setCallback(const sp<IFingerprintInscreenCallback>& callback) override;
+    Return<int32_t> getPositionX() override;
+    Return<int32_t> getPositionY() override;
+    Return<int32_t> getSize() override;
 
-private:
+  private:
+    bool mFodCircleVisible;
+
+    sp<IBiometricsFingerprint> mVendorFpService;
+
     std::mutex mCallbackLock;
     sp<IFingerprintInscreenCallback> mCallback;
-    Return<bool> isDozeMode();
+    bool mFingerPressed;
 };
 
 }  // namespace implementation

@@ -23,32 +23,14 @@
 #include <cmath>
 #include <thread>
 
+#define FINGERPRINT_ACQUIRED_VENDOR 6
+
 #define FP_PRESS_PATH "/sys/kernel/oppo_display/notify_fppress"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/nofify_panel_blank"
-#define DOZE_MODE "/sys/kernel/oppo_display/power_status"
-#define ON 1
-#define OFF 0
-namespace {
-
-template <typename T>
-static void set(const std::string& path, const T& value) {
-    std::ofstream file(path);
-    file << value;
-    LOG(INFO) << "wrote path: " << path << ", value: " << value << "\n";
-}
-
-template <typename T>
-static T get(const std::string& path, const T& def) {
-    std::ifstream file(path);
-    T result;
-
-    file >> result;
-    LOG(INFO) << "read path: " << path << ", value: " << result << "\n";
-    return file.fail() ? def : result;
-}
-
-} // anonymous namespace
+#define AOD_MODE_PATH "/sys/kernel/oppo_display/aod_light_mode_set"
+#define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/notify_panel_blank"
+#define POWER_STATUS "/sys/kernel/oppo_display/power_status"
+#define DC_DIM_PATH "/sys/kernel/oppo_display/dimlayer_bl_en"
 
 namespace vendor {
 namespace lineage {
@@ -58,7 +40,30 @@ namespace inscreen {
 namespace V1_0 {
 namespace implementation {
 
-FingerprintInscreen::FingerprintInscreen(){
+bool dcDimState;
+
+/*
+ * Write value to path and close file.
+ */
+template <typename T>
+static void set(const std::string& path, const T& value) {
+    std::ofstream file(path);
+    file << value;
+}
+
+template <typename T>
+static T get(const std::string& path, const T& def) {
+    std::ifstream file(path);
+    T result;
+
+    file >> result;
+    return file.fail() ? def : result;
+}
+
+FingerprintInscreen::FingerprintInscreen() {
+    this->mFodCircleVisible = false;
+	this->mFingerPressed = false;
+    this->mVendorFpService = IBiometricsFingerprint::getService();
 }
 
 Return<int32_t> FingerprintInscreen::getPositionX() {
@@ -82,33 +87,72 @@ Return<void> FingerprintInscreen::onFinishEnroll() {
 }
 
 Return<void> FingerprintInscreen::onPress() {
-    set(FP_PRESS_PATH, ON);
-    set(DIMLAYER_PATH, ON);
-    return Void();
-}
-
-Return<void> FingerprintInscreen::onRelease() {
-    set(FP_PRESS_PATH, OFF);
-    return Void();
-}
-
-Return<void> FingerprintInscreen::onShowFODView() {
-    if (isDozeMode()) {
-    set(NOTIFY_BLANK_PATH, ON);
-    } else {
-    set(DIMLAYER_PATH, ON);
+    mFingerPressed = true;
+    if (mFingerPressed) {
+        set(FP_PRESS_PATH, 1);
     }
     return Void();
 }
 
+Return<void> FingerprintInscreen::onRelease() {
+    
+    mFingerPressed = false;
+    set(FP_PRESS_PATH, 0);
+     
+    return Void();
+}
+
+Return<void> FingerprintInscreen::onShowFODView() {
+    if (!mFodCircleVisible) {
+        dcDimState = get(DC_DIM_PATH, 0);
+        set(DC_DIM_PATH, 0);
+    }
+    if (get(POWER_STATUS, 3) || get(POWER_STATUS, 4)) {
+	    set(NOTIFY_BLANK_PATH, 1);
+        set(AOD_MODE_PATH, 1);
+	}
+    this->mFodCircleVisible = true;
+	this->mVendorFpService->setScreenState(::vendor::oppo::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_ON);
+    set(DIMLAYER_PATH, 1);
+    return Void();
+}
+
 Return<void> FingerprintInscreen::onHideFODView() {
-    if (!isDozeMode())
-    set(DIMLAYER_PATH, OFF);
+    if (mFodCircleVisible) {
+        set(DC_DIM_PATH, dcDimState);
+    }
+    this->mFodCircleVisible = false;
+	this->mVendorFpService->setScreenState(::vendor::oppo::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_ON);
+    set(FP_PRESS_PATH, 0);
+    set(DIMLAYER_PATH, 0);
+
     return Void();
 }
 
 Return<bool> FingerprintInscreen::handleAcquired(int32_t acquiredInfo, int32_t vendorCode) {
-    LOG(ERROR) << "acquiredInfo: " << acquiredInfo << ", vendorCode: " << vendorCode << "\n";
+    std::lock_guard<std::mutex> _lock(mCallbackLock);
+    if (mCallback == nullptr) {
+        return false;
+    }
+
+    if (acquiredInfo == FINGERPRINT_ACQUIRED_VENDOR) {
+        if (mFodCircleVisible && vendorCode == 0) {
+            Return<void> ret = mCallback->onFingerDown();
+            if (!ret.isOk()) {
+                LOG(ERROR) << "FingerDown() error: " << ret.description();
+            }
+            return true;
+        }
+
+        if (mFodCircleVisible && vendorCode == 1) {
+            Return<void> ret = mCallback->onFingerUp();
+            if (!ret.isOk()) {
+                LOG(ERROR) << "FingerUp() error: " << ret.description();
+            }
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -129,15 +173,12 @@ Return<bool> FingerprintInscreen::shouldBoostBrightness() {
     return false;
 }
 
-Return<bool> FingerprintInscreen::isDozeMode() {
-    return (get(DOZE_MODE, 0) == 1) || (get(DOZE_MODE, 0) == 3);
-}
-
-Return<void> FingerprintInscreen::setCallback(const sp<::vendor::lineage::biometrics::fingerprint::inscreen::V1_0::IFingerprintInscreenCallback>& callback) {
+Return<void> FingerprintInscreen::setCallback(const sp<IFingerprintInscreenCallback>& callback) {
     {
         std::lock_guard<std::mutex> _lock(mCallbackLock);
         mCallback = callback;
     }
+
     return Void();
 }
 
@@ -148,4 +189,3 @@ Return<void> FingerprintInscreen::setCallback(const sp<::vendor::lineage::biomet
 }  // namespace biometrics
 }  // namespace lineage
 }  // namespace vendor
-

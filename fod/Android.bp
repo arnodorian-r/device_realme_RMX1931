@@ -18,10 +18,7 @@ cc_binary {
     defaults: ["hidl_defaults"],
     name: "vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.RMX1931",
     init_rc: ["vendor.lineage.biometrics.fingerprint.inscreen@1.0-service.RMX1931.rc"],
-    srcs: [
-	"service.cpp",
-        "FingerprintInscreen.cpp",
-    ],
+    srcs: ["service.cpp", "FingerprintInscreen.cpp"],
     vendor: true,
     shared_libs: [
         "libbase",
@@ -30,6 +27,7 @@ cc_binary {
         "liblog",
         "libutils",
         "vendor.lineage.biometrics.fingerprint.inscreen@1.0",
+        "vendor.oppo.hardware.biometrics.fingerprint@2.1",
     ],
 }
 
