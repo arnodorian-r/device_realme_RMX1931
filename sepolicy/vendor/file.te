@@ -52,3 +52,7 @@ type hostapd_socket, file_type, data_file_type;
 
 # ranging
 type sysfs_vl53l1, sysfs_type, fs_type;
+
+#fpsinfo
+type sysfs_fps, sysfs_type, fs_type;
+

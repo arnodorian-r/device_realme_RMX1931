@@ -55,3 +55,4 @@ persist.vendor.dolby.loglevel           u:object_r:vendor_dolby_loglevel_prop:s0
 
 # NFC
 persist.nfc.               u:object_r:persist_nfc_prop:s0
+
