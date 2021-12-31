@@ -185,8 +185,9 @@ TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 # Sepolicy
 SELINUX_IGNORE_NEVERALLOWS := true
 
-# Sepolicy
-include device/qcom/sepolicy_vndr/SEPolicy.mk
+# SELinux
+include device/qcom-LA.UM.10.3.r1-xxxxx-sdm845.0/sepolicy_vndr/SEPolicy.mk
+
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 
