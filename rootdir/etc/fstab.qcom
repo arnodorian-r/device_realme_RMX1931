@@ -16,6 +16,7 @@
 
 #Kang.Zou@PSW.AD.Storage.1398012, 2019/08/20, Add for enable fbe
 /dev/block/bootdevice/by-name/userdata                  /data                  ext4    noatime,nosuid,nodev,barrier=1,noauto_da_alloc,discard,errors=panic,inlinecrypt latemount,wait,check,fileencryption=ice,wrappedkey,keydirectory=/metadata/vold/metadata_encryption,quota,reservedsize=128M
+/dev/block/bootdevice/by-name/userdata                  /data                  f2fs    noatime,nosuid,nodev,discard,fsync_mode=nobarrier,inlinecrypt latemount,wait,check,fileencryption=ice,wrappedkey,sysfs_path=/sys/devices/platform/soc/1d84000.ufshc,checkpoint=fs,keydirectory=/metadata/vold/metadata_encryption,quota,formattable,reservedsize=128M,resize
 
 /devices/platform/soc/8804000.sdhci/mmc_host*           /storage/sdcard1       vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto
 /devices/platform/soc/1da4000.ufshc_card/host*          /storage/sdcard1       vfat    nosuid,nodev                                         wait,voldmanaged=sdcard1:auto
