@@ -41,5 +41,5 @@ get_prop(adsprpcd, vendor_adsprpc_prop)
 allow adsprpcd sensors_persist_file:dir create_dir_perms;
 allow adsprpcd sensors_persist_file:file create_file_perms;
 
-r_dir_file(adsprpcd, proc_oppoversion);
-r_dir_file(adsprpcd, sysfs_oppo_display);
+r_dir_file(adsprpcd, proc_oppoversion)
+r_dir_file(adsprpcd, sysfs_oppo_display)

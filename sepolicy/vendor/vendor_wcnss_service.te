@@ -36,4 +36,4 @@ allow vendor_wcnss_service mnt_vendor_file:file { open read getattr };
 
 allow vendor_wcnss_service sysfs_data:file r_file_perms;
 
-set_prop(vendor_wcnss_service, oppo_wlan_prop);
+set_prop(vendor_wcnss_service, oppo_wlan_prop)

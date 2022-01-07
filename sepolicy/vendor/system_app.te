@@ -9,7 +9,7 @@ allow system_app sysfs_oppo_display:file { getattr open read write };
 allow system_app vendor_sysfs_battery_supply:file rw_file_perms;
 allow system_app vendor_sysfs_battery_supply:dir r_dir_perms;
 
-r_dir_file(system_app, proc_touchpanel);
-r_dir_file(system_app, sysfs_vibrator);
+r_dir_file(system_app, proc_touchpanel)
+r_dir_file(system_app, sysfs_vibrator)
 allow system_app baseband_prop:file { read };
 get_prop(system_app, baseband_prop)
