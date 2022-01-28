@@ -68,43 +68,6 @@ on init
     chown root system /sys/fs/cgroup/memory/bg/tasks
     chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
-# Gou shengjun@SWDP.MM.Display.LCD, 2018/12/02 Add for display
-    chown system system /sys/kernel/oppo_display/hbm
-    chown system system /sys/kernel/oppo_display/seed
-    chown system system /sys/kernel/oppo_display/cabc
-    chown system system /sys/kernel/oppo_display/dimlayer_bl_en
-    chown system system /sys/kernel/oppo_display/ffl_set
-    chown system system /sys/kernel/oppo_display/dump_info
-    chown system system /sys/kernel/oppo_display/esd_status
-    chown system system /sys/kernel/oppo_display/power_status
-    chown system system /sys/kernel/oppo_display/dimlayer_hbm
-    chown system system /sys/kernel/oppo_display/notify_fppress
-    chown system system /sys/kernel/oppo_display/force_screenfp
-    chown system system /sys/kernel/oppo_display/sau_closebl_node
-    chown system system /sys/kernel/oppo_display/panel_serial_number
-    chown system system /sys/kernel/oppo_display/audio_ready
-    chown system system /sys/kernel/oppo_display/aod_light_mode_set
-    chown system system /sys/kernel/oppo_display/serial_number
-    chown system system /sys/kernel/oppo_display/hdr10
-
-    chmod 0666 /sys/kernel/oppo_display/hbm
-    chmod 0666 /sys/kernel/oppo_display/seed
-    chmod 0666 /sys/kernel/oppo_display/cabc
-    chmod 0666 /sys/kernel/oppo_display/dimlayer_bl_en
-    chmod 0666 /sys/kernel/oppo_display/ffl_set
-    chmod 0666 /sys/kernel/oppo_display/dump_info
-    chmod 0666 /sys/kernel/oppo_display/esd_status
-    chmod 0666 /sys/kernel/oppo_display/power_status
-    chmod 0666 /sys/kernel/oppo_display/dimlayer_hbm
-    chmod 0666 /sys/kernel/oppo_display/notify_fppress
-    chmod 0666 /sys/kernel/oppo_display/force_screenfp
-    chmod 0666 /sys/kernel/oppo_display/sau_closebl_node
-    chmod 0666 /sys/kernel/oppo_display/panel_serial_number
-    chmod 0666 /sys/kernel/oppo_display/audio_ready
-    chmod 0666 /sys/kernel/oppo_display/aod_light_mode_set
-    chmod 0666 /sys/kernel/oppo_display/serial_number
-    chmod 0666 /sys/kernel/oppo_display/hdr10
-
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
 # Start services for bootanim
@@ -522,106 +485,6 @@ on property:persist.vendor.sys.rawdump_copy=1
 on property:persist.vendor.sys.rawdump_copy=0
     write /sys/kernel/dload/emmc_dload 0
 
-#ifdef VENDOR_EDIT
-#Min.Yi@EXP.CN.WiFi.Hardware.1178256, 2017/12/28
-#Add for receive command from the PC tools
-service wifi_diag_stop /vendor/bin/wifistopftmtest
-    class late_start
-    user root
-    seclabel u:r:rutilsdaemon:s0
-    group root
-    disabled
-    oneshot
-
-service wifitestdiag /vendor/bin/wifi_diag
-    class late_start
-    user root
-    seclabel u:r:rutilsdaemon:s0
-    group root
-    disabled
-    oneshot
-
-on property:oppo.wifi.ftmstoptest=1
-     start wifi_diag_stop
-
-on property:oppo.wifi.ftmstoptest=0
-     stop wifi_diag_stop
-
-on property:sys.usb.config=diag,adb && property:sys.usb.configfs=1
-    setprop persist.sys.adddevdiag 1
-    start wifitestdiag
-#endif /* VENDOR_EDIT */
-
-#ifdef VENDOR_EDIT
-#Min.Yi@PSW.CN.WiFi.Hardware.1075545, 2017/11/02
-#Add for : Wifi ftm from the engineer app
-service wifi_ftm /system/vendor/bin/wififtmtest
-    class late_start
-    user root
-    seclabel u:r:rutilsdaemon:s0
-    group root
-    disabled
-    oneshot
-
-on property:oppo.wifi.ftmtest=1
-     start wifi_ftm
-
-on property:oppo.wifi.ftmtest=0
-     stop wifi_ftm
-#endif /* VENDOR_EDIT */
-
-#ifdef VENDOR_EDIT
-#Qiulei@Connectivity.WiFi.Hardware.1075545, 2016/07/23
-#Add for : Wifi ftm
-service wififtm /system/vendor/bin/wififtm
-    class late_start
-    user root
-    group root
-    disabled
-    oneshot
-
-on property:oppo.wifi.ftm=1
-     start wififtm
-
-on property:oppo.wifi.ftm=0
-     stop wififtm
-#endif /* VENDOR_EDIT */
-
-#ifdef VENDOR_EDIT
-#Qiulei@PSW.CN.WiFi.Hardware.1075545, 2016/07/23
-#Add for : Wifi HW ftm
-service wifihwftm /vendor/bin/wifihwftm
-    class late_start
-    user root
-    seclabel u:r:rutilsdaemon:s0
-    group root
-    disabled
-    oneshot
-
-on property:oppo.wifi.hwtest=1
-     start wifihwftm
-
-on property:oppo.wifi.hwtest=0
-     stop wifihwftm
-
-on property:vendor.wifi.hwtest=1
-     start wifihwftm
-
-on property:vendor.wifi.hwtest=0
-     stop wifihwftm
-#endif /* VENDOR_EDIT */
-
-#ifdef VENDOR_EDIT
-#Qiulei@PSW.CN.WiFi.Hardware.1769918, 2019/01/02
-#Add for : Wifi BDF version
-service WifibdfVersion /vendor/bin/vendor.autochmod.sh "WifibdfVersion"
-    class late_start
-    user root
-    seclabel u:r:rutilsdaemon:s0
-    group root
-    oneshot
-#endif /* VENDOR_EDIT */
-
 #Lei.Zhang@PSW.CN.WiFi.Basic., 2018/12/24
 #Add for wifi sar setting on Android P
 service wifisar /system/vendor/bin/wifisar
@@ -775,23 +638,6 @@ on property:ro.data.large_tcp_window_size=true
 on property:sys.sysctl.tcp_adv_win_scale=*
     write /proc/sys/net/ipv4/tcp_adv_win_scale ${sys.sysctl.tcp_adv_win_scale}
 
-#ifndef VENDOR_EDIT
-#Tao.Hui@PSW.CN.WiFi.Basic.Log.1072015, 2015/04/24,
-#Modify for:close defualt debug log of wpa_supplicant
-#service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
-#    -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 -dd \
-#    -g@android:vendor_wpa_wlan0
-#   we will start as root and wpa_supplicant will switch to user wifi
-#   after setting up the capabilities required for WEXT
-#   user wifi
-#   group wifi inet keystore
-#    interface android.hardware.wifi.supplicant@1.0::ISupplicant default
-#    interface android.hardware.wifi.supplicant@1.1::ISupplicant default
-#    class main
-#    socket vendor_wpa_wlan0 dgram 660 wifi wifi
-#    disabled
-#    oneshot
-#else
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     -O/data/vendor/wifi/wpa/sockets -puse_p2p_group_interface=1 \
     -g@android:vendor_wpa_wlan0
@@ -805,7 +651,6 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     socket vendor_wpa_wlan0 dgram 660 wifi wifi
     disabled
     oneshot
-#endif
 
 service vendor.wigig_supplicant /vendor/bin/hw/wpa_supplicant \
     -iwigig0 -Dnl80211 -c/data/vendor/wifi/wigig_supplicant.conf \
@@ -1093,37 +938,12 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service diag_mdlog_start /vendor/bin/diag_mdlog -c
-    class late_start
-    user shell
-    group system diag  oem_2901 sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
 #natao.lin@Camera for Laser daemon, 2019/09/20
 service vl53l1_daemon_main /vendor/bin/vl53l1_daemon_main
     class late_start
     user root
     group root
     socket vl53l1_daemon stream 660 root system
-
-service diag_mdlog_stop /vendor/bin/diag_mdlog -k
-    class late_start
-    user shell
-    group system diag  oem_2901 sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-#ifdef VENDOR_EDIT
-#zhengpeng.tan@PSW.NW.EM.1139269, 2017/10/31
-#Add for device log on nrt mode
-service diag_mdlog_nrt /vendor/bin/diag_mdlog -c -b
-    class late_start
-    user shell
-    group system diag  oem_2901 sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-#endif VENDOR_EDIT
 
 service qlogd /system/xbin/qlogd
     socket qlogd stream 0662 system system
@@ -1134,44 +954,11 @@ on property:persist.sys.qlogd=1
 on property:persist.sys.qlogd=0
     stop qlogd
 
-service vm_bms /vendor/bin/vm_bms
-    user root
-    group root
-    disabled
-
 service vendor.msm_irqbalance /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core
     user root
     group root
     disabled
-
-service vendor.msm_irqbal_lb /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance_little_big.conf
-    class core
-    user root
-    group root
-    disabled
-
-service vendor.msm_irqbl_sdm630 /vendor/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance_sdm630.conf
-    class core
-    user root
-    group root
-    disabled
-
-# service for USERDEBUG
-service vendor.LKCore-dbg /vendor/bin/LKCore
-    class late_start
-    oneshot
-    disabled
-    user root
-    group root system log diag net_raw
-
-# service for USER
-service vendor.LKCore-rel /vendor/bin/LKCore
-    class late_start
-    oneshot
-    disabled
-    user system
-    group system log diag
 
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
@@ -1204,17 +991,6 @@ service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.cfg
     group root system
     disabled
     oneshot
-
-# Logcat dump daemon, dumps logs to logdump partition
-service logdumpd /system/bin/logcat -b all -v threadtime -D -w /dev/block/bootdevice/by-name/logdump
-    class core
-    writepid /dev/cpuset/system-background/tasks
-    seclabel u:r:logdumpd:s0
-    disabled
-
-# Logdumpd is enabled only for userdebug non-perf build
-on property:ro.logdumpd.enabled=1
-    start logdumpd
 
 service time_daemon /vendor/bin/time_daemon
     class main
@@ -1297,39 +1073,6 @@ on property:oppo.wifi.restorepersistaccess=*
     chmod 0771 /mnt/vendor/persist
 #endif /* VENDOR_EDIT */
 
-#ifdef VENDOR_EDIT
-#Qiang.shao@PSW.AD.OppoFeature.CommonSoft.1181235, 2016/07/30, Add for self_init domain to access block_device for init prop
-service prop-adap-core /vendor/bin/self-init core
-    class core
-    user root
-    oneshot
-    seclabel u:r:rutilsdaemon:s0
-service prop-adap-main /vendor/bin/self-init main
-    class main
-    user root
-    oneshot
-    seclabel u:r:rutilsdaemon:s0
-service media-resource-reconciliation /vendor/bin/self-init reconcile_media_resource
-    user root
-    oneshot
-    disabled
-    seclabel u:r:rutilsdaemon:s0
-service prop-adap-core-gsi /vendor/bin/self-init gsicore
-    class core
-    user root
-    group root system radio
-    oneshot
-
-service prop-adap-main-gsi /vendor/bin/self-init gsimain
-    class main
-    user root
-    group root system radio
-    oneshot
-
-
-on property:ro.oppo.reconcile_media_resource=1
-    start media-resource-reconciliation
-#endif
 
 #zhunn@OnLineRD.AirService.RIL, 2015/1/28, Add for cdma card cannot send sms in Yiwu
 #WeiHong.Li@Mobile.Network, 2015/09/11, Add suid_dumpable to capture rild's tombstone according to case 02090380
