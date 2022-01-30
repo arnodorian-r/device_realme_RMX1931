@@ -2,11 +2,8 @@
 /dev/goodix_fp                                                                                           u:object_r:goodix_device:s0
 
 # Biometrics
-/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.1-service\.RMX1931    u:object_r:hal_fingerprint_default_exec:s0
+/(vendor|system/vendor)/bin/hw/android\.hardware\.biometrics\.fingerprint@2\.3-service\.RMX1931    u:object_r:hal_fingerprint_default_exec:s0
 /(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.biometrics\.fingerprint@2\.1-service              u:object_r:hal_fingerprint_default_exec:s0       
-
-# FOD Hal
-/(vendor|system/vendor)/bin/hw/vendor\.lineage\.biometrics\.fingerprint\.inscreen@1.0-service\.RMX1931    u:object_r:hal_lineage_fod_default_exec:s0
 
 # Light Hal
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                      u:object_r:hal_light_default_exec:s0

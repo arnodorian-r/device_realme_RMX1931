@@ -10,9 +10,14 @@ allow hal_fingerprint_default init:binder { call };
 allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
 
 allow hal_fingerprint_default proc_oppo_fp:file r_file_perms;
-
 allow hal_fingerprint_default proc_touchpanel:dir search;
 allow hal_fingerprint_default proc_touchpanel:file rw_file_perms;
+
+allow hal_fingerprint_default sysfs_oppo_display:dir search;
+allow hal_fingerprint_default sysfs_oppo_display:file rw_file_perms;
+allow hal_fingerprint_default default_prop:file { getattr };
+allow hal_fingerprint_default proc_touchpanel:dir search;
+allow hal_fingerprint_default proc_touchpanel:file { getattr open read };
 
 get_prop(hal_fingerprint_default, oppo_debug_prop)
 get_prop(hal_fingerprint_default, vendor_adsprpc_prop)
