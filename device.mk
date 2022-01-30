@@ -208,8 +208,6 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.allocator-service \
     gralloc.msmnile \
     memtrack.msmnile \
-    libdisplayconfig.qti \
-    libdisplayconfig.qti.vendor \
     libtinyxml \
     vendor.display.config@2.0 \
     vendor.display.config@2.0.vendor
@@ -230,9 +228,9 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapperextensions@1.1.vendor
 
 # Doze
-PRODUCT_PACKAGES += \
-    RealmeDoze \
-    devicesettings
+#PRODUCT_PACKAGES += \
+#    RealmeDoze \
+#    devicesettings
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -534,13 +532,3 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/p2p_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/p2p_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
-
-# WiFi Display
-PRODUCT_PACKAGES += \
-    libnl \
-    libqdMetaData \
-    libqdMetaData.system \
-    libqdMetaData.vendor
-
-PRODUCT_BOOT_JARS += \
-    WfdCommon
