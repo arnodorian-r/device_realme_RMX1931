@@ -60,12 +60,6 @@ persist.dbg.ims_volte_enable=1
 # IO Prefetcher
 vendor.iop.enable_uxe=1
 
-# Media
-av.offload.enable=true
-media.settings.xml=/vendor/etc/media_profiles_vendor.xml
-vendor.swvdec.log.level=1
-vendor.vidc.debug.level=1
-
 # Memory optimizations
 ro.vendor.qti.sys.fw.bservice_enable=true
 
@@ -104,7 +98,6 @@ ro.telephony.iwlan_operation_mode=legacy
 persist.sys.fflag.override.settings_provider_model=false
 ril.subscription.types=NV,RUIM
 rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
-ro.com.android.dataroaming=true
 ro.telephony.default_network=22,22
 telephony.lteOnCdmaDevice=1
 
