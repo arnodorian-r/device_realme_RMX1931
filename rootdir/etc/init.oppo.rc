@@ -123,6 +123,9 @@ on boot
     chmod 0666 /proc/touchpanel/oppo_tp_direction
     chmod 0666 /proc/touchpanel/oppo_tp_limit_enable
 
+    write /proc/touchpanel/oppo_tp_direction 1
+    write /proc/touchpanel/oppo_tp_limit_enable 0
+
 #Misc Dirs
     mkdir /data/misc/keystore 0700 keystore keystore
     mkdir /data/misc/gatekeeper 0700 system system
