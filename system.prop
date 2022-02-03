@@ -38,43 +38,10 @@ persist.data.profile_update=true
 persist.data.wda.enable=true 
 persist.rmnet.data.enable=true
 
-# Display - oppo
-ro.vendor.display.ad.sdr_calib_data=/vendor/etc/OPPO_OLED_AD_calib.cfg
-ro.display.underscreenfingerprint=1
-ro.display.underscreen.lightsensor.support=1
-ro.lcd.display.screen.underlightsensor.region=677,19,707,49
-ro.display.underscreen.lightsensor.screenshot.period=50
-ro.oppo.screen.heteromorphism=483,0:597,67
-
-# Dex
-dalvik.vm.dex2oat64.enabled=true
-ro.vendor.qti.am.reschedule_service=true
-ro.sys.fw.dex2oat_thread_count=8
-dalvik.vm.boot-dex2oat-threads=8
-dalvik.vm.dex2oat-cpu-set=0,1,2,3,4,5,6,7
-dalvik.vm.dex2oat-filter=quicken
-dalvik.vm.dex2oat-threads=8
-dalvik.vm.image-dex2oat-cpu-set=0,1,2,3,4,5,6,7
-dalvik.vm.image-dex2oat-filter=quicken
-dalvik.vm.image-dex2oat-threads=8
-
-# Display post-processing
-ro.qualcomm.cabl=0
-ro.vendor.display.ad=1
-ro.vendor.display.sensortype=2
-
 # DPM
 persist.vendor.dpm.feature=1
 persist.vendor.dpm.loglevel=0
 persist.vendor.dpm.nsrm.bkg.evt=3955
-
-# Graphics
-debug.sf.disable_backpressure=1
-debug.sf.latch_unsignaled=1
-persist.demo.hdmirotationlock=false
-persist.sys.sf.color_saturation=1.0
-persist.sys.sf.native_mode=0
-debug.sf.enable_hwc_vds=1
 
 # GBoard Spacing
 ro.com.google.ime.kb_pad_port_b=1
