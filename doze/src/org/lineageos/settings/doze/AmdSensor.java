@@ -29,10 +29,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class MovementSensor implements SensorEventListener {
+public class AmdSensor implements SensorEventListener {
 
     private static final boolean DEBUG = false;
-    private static final String TAG = "MovementSensor";
+    private static final String TAG = "AmdSensor";
 
     private static final int MIN_PULSE_INTERVAL_MS = 2000;
 
@@ -43,7 +43,7 @@ public class MovementSensor implements SensorEventListener {
 
     private long mEntryTimestamp;
 
-    public MovementSensor(Context context) {
+    public AmdSensor(Context context) {
         mContext = context;
         mSensorManager = mContext.getSystemService(SensorManager.class);
         mSensor = DozeUtils.getSensor(mSensorManager, "qti.sensor.amd");

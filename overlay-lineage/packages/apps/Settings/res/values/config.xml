@@ -20,9 +20,6 @@
     <!-- Hide rounded corner customisation -->
     <bool name="config_showRoundedCornersCustomisation">false</bool>
 
-    <!-- Whether to show refresh rate controls in display settings -->
-    <bool name="config_show_refresh_rate_controls">true</bool>
-
     <!-- Battery Health -->
     <bool name="config_supportBatteryHealth">true</bool>
     <string name="config_batDesCap">/sys/class/power_supply/battery/charge_full</string>

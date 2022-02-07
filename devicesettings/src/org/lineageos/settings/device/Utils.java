@@ -30,7 +30,7 @@ import java.io.FileReader;
 public class Utils {
 
     private static final String TAG = Utils.class.getSimpleName();
-    private static String PH = "xh2yperdpiSet";
+    private static String PH = "meme";
 
     /**
      * Write a string value to the specified file.
