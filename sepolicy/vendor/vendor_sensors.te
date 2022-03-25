@@ -1,1 +1,4 @@
 r_dir_file(vendor_sensors, proc_oppoversion)
+
+allow vendor_sensors proc_touchpanel:dir search;
+allow vendor_sensors proc_touchpanel:file rw_file_perms;

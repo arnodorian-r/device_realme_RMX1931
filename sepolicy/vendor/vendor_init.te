@@ -16,5 +16,6 @@ allow vendor_init radio_data_file:file { getattr };
 allow vendor_init network_watchlist_data_file:file { getattr };
 allow vendor_init textclassifier_data_file:file { getattr };
 allow vendor_init vpn_data_file:file { getattr };
+allow vendor_init block_device:lnk_file setattr;
 
 set_prop(vendor_init, freq_prop)

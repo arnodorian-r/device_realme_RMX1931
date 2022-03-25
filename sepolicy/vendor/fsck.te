@@ -1,0 +1,2 @@
+dontaudit fsck fsck:capability { kill };
+
