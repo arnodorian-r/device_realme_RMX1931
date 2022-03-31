@@ -1,2 +1,1 @@
-dontaudit fsck fsck:capability { kill };
-
+allow fsck oppo_block_device:blk_file { ioctl open read write };

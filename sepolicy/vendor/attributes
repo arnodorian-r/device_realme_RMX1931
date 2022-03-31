@@ -1,7 +1,17 @@
-attribute hal_perf;
-attribute hal_perf_client;
-attribute hal_perf_server;
+# HALs
+
+attribute nxpnfc;
+attribute nxpnfc_client;
+attribute nxpnfc_server;
+
+attribute nxpese;
+attribute nxpese_client;
+attribute nxpese_server;
+
+attribute hal_hypnus;
+attribute hal_hypnus_client;
+attribute hal_hypnus_server;
 
 attribute hal_dms;
 attribute hal_dms_client;
-attribute hal_dms_server; 
+attribute hal_dms_server;

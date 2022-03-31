@@ -1,3 +1,0 @@
-# Fix Baseband
-allow priv_app baseband_prop:file read;
-get_prop(priv_app, baseband_prop)

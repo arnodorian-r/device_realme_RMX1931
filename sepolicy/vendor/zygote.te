@@ -1,3 +1,0 @@
-allow zygote vendor_file:file { execute getattr open read map };
-allow zygote zygote:capability kill;
-get_prop(zygote, baseband_prop)

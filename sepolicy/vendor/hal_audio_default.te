@@ -1,8 +1,18 @@
-r_dir_file(hal_audio_default, proc_oppoversion);
+# Allow access to the HALs
+hal_client_domain(hal_audio_default, hal_sensors)
 
-get_prop(hal_audio_default, vendor_mpctl_prop)
-get_prop(hal_audio_default, oppo_debug_prop)
+# Allow binder communication with hal_sensors_default
+binder_call(hal_audio_default, hal_sensors_default)
 
-# Dolby
-allow hal_audio_default hal_dms_default:binder { transfer call };
-allow hal_audio_default hal_dms_hwservice:hwservice_manager find;
+# Allow hal_audio_default to read audio_device
+allow hal_audio_default audio_device:dir r_dir_perms;
+
+# Allow hal_audio_default to read files in mnt_vendor_file
+r_dir_file(hal_audio_default, mnt_vendor_file)
+
+# Allow hal_audio_default to read and write to proc_oppo_extra
+allow hal_audio_default proc_oppo_extra:dir search;
+allow hal_audio_default proc_oppo_extra:file rw_file_perms;
+
+allow hal_audio_default sysfs:dir r_dir_perms;
+allow hal_audio_default sysfs:file rw_file_perms;
