@@ -56,10 +56,7 @@ on early-fs
 
 on fs
     start hwservicemanager
-    #ifdef VENDOR_EDIT
-    #Xuefeng.Peng@PSW.AD.Storage.ReservePartition.1207580, 2018/11/19, Add for change opporeserve mount point for google GSI test
     mkdir /mnt/vendor/opporeserve 0771 system system
-    #endif /*VENDOR_EDIT*/
     mount_all /vendor/etc/fstab.qcom --early
     chown root system /mnt/vendor/persist
     chmod 0771 /mnt/vendor/persist
@@ -67,18 +64,11 @@ on fs
     restorecon_recursive /mnt/vendor/persist
     mkdir /mnt/vendor/persist/data 0700 system system
     restorecon -R -F /mnt/vendor/persist/sensors
-    #ifdef VENDOR_EDIT
-    #Zhao.Pan@PSW.MM.AudioDriver.Adsp 2018/12/03 Add for load adsp early
     write /sys/kernel/boot_adsp/boot 1
-    #endif
 
 on post-fs
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-#ifdef VENDOR_EDIT
-#SunFaliang@BSP.Power.Basic, 2019/11/05, remove for homeidle current.
-#    start vendor.spdaemon
-#endif
     start vendor.sec_nvm
 
 on late-fs
@@ -92,59 +82,42 @@ on post-fs-data
     mkdir /tombstones/lpass 0771 system system
     mkdir /tombstones/wcnss 0771 system system
     mkdir /tombstones/dsps 0771 system system
-#ifndef VENDOR_EDIT
-#Cong.Dai@psw.bsp.tp 2018/11/20 del for closing hbtp
-#    mkdir /data/vendor/hbtp 0750 system system
-#endif
     mkdir /data/vendor/nnhal 0700 system system
-    #ifdef VENDOR_EDIT
     mkdir /data/vendor/dolby 0770 media media
-    #endif /*VENDOR_EDIT*/
+
 on early-boot
     start vendor.sensors
 
-# For cpusets initialize for Silver Only first and then Silver + Gold
-# Silver Only configuration cannot work with 0-7
 on boot
-#ifndef VENDOR_EDIT
-#Cong.Dai@psw.bsp.tp 2018/11/20 del for closing hbtp
-#    chown system system /sys/kernel/hbtp/display_pwr
-#endif
     chown system system /sys/kernel/qvr_external_sensor/fd
     start rmt_storage
     start rfs_access
+    # First setup runtime cpusets only for silver cpus
     write /dev/cpuset/top-app/cpus 0-3
     write /dev/cpuset/audio-app/cpus 1-2
     write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 0-3
     write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
+    # Setup runtime cpusets
     write /dev/cpuset/top-app/cpus 0-7
     write /dev/cpuset/foreground/cpus 0-7
-    write /dev/cpuset/foreground/boost/cpus 0-7
-    #ifndef VENDOR_EDIT
-    #Jiaquan.He@RM.AD.Performance , 2019/12/17, Add for boost boot time
-    #write /dev/cpuset/background/cpus 0-7
-    #else /*VENDOR_EDIT*/
-    write /dev/cpuset/background/cpus 0-3
-    #endif /*VENDOR_EDIT*/
+    write /dev/cpuset/background/cpus 0-7
     write /dev/cpuset/system-background/cpus 0-7
 
     # Enable ZRAM on boot_complete
     swapon_all /vendor/etc/fstab.qcom
 
 # Add a cpuset for the camera daemon
-# We want all cores for camera
     mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0-7
     write /dev/cpuset/camera-daemon/mems 0
     chown cameraserver cameraserver /dev/cpuset/camera-daemon
     chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
     chmod 0660 /dev/cpuset/camera-daemon/tasks
-# ifdef VENDOR_EDIT
+
 # natao.Lin@Camera 2019/9/20 for laser calibration
     chmod 0666 /dev/stmvl53l1_ranging
-# endif
+
 #USB controller configuration
     setprop vendor.usb.rndis.func.name "gsi"
     setprop vendor.usb.rmnet.func.name "gsi"
@@ -199,15 +172,6 @@ on charger
     setprop sys.usb.controller a600000.dwc3
     setprop sys.usb.configfs 1
 
-#ifdef VENDOR_EDIT
-#SunFaliang@BSP.Power.Basic, 2019/11/05, remove for homeidle current.
-#service vendor.spdaemon /vendor/bin/spdaemon
-#    class core
-#    user system
-#    group system
-#    shutdown critical
-#endif
-
 service vendor.sec_nvm /vendor/bin/sec_nvm
     class core
     user system
@@ -227,13 +191,6 @@ service vendor.mdm_helper /vendor/bin/mdm_helper
 service vendor.mdm_launcher /vendor/bin/sh /vendor/bin/init.mdm.sh
     class main
     oneshot
-
-#ifndef VENDOR_EDIT
-#Pan.Zhang@PSW.CN.WiFi.Basic.Log.1072015, 2016/08/03,
-#Remove for wifi log enhance function
-#on property:vold.decrypt=trigger_restart_framework
-#   start cnss_diag
-#endif
 
 service cnss_diag /system/vendor/bin/cnss_diag -q -f -t HELIUM
     class main
