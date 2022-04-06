@@ -28,12 +28,8 @@
 #
 
 on early-init
-#ifndef VENDOR_EDIT
-#xiang.fei@PSW.MM.AudioDriver.Codec, 2019/07/13, Add for Max98937
-    #exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules audio_wglink audio_q6_pdr audio_q6_notifier audio_apr audio_adsp_loader audio_q6 audio_native audio_usf audio_pinctrl_wcd audio_swr audio_platform audio_hdmi audio_wcd_spi audio_stub audio_wcd_core audio_wsa881x audio_wcd9360 audio_hdmi audio_machine_msmnile
-#else
     exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -a -d /vendor/lib/modules audio_wglink audio_q6_pdr audio_q6_notifier audio_apr audio_adsp_loader audio_q6 audio_native audio_usf audio_pinctrl_wcd audio_swr audio_platform audio_hdmi audio_wcd_spi audio_stub audio_wcd_core audio_wsa881x audio_wcd9360 audio_hdmi audio_machine_msmnile audio_max98937 audio_tfa98xx-v6
-#endif
+
     write /proc/sys/kernel/sched_boost 1
     symlink /data/tombstones /tombstones
 
@@ -138,9 +134,6 @@ on boot && property:persist.vendor.usb.controller.default=*
 
 on property:vendor.usb.controller=*
     setprop sys.usb.controller ${vendor.usb.controller}
-
-#Load WLAN driver
-    insmod /vendor/lib/modules/qca_cld3_wlan.ko
 
 #pd-mapper
 service vendor.pd_mapper /vendor/bin/pd-mapper

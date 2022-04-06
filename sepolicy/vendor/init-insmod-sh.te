@@ -1,0 +1,9 @@
+# Allow insmod
+type init-insmod-sh, domain;
+type init-insmod-sh_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(init-insmod-sh)
+allow init-insmod-sh vendor_toolbox_exec:file rx_file_perms;
+allow init-insmod-sh vendor_sysfs_boot_adsp:file { open write };
+
+set_prop(init-insmod-sh, oppo_vendor_prop)
