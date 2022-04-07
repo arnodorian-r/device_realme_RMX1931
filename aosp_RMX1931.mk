@@ -26,13 +26,10 @@ PRODUCT_MODEL := RMX1931
 PRODUCT_MANUFACTURER := realme
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="redfin-user 11 RQ3A.21101.001. 7641976 release-keys" \
+    PRIVATE_BUILD_DESC="RMX1931-user 10 QKQ1.191021.002 1583422340 release-keys" \
     PRODUCT_NAME="RMX1931"
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := google/redfin/redfin:11/RQ3A.21101.001/7641976:user/release-keys
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.build.fingerprint=$(BUILD_FINGERPRINT)
+BUILD_FINGERPRINT := realme/RMX1931/RMX1931:10/QKQ1.191021.002/1583422340:user/release-keys
 
 PRODUCT_GMS_CLIENTID_BASE := android-oppo

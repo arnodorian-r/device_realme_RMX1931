@@ -9,6 +9,7 @@ binder_call(hal_fingerprint_default, hal_hypnus_oppo)
 allow hal_fingerprint_default vendor_hal_perf_hwservice:hwservice_manager find;
 
 allow hal_fingerprint_default hal_hypnus_hwservice:hwservice_manager find;
+allow hal_fingerprint_default dcs_hwservice:hwservice_manager find;
 
 # Allow hal_fingerprint_default to read and write to fingerprintd_device
 allow hal_fingerprint_default fingerprintd_device:chr_file rw_file_perms;
@@ -41,5 +42,4 @@ r_dir_file(hal_fingerprint_default, mnt_vendor_file);
 # Allow hal_fingerprint_default to get vendor_adsprpc_prop
 get_prop(hal_fingerprint_default, vendor_adsprpc_prop)
 
-set_prop(hal_fingerprint_default, oppo_vendor_prop)
-
+set_prop(hal_fingerprint_default, oppo_fingerprint_prop)

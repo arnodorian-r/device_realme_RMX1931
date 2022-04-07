@@ -6,6 +6,9 @@ allow vendor_init ion_device:chr_file rw_file_perms;
 # Allow vendor_init to read and write to tee_device
 allow vendor_init tee_device:chr_file rw_file_perms;
 
+# Allow vendor_init to read persist debug prop
+allow vendor_init persist_debug_prop:file read;
+
 # Allow vendor_init to write to sysfs_ssr_toggl
 allow vendor_init vendor_sysfs_ssr_toggle:file w_file_perms;
 
@@ -28,6 +31,7 @@ get_prop(vendor_init, oppo_vendor_prop)
 set_prop(vendor_init, oppo_vendor_prop)
 get_prop(vendor_init, vendor_camera_prop)
 set_prop(vendor_init, vendor_camera_prop)
+get_prop(vendor_init, persist_debug_prop)
 
 # Allow vendor_init to set attribute of block_device
 allow vendor_init block_device:lnk_file setattr;
@@ -38,3 +42,7 @@ allow vendor_init proc_cmdline:file getattr;
 
 allow vendor_init proc_touchpanel:dir r_dir_perms;
 allow vendor_init proc_touchpanel:file rw_file_perms;
+
+# Allow vendor_init to read certain props
+get_prop(vendor_init, default_prop)
+get_prop(vendor_init, radio_prop)

@@ -34,6 +34,7 @@
 /(vendor|system/vendor)/bin/hw/vendor\.oppo\.hardware\.biometrics\.fingerprint@2\.1-service		u:object_r:hal_fingerprint_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.power\.stats@1\.0-service\.mock            u:object_r:hal_power_stats_default_exec:s0
 /(vendor|system/vendor)/bin/hw/android\.hardware\.light@2\.0-service\.RMX1931                      u:object_r:hal_light_default_exec:s0
+/(vendor|system/vendor)/bin/init\.insmod\.sh                                                          u:object_r:init-insmod-sh_exec:s0
 
 # OPPO
 /mnt/vendor/persist/fingerprint/silead(/.*)?		u:object_r:oppo_fingerprint_file:s0

@@ -9,8 +9,6 @@ ro.camera.temperature.limit u:object_r:exported_default_prop:s0
 
 persist.sys.oppo.displaymetrics           u:object_r:exported_system_prop:s0
 persist.aec.manual.mode                   u:object_r:exported_system_prop:s0
-persist.iris.skip.frame                   u:object_r:exported_system_prop:s0
-persist.iris.lunch.frame                  u:object_r:exported_system_prop:s0
 persist.skip.frame.app                    u:object_r:exported_system_prop:s0
 persist.watermark.dumpimg                 u:object_r:exported_system_prop:s0
 persist.debug.camera.overrideLogLevels    u:object_r:exported_system_prop:s0
@@ -50,6 +48,9 @@ ro.dolby.device   u:object_r:oppo_vendor_prop:s0
 ro.dolby.manufacturer   u:object_r:oppo_vendor_prop:s0
 ro.dolby.brand    u:object_r:oppo_vendor_prop:s0
 
+#Haptics prop
+audio.awinic.haptic.support		u:object_r:oppo_vendor_prop:s0
+
 ro.oppo.operator  u:object_r:oppo_vendor_prop:s0
 ro.oppo.euex.country  u:object_r:oppo_vendor_prop:s0
 ro.vendor.oppo.radio.multisim.config  u:object_r:oppo_vendor_prop:s0
@@ -58,6 +59,16 @@ vendor.nfc_se.config_ready  u:object_r:engineer_vendor_prop:s0
 oppo.device.imeicache u:object_r:engineer_vendor_prop:s0
 sys.oppo.network.rffeature u:object_r:engineer_vendor_prop:s0
 
-
 persist.sys.assert.panic        u:object_r:oppo_vendor_prop:s0
 persist.console.silent.config   u:object_r:oppo_vendor_prop:s0
+
+# Insmod
+vendor.all.modules.ready                u:object_r:oppo_vendor_prop:s0
+vendor.all.devices.ready                u:object_r:oppo_vendor_prop:s0
+
+# Oppo FP props
+persist.vendor.fingerprint.             u:object_r:oppo_fingerprint_prop:s0
+oppo.optical.             u:object_r:oppo_fingerprint_prop:s0
+vendor.fingerprint.optical.             u:object_r:oppo_fingerprint_prop:s0
+oppo.fingerprint.gf.package.version             u:object_r:oppo_fingerprint_prop:s0
+oppo.fingerprint.factory             u:object_r:oppo_fingerprint_prop:s0
