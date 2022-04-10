@@ -21,15 +21,10 @@ TARGET_USES_BLUR := true
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := aosp_RMX1931
 PRODUCT_DEVICE := RMX1931
-PRODUCT_BRAND := realme
-PRODUCT_MODEL := RMX1931
-PRODUCT_MANUFACTURER := realme
+PRODUCT_BRAND := Realme
+PRODUCT_MODEL := Realme X2 pro
+PRODUCT_MANUFACTURER := Realme
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="RMX1931-user 10 QKQ1.191021.002 1583422340 release-keys" \
-    PRODUCT_NAME="RMX1931"
-
-# Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := realme/RMX1931/RMX1931:10/QKQ1.191021.002/1583422340:user/release-keys
+BUILD_FINGERPRINT := realme/RMX1931/RMX1931L1:10/QKQ1.191021.002/1583422340:user/release-keys
 
 PRODUCT_GMS_CLIENTID_BASE := android-oppo

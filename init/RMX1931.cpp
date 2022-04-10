@@ -1,34 +1,29 @@
 /*
- * Copyright (C) 2020 LineageOS Project
- * Copyright (C) 2020 Harshit Jain
+ * Copyright (c) 2021, The LineageOS Project
  *
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <vector>
-#include <string>
+#include <cstdlib>
 #include <fstream>
-
-#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
-#include <sys/_system_properties.h>
+#include <string.h>
+#include <unistd.h>
+#include <vector>
 
 #include <android-base/properties.h>
-#include <android-base/logging.h>
+#define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
+#include <sys/_system_properties.h>
+#include <sys/sysinfo.h>
 
 #include "property_service.h"
 #include "vendor_init.h"
-
-struct RMX1931_props
-{
-    std::string device_build;
-    std::string product_device;
-};
 
 std::vector<std::string> ro_props_default_source_order = {
     "",
     "odm.",
     "product.",
     "system.",
+    "system_ext.",
     "vendor.",
 };
 
@@ -44,9 +39,9 @@ bool isCN()
     return ret;
 }
 
-void property_override(char const prop[], char const value[], bool add = true)
-{
+void property_override(char const prop[], char const value[], bool add = true) {
     prop_info *pi;
+
     pi = (prop_info *)__system_property_find(prop);
     if (pi)
         __system_property_update(pi, value, strlen(value));
@@ -54,53 +49,48 @@ void property_override(char const prop[], char const value[], bool add = true)
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-
-void setRMX(const unsigned int variant)
-{
-    RMX1931_props prop[3] = {};
-
-    //RMX1931CN
-    prop[0] = {
-        "RMX1931",
-        "RMX1931CN",
-    };
-
-    //RMX1931
-    prop[1] = {
-        "RMX1931",
-        "RMX1931L1",
-    };
-
-	const auto set_ro_build_prop = [](const std::string &source,
-                                      const std::string &prop, const std::string &value) {
+void set_device_props(const std::string fingerprint, const std::string description,
+        const std::string brand, const std::string device, const std::string model) {
+    const auto set_ro_build_prop = [](const std::string &source,
+                                      const std::string &prop,
+                                      const std::string &value) {
         auto prop_name = "ro." + source + "build." + prop;
         property_override(prop_name.c_str(), value.c_str(), false);
     };
 
     const auto set_ro_product_prop = [](const std::string &source,
-                                        const std::string &prop, const std::string &value) {
+                                        const std::string &prop,
+                                        const std::string &value) {
         auto prop_name = "ro.product." + source + prop;
         property_override(prop_name.c_str(), value.c_str(), false);
     };
 
-    property_override("ro.build.product", prop[variant].product_device.c_str());
-    for (const auto &source : ro_props_default_source_order)
-    {
-        set_ro_product_prop(source, "device", prop[variant].product_device.c_str());
-        set_ro_product_prop(source, "model", prop[variant].device_build.c_str());
-        set_ro_product_prop(source, "name", prop[variant].device_build.c_str());
+    for (const auto &source : ro_props_default_source_order) {
+        set_ro_build_prop(source, "fingerprint", fingerprint);
+        set_ro_product_prop(source, "brand", brand);
+        set_ro_product_prop(source, "device", device);
+        set_ro_product_prop(source, "model", model);
     }
 
+    property_override("ro.build.fingerprint", fingerprint.c_str());
+    property_override("ro.build.description", description.c_str());
+    property_override("ro.system_ext.build.fingerprint", fingerprint.c_str());
 }
 
-void vendor_load_properties()
-{
-    if (isCN())
-    {
-        setRMX(0); //RMX1931CN
-    }
-    else
-    {
-        setRMX(1); //RMX1931
+void vendor_load_properties() {
+    char const fp[] = "realme/RMX1931/RMX1931L1:10/QKQ1.191021.002/1583422340:user/release-keys";
+    char const fp_cn[] = "realme/RMX1931/RMX1931CN:10/QKQ1.191021.002/1583422340:user/release-keys";
+    char const fp_desc[] = "RMX1931-user 10 QKQ1.191021.002 1583422340 release-keys";
+
+    if (isCN()) {
+        set_device_props(
+            fp_cn,
+            fp_desc,
+            "Realme", "RMX1931CN", "Realme X2 Pro");
+    } else {
+        set_device_props(
+            fp,
+            fp_desc,
+            "Realme", "RMX1931L1", "Realme X2 Pro");
     }
 }
