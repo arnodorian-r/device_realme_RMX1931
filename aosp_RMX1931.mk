@@ -21,9 +21,9 @@ TARGET_USES_BLUR := true
 # Device identifier. This must come after all inclusions.
 PRODUCT_NAME := aosp_RMX1931
 PRODUCT_DEVICE := RMX1931
-PRODUCT_BRAND := Realme
-PRODUCT_MODEL := Realme X2 pro
-PRODUCT_MANUFACTURER := Realme
+PRODUCT_BRAND := realme
+PRODUCT_MODEL := realme X2 Pro
+PRODUCT_MANUFACTURER := realme
 
 BUILD_FINGERPRINT := realme/RMX1931/RMX1931L1:10/QKQ1.191021.002/1583422340:user/release-keys
 

@@ -88,11 +88,11 @@ void vendor_load_properties() {
         set_device_props(
             fp_cn,
             fp_desc,
-            "Realme", "RMX1931CN", "Realme X2 Pro", "RMX1931");
+            "realme", "RMX1931CN", "realme X2 Pro", "RMX1931");
     } else {
         set_device_props(
             fp,
             fp_desc,
-            "Realme", "RMX1931L1", "Realme X2 Pro", "RMX1931");
+            "realme", "RMX1931L1", "realme X2 Pro", "RMX1931");
     }
 }
