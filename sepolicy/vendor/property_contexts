@@ -63,8 +63,8 @@ persist.sys.assert.panic        u:object_r:oppo_vendor_prop:s0
 persist.console.silent.config   u:object_r:oppo_vendor_prop:s0
 
 # Insmod
-vendor.all.modules.ready                u:object_r:oppo_vendor_prop:s0
-vendor.all.devices.ready                u:object_r:oppo_vendor_prop:s0
+vendor.all.modules.ready                u:object_r:vendor_device_prop:s0
+vendor.all.devices.ready        u:object_r:vendor_device_prop:s0
 
 # Oppo FP props
 persist.vendor.fingerprint.             u:object_r:oppo_fingerprint_prop:s0
