@@ -43,3 +43,4 @@ r_dir_file(hal_fingerprint_default, mnt_vendor_file);
 get_prop(hal_fingerprint_default, vendor_adsprpc_prop)
 
 set_prop(hal_fingerprint_default, oppo_fingerprint_prop)
+dontaudit hal_fingerprint_default default_prop:property_service set;

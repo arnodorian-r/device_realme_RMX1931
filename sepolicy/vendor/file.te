@@ -20,4 +20,4 @@ type sysfs_dtb_model, sysfs_type, fs_type;
 type alpha_sysfs, sysfs_type, fs_type;
 type sysfs_vl53l1, sysfs_type, fs_type;
 type vendor_sysfs_ac_supply, fs_type, sysfs_type;
-type sysfs_msm_boot, fs_type, sysfs_type;
+type vendor_sysfs_msm_boot, fs_type, sysfs_type;

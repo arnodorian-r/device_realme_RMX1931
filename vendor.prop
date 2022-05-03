@@ -141,7 +141,6 @@ ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 # Fingerprint
 persist.vendor.qfp=true
-ro.boot.realme.lockstate=0
 
 # Graphics
 debug.egl.hw=0
