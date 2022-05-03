@@ -10,5 +10,23 @@ ro.lmk.kill_timeout_ms=100
 ro.lmk.use_minfree_levels=true
 ro.lmk.log_stats=true
 
+# Media
+media.aac_51_output_enabled=true
+media.stagefright.enable-aac=true
+media.stagefright.enable-fma2dp=true
+media.stagefright.enable-http=true
+media.stagefright.enable-player=true
+media.stagefright.enable-qcp=true
+media.stagefright.enable-scan=true
+media.stagefright.thumbnail.prefer_hw_codecs=true
+ro.media.recorder-max-base-layer-fps=60
+mmp.enable.3g2=true
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
+persist.mm.enable.prefetch=true
+
+# Additional buffers for Video
+vidc.enc.dcvs.extra-buff-count=2
+vidc.enc.disable.pq=1
+
 # Seamless transfer
 sys.fflag.override.settings_seamless_transfer=true

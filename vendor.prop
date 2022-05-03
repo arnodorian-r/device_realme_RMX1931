@@ -95,6 +95,7 @@ ro.surface_flinger.supports_background_blur=1
 ro.sf.blurs_are_expensive=1
 
 # Codec2
+media.settings.xml=/vendor/etc/media_profiles_vendor.xml
 debug.stagefright.omx_default_rank.sw-audio=1
 debug.stagefright.omx_default_rank=0
 
