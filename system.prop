@@ -1,8 +1,5 @@
 # Audio
-audio.deep_buffer.media=true
-ro.config.media_vol_steps=25
-ro.config.vc_call_vol_steps=7
-ro.af.client_heap_size_kbyte=7168
+persist.vendor.audio.hac.enable=false
 ro.audio.monitorRotation=true
 audio.offload.min.duration.secs=30
 
@@ -39,7 +36,6 @@ persist.data.wda.enable=true
 persist.rmnet.data.enable=true
 
 # DPM
-persist.vendor.dpm.feature=1
 persist.vendor.dpm.loglevel=0
 persist.vendor.dpm.nsrm.bkg.evt=3955
 
