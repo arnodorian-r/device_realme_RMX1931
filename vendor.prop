@@ -1,6 +1,10 @@
 # Audio
+aaudio.hw_burst_min_usec=2000
+aaudio.mmap_exclusive_policy=2
+aaudio.mmap_policy=2
 af.fast_track_multiplier=1
 audio.deep_buffer.media=true
+audio.offload.video=true
 persist.vendor.audio.ambisonic.auto.profile=false
 persist.vendor.audio.ambisonic.capture=false
 persist.vendor.audio.avs.afe_api_version=2
@@ -9,11 +13,12 @@ persist.vendor.audio.fluence.speaker=true
 persist.vendor.audio.fluence.tmic.enabled=false
 persist.vendor.audio.fluence.voicecall=true
 persist.vendor.audio.fluence.voicerec=true
-persist.vendor.audio.voicecall.speaker.stereo=true
+persist.vendor.audio.hac.enable=false
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 persist.vendor.audio.hifi.int_codec=true
 persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.spv3.enable=true
-persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
+persist.vendor.audio.voicecall.speaker.stereo=true
 ro.af.client_heap_size_kbyte=7168
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=7
@@ -38,7 +43,10 @@ vendor.audio.tunnel.encode=false
 vendor.audio.use.sw.alac.decoder=true
 vendor.audio.use.sw.ape.decoder=true
 vendor.audio.volume.headset.gain.depcal=true
+vendor.audio_hal.in_period_size=144
+vendor.audio_hal.period_multiplier=3
 vendor.audio_hal.period_size=192
+vendor.voice.path.for.pcm.voip=true
 
 # Bluetooth
 persist.bluetooth.a2dp_offload.cap=sbc-aac-aptx-aptxhd-ldac
@@ -51,6 +59,7 @@ persist.vendor.qcom.bluetooth.aac_vbr_ctl.enabled=false
 persist.vendor.qcom.bluetooth.twsp_state.enabled=false
 persist.vendor.qcom.bluetooth.scram.enabled=true
 ro.bluetooth.a2dp_offload.supported=true
+ro.vendor.bluetooth.wipower=false
 
 # Blur
 ro.launcher.blur.appLaunch=0
@@ -205,3 +214,6 @@ persist.sys.binary_xml=false
 # SoC
 ro.soc.manufacturer=Qualcomm
 ro.soc.model=SM8150
+
+# Shutdown wait time
+sys.vendor.shutdown.waittime=500
