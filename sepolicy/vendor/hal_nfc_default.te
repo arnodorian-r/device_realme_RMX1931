@@ -8,5 +8,6 @@ allow hal_nfc_default proc_oppo_extra:dir r_dir_perms;
 allow hal_nfc_default proc_oppo_extra:file rw_file_perms;
 
 get_prop(hal_nfc_default, hwservicemanager_prop)
+allow hal_nfc_default nxpese_hwservice:hwservice_manager find;
 
 hwbinder_use(hal_nfc_default)
