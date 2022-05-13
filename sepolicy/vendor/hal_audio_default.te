@@ -19,3 +19,8 @@ allow hal_audio_default sysfs:file rw_file_perms;
 
 set_prop(hal_audio_default, vendor_audio_prop)
 get_prop(hal_audio_default, vendor_audio_prop)
+
+# Read props required for audiohal
+allow hal_audio_default audio_prop:file { read };
+allow hal_audio_default default_prop:file { read };
+allow hal_audio_default system_prop:file { read };
