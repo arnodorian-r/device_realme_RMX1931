@@ -46,9 +46,6 @@
         <!--DOLBY DAP-->
         <library name="dap" path="libswdap.so"/>
         <!--DOLBY END-->
-         <!--DOLBY VQE-->
-        <library name="vqe" path="libswvqe.so"/>
-        <!--DOLBY END-->
         <!-- #endif VENDOR_EDIT-->
     </libraries>
     <effects>
@@ -102,9 +99,6 @@
         <!--YunMang.Xiao@PSW.MM.Dolby, 2019/06/18, add for dolby -->
         <!--DOLBY DAP-->
         <effect name="dap" library="dap" uuid="9d4921da-8225-4f29-aefa-39537a04bcaa"/>
-        <!--DOLBY END-->
-        <!--DOLBY VQE-->
-        <effect name="vqe" library="vqe" uuid="64a0f614-7fa4-48b8-b081-d59dc954616f"/>
         <!--DOLBY END-->
         <!-- #endif VENDOR_EDIT-->
     </effects>
