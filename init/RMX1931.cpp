@@ -80,19 +80,19 @@ void set_device_props(const std::string fingerprint, const std::string descripti
 }
 
 void vendor_load_properties() {
-    char const fp[] = "realme/RMX1931/RMX1931L1:10/QKQ1.191021.002/1583422340:user/release-keys";
-    char const fp_cn[] = "realme/RMX1931/RMX1931CN:10/QKQ1.191021.002/1583422340:user/release-keys";
-    char const fp_desc[] = "msmnile-user 10 QKQ1.191021.002 1583422340 release-keys";
+    char const fp[] = "realme/RMX1931/RMX1931L1:11/RKQ1.200928.002/1634728216537:user/release-keys";
+    char const fp_cn[] = "realme/RMX1931/RMX1931CN:11/RKQ1.200928.002/1634728216537:user/release-keys";
+    char const fp_desc[] = "qti-user 11 RKQ1.200928.002 1634728216537 release-keys";
 
     if (isCN()) {
         set_device_props(
             fp_cn,
             fp_desc,
-            "realme", "RMX1931CN", "realme X2 Pro", "RMX1931");
+            "realme", "RMX1931CN", "RMX1931","realme X2 Pro");
     } else {
         set_device_props(
             fp,
             fp_desc,
-            "realme", "RMX1931L1", "realme X2 Pro", "RMX1931");
+            "realme", "RMX1931L1", "RMX1931", "realme X2 Pro");
     }
 }
