@@ -45,6 +45,7 @@
 # Persist files
 /mnt/vendor/persist/media(/.*)?		u:object_r:media_persist_file:s0
 /mnt/vendor/persist/fingerprint(/.*)?		u:object_r:oppo_fingerprint_file:s0
+/proc/asound/card0/codecs(/.*)?                  u:object_r:proc_audio_file:s0
 
 # Socket files
 /dev/socket/vl53l1_daemon    u:object_r:vl53l1_socket:s0
