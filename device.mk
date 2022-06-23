@@ -324,8 +324,7 @@ PRODUCT_PACKAGES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    android.hardware.light@2.0-service.RMX1931 \
-    lights.msmnile
+    android.hardware.light-service.RMX1931 \
 
 # LiveDisplay
 PRODUCT_PACKAGES += \
