@@ -16,13 +16,13 @@
     <string name="display_title">Display</string>
     <string name="misc_title">Misc settings</string>
     <!-- Refresh rate -->
-    <string name="refresh_title">Screen refresh</string>
-    <string name="tile_refresh_rate">Screen refresh rate</string>
-    <string name="auto_refresh_rate_summary">Let apps decide what refresh rate to use</string>
-    <string name="auto_refresh_rate_title">Auto refresh mode</string>
-    <string name="refresh_rate_summary">Choose between 60Hz or 90Hz peak refresh</string>
-    <string name="refresh_rate_title">Force 90Hz peak refresh rate</string>
-    <string name="refresh_rate_warning">Using forced 90Hz will impact battery life significantly</string>
+    <string name="refresh_title">Screen Refresh Rate</string>
+    <string name="tile_refresh_rate">Screen Refresh Rate</string>
+    <string name="i60_refresh_rate_summary">Display refreshes at 60 Hz</string>
+    <string name="i60_refresh_rate_title">60 Hz</string>
+    <string name="i90_refresh_rate_summary">Display refreshes at 90 Hz</string>
+    <string name="i90_refresh_rate_title">90 Hz</string>
+    <string name="refresh_rate_warning">Using 90Hz will impact battery life.</string>
     <!-- DC dimming -->
     <string name="dc_mode_summary">Reduces screen flicker while brightness is low</string>
     <string name="dc_mode_title">DC-Dimming</string>
