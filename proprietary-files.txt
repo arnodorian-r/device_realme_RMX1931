@@ -52,12 +52,9 @@ vendor/lib/vendor.qti.hardware.alarm@1.0.so
 # ANT+
 -lib64/libantradio.so
 -lib/libantradio.so
-system_ext/lib64/com.qualcomm.qti.ant@1.0.so
+vendor/lib64/hw/com.dsi.ant@1.0-impl.so
 system_ext/lib/com.qualcomm.qti.ant@1.0.so
-vendor/lib64/com.qualcomm.qti.ant@1.0.so
-vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
-vendor/lib/com.qualcomm.qti.ant@1.0.so
-vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
+system_ext/lib64/com.qualcomm.qti.ant@1.0.so
 
 # Audio
 etc/permissions/audiosphere.xml
@@ -158,166 +155,51 @@ system_ext/lib64/libaptXHD_encoder.so
 # Bluetooth
 vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
-vendor/lib/com.qualcomm.qti.bluetooth_audio@1.0.so
 vendor/lib/hw/android.hardware.bluetooth.audio@2.0-impl.so
 vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib/hw/audio.bluetooth.default.so
 vendor/lib/hw/audio.bluetooth_qti.default.so
 vendor/lib/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
-vendor/lib/hw/vendor.qti.hardware.bluetooth_sar@1.0-impl.so
+vendor/lib/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 vendor/lib/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
-vendor/lib/libbluetooth_audio_session.so
+vendor/lib/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
 vendor/lib/libbluetooth_audio_session_qti.so
 vendor/lib/libbt-hidlclient.so
 vendor/lib/libbtnv.so
-vendor/lib/vendor.qti.hardware.bluetooth_audio@2.0.so
 vendor/lib/vendor.qti.hardware.bluetooth_sar@1.0.so
+vendor/lib/vendor.qti.hardware.bluetooth_sar@1.1.so
 vendor/lib/vendor.qti.hardware.btconfigstore@1.0.so
 vendor/lib64/hw/android.hardware.bluetooth.audio@2.0-impl.so
 vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
-vendor/lib64/hw/audio.bluetooth.default.so
 vendor/lib64/hw/audio.bluetooth_qti.default.so
 vendor/lib64/hw/vendor.qti.hardware.bluetooth_audio@2.0-impl.so
-vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.0-impl.so
+vendor/lib64/hw/vendor.qti.hardware.bluetooth_sar@1.1-impl.so
 vendor/lib64/hw/vendor.qti.hardware.btconfigstore@1.0-impl.so
-vendor/lib64/libbluetooth_audio_session.so
+vendor/lib64/hw/vendor.qti.hardware.btconfigstore@2.0-impl.so
 vendor/lib64/libbluetooth_audio_session_qti.so
 vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbtnv.so
-vendor/lib64/vendor.qti.hardware.bluetooth_audio@2.0.so
 vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.0.so
+vendor/lib64/vendor.qti.hardware.bluetooth_sar@1.1.so
 vendor/lib64/vendor.qti.hardware.btconfigstore@1.0.so
 
 # Bluetooth (Audio)
-vendor/lib/liba2dpoffload.so
-vendor/lib64/liba2dpoffload.so
 vendor/lib/btaudio_offload_if.so
 vendor/lib64/btaudio_offload_if.so
 
 # Camera
 lib/libchromaflash.so
 lib64/libseemore.so
-vendor/lib/camera/com.qti.eeprom.truly_cmb433.so
-vendor/lib/camera/com.qti.sensor.gc02m0b.so
-vendor/lib/camera/com.qti.sensor.imx318.so
-vendor/lib/camera/com.qti.sensor.imx319.so
-vendor/lib/camera/com.qti.sensor.imx334.so
-vendor/lib/camera/com.qti.sensor.imx362.so
-vendor/lib/camera/com.qti.sensor.imx376.so
-vendor/lib/camera/com.qti.sensor.imx386.so
-vendor/lib/camera/com.qti.sensor.imx471.so
-vendor/lib/camera/com.qti.sensor.imx476.so
-vendor/lib/camera/com.qti.sensor.imx519.so
-vendor/lib/camera/com.qti.sensor.imx576.so
-vendor/lib/camera/com.qti.sensor.imx577.so
-vendor/lib/camera/com.qti.sensor.imx586.so
-vendor/lib/camera/com.qti.sensor.max7366_6dof.so
-vendor/lib/camera/com.qti.sensor.max7366_eyetrack.so
-vendor/lib/camera/com.qti.sensor.max7366_ov6211.so
-vendor/lib/camera/com.qti.sensor.max7366_ov9282.so
-vendor/lib/camera/com.qti.sensor.ov02a1b.so
-vendor/lib/camera/com.qti.sensor.ov12a10.so
-vendor/lib/camera/com.qti.sensor.ov12a10_front.so
-vendor/lib/camera/com.qti.sensor.ov13855.so
-vendor/lib/camera/com.qti.sensor.ov13880.so
-vendor/lib/camera/com.qti.sensor.ov7251.so
-vendor/lib/camera/com.qti.sensor.ov8856.so
-vendor/lib/camera/com.qti.sensor.s5k2l7.so
-vendor/lib/camera/com.qti.sensor.s5k2x5sp.so
-vendor/lib/camera/com.qti.sensor.s5k3m5sx.so
-vendor/lib/camera/com.qti.sensor.s5k5e9yu05.so
-vendor/lib/camera/com.qti.sensor.s5kgw1.so
-vendor/lib/camera/com.qti.sensormodule.qtech_s5k3m5sx.bin
-vendor/lib/camera/com.qti.sensormodule.qtech_s5kgw1.bin
-vendor/lib/camera/com.qti.sensormodule.shine_ov02a1b.bin
-vendor/lib/camera/com.qti.sensormodule.sunny_imx319.bin
-vendor/lib/camera/com.qti.sensormodule.sunny_imx471.bin
-vendor/lib/camera/com.qti.sensormodule.sunny_s5kgw1.bin
-vendor/lib/camera/com.qti.tuned.default.bin
-vendor/lib/camera/com.qti.tuned.qtech_s5k3m5sx.bin
-vendor/lib/camera/com.qti.tuned.qtech_s5kgw1.bin
-vendor/lib/camera/com.qti.tuned.shine_ov02a1b.bin
-vendor/lib/camera/com.qti.tuned.sunny_imx319.bin
-vendor/lib/camera/com.qti.tuned.sunny_imx471.bin
-vendor/lib/camera/com.qti.tuned.sunny_s5kgw1.bin
-vendor/lib/camera/components/com.oppo.node.drawafinfo.so
-vendor/lib/camera/components/com.oppo.node.oppoengmode.so
-vendor/lib/camera/components/com.qti.camx.chiiqutils.so
-vendor/lib/camera/components/com.qti.eisv2.so
-vendor/lib/camera/components/com.qti.eisv3.so
-vendor/lib/camera/components/com.qti.hvx.addconstant.so
-vendor/lib/camera/components/com.qti.hvx.binning.so
-vendor/lib/camera/components/com.qti.node.depth.so
-vendor/lib/camera/components/com.qti.node.dummyrtb.so
-vendor/lib/camera/components/com.qti.node.dummysat.so
-vendor/lib/camera/components/com.qti.node.eisv2.so
-vendor/lib/camera/components/com.qti.node.eisv3.so
-vendor/lib/camera/components/com.qti.node.fcv.so
-vendor/lib/camera/components/com.qti.node.gpu.so
-vendor/lib/camera/components/com.qti.node.memcpy.so
-vendor/lib/camera/components/com.qti.node.remosaic.so
-vendor/lib/camera/components/com.qti.node.stich.so
-vendor/lib/camera/components/com.qti.node.swregistration.so
-vendor/lib/camera/components/com.qti.stats.aec.so
-vendor/lib/camera/components/com.qti.stats.af.so
-vendor/lib/camera/components/com.qti.stats.afd.so
-vendor/lib/camera/components/com.qti.stats.afwrapper.so
-vendor/lib/camera/components/com.qti.stats.asd.so
-vendor/lib/camera/components/com.qti.stats.awb.so
-vendor/lib/camera/components/com.qti.stats.awbwrapper.so
-vendor/lib/camera/components/com.qti.stats.haf.so
-vendor/lib/camera/components/com.qti.stats.hafoverride.so
-vendor/lib/camera/components/com.qti.stats.localhistogram.so
-vendor/lib/camera/components/com.qti.stats.pdlib.so
-vendor/lib/camera/components/com.qti.stats.pdlibsony.so
-vendor/lib/camera/components/com.qti.stats.pdlibwrapper.so
-vendor/lib/camera/components/com.qtistatic.stats.aec.so
-vendor/lib/camera/components/com.qtistatic.stats.af.so
-vendor/lib/camera/components/com.qtistatic.stats.awb.so
-vendor/lib/camera/components/com.qtistatic.stats.pdlib.so
-vendor/lib/camera/components/com.vidhance.node.processing.so
-vendor/lib/camera/components/com.vidhance.stats.aec_dmbr.so
-vendor/lib/camera/components/libdepthmapwrapper.so
-vendor/lib/camera/fdconfigpreview.bin
-vendor/lib/camera/fdconfigpreviewlite.bin
-vendor/lib/camera/fdconfigvideo.bin
-vendor/lib/camera/fdconfigvideolite.bin
-vendor/lib/hw/camera.qcom.so
-vendor/lib/hw/com.qti.chi.override_moorea.so
-vendor/lib/libc++_shared.so
-vendor/lib/libcamera2ndk_vendor.so
-vendor/lib/libcamera_nn_stub.so
-vendor/lib/libcamxfdalgov7.so
-vendor/lib/libcamxfdalgov8.so
-vendor/lib/libcamxfdengine.so
-vendor/lib/libcamxstatscore.so
-vendor/lib/libcamxswprocessalgo.so
-vendor/lib/libcamxtintlessalgo.so
 vendor/lib/libcapiv2svacnn.so
-vendor/lib/libcapiv2svarnn.so
 vendor/lib/libcapiv2vop.so
-vendor/lib/libcom.qti.chinodeutils.so
-vendor/lib/libcvface_api.so
-vendor/lib/libDxHdcp.so
-vendor/lib/libgui_vendor.so
-vendor/lib/libmpbase.so
-vendor/lib/libSNPE.so
-vendor/lib/libsnpe_dsp_domains_v2.so
-vendor/lib/libSNPE_G.so
 vendor/lib/libsnsapi.so
 vendor/lib/libsnsdiaglog.so
 vendor/lib/libsns_device_mode_stub.so
 vendor/lib/libsns_fastRPC_util.so
 vendor/lib/libsns_low_lat_stream_stub.so
-vendor/lib/libSonyIMX471RmscLibrary.so
 vendor/lib/libswregistrationalgo.so
 vendor/lib/libswvdec.so
-vendor/lib/libsymphony-cpu.so
-vendor/lib/libsymphonypower.so
 vendor/lib/libvideoutils.so
-vendor/lib/libvidhance.so
 vendor/lib/qcom.camera.log.so
-vendor/lib/voc.dat.zip
 vendor/lib64/camera/com.qti.eeprom.truly_cmb433.so
 vendor/lib64/camera/com.qti.sensor.gc02m0b.so
 vendor/lib64/camera/com.qti.sensor.imx318.so
@@ -458,10 +340,6 @@ vendor/lib64/libVDUpScale.so
 vendor/lib64/libvidhance.so
 
 # Camera-arcsoft
-vendor/lib/libarcsoft_dualcam_bokeh_api.so
-vendor/lib/libarcsoft_dualcam_refocus_left.so
-vendor/lib/libarcsoft_dualcam_refocus_preview.so
-vendor/lib/libarcsoft_dualcam_refocus_right.so
 vendor/lib64/libarcsoft_beautyshot.so
 vendor/lib64/libarcsoft_distortion_correction.so
 vendor/lib64/libarcsoft_distortion_correction_7150.so
@@ -557,18 +435,7 @@ vendor/etc/camera/fb_model/skin_normal.png
 vendor/etc/camera/gasryuv.model
 vendor/etc/camera/gasryuv_1.2_wp.model
 vendor/etc/camera/imx319
-vendor/etc/camera/imx362
 vendor/etc/camera/imx471
-vendor/etc/camera/imx519
-vendor/etc/camera/imx576
-vendor/etc/camera/imx586
-vendor/etc/camera/megvii/cache
-vendor/etc/camera/megvii/merged_model
-vendor/etc/camera/megvii/merged_model_post
-vendor/etc/camera/megvii/siq_ocl_cache
-vendor/etc/camera/megvii/superiq_model
-vendor/etc/camera/model/DocDetectV13.xbin
-vendor/etc/camera/model/license.lic
 vendor/etc/camera/mtStereoParams.bin
 vendor/etc/camera/mwStereoParams.bin
 vendor/etc/camera/M_Attribute_Gender_Age_1.0.model.hardcode
@@ -600,17 +467,7 @@ vendor/etc/camera/tonemap/tonemap_lut_9
 vendor/etc/camera/vidhance_calibration
 
 # Camera-Hardware
-vendor/lib64/android.hardware.camera.provider@2.4-external.so
-vendor/lib64/android.hardware.camera.provider@2.4-legacy.so
-vendor/lib64/camera.device@1.0-impl.so
-vendor/lib64/camera.device@3.2-impl.so
-vendor/lib64/camera.device@3.3-impl.so
-vendor/lib64/camera.device@3.4-external-impl.so
-vendor/lib64/camera.device@3.4-impl.so
-vendor/lib64/camera.device@3.5-external-impl.so
-vendor/lib64/camera.device@3.5-impl.so
 vendor/lib64/qcom.camera.log.so
-vendor/lib64/vendor.qti.hardware.camera.device@1.0.so
 vendor/lib/libSEC.HybridHDR.so
 vendor/lib64/libSEC.HybridHDR.so
 
@@ -641,9 +498,6 @@ vendor/lib/libsysmon_cdsp_skel.so
 
 # Charger
 vendor/bin/hvdcp_opti
-vendor/bin/init.qti.chg_policy.sh
-vendor/etc/charger_fstab.qti
-vendor/etc/init/vendor.qti.hardware.charger_monitor@1.0-service.rc
 
 # CNE
 system_ext/framework/com.quicinc.cne.api-V1.1-java.jar
@@ -735,7 +589,6 @@ vendor/lib/hw/hwcomposer.msmnile.so
 vendor/lib64/hw/hwcomposer.msmnile.so
 
 # Display-calibration
-vendor/etc/qdcm_calib_data_samsung_s6e3fc2x01_amoled_fhd+_panel_with_DSC.xml
 vendor/etc/qdcm_calib_data_samsung_sofef03f_m_amoled_fhd+_panel_with_DSC.xml
 vendor/etc/OPPO_OLED_AD_calib.cfg
 
@@ -792,20 +645,14 @@ vendor/lib/libhdcpsrm.so
 vendor/lib/libmm-hdcpmgr.so
 
 # DRM - Widevine
-vendor/bin/hw/android.hardware.drm@1.2-service.widevine
-vendor/etc/init/android.hardware.drm@1.2-service.widevine.rc
+vendor/bin/hw/android.hardware.drm@1.3-service.widevine
+vendor/etc/init/android.hardware.drm@1.3-service.widevine.rc
 vendor/lib64/libbase64.so
 vendor/lib64/libcpion.so
 vendor/lib64/liboemcrypto.so
 vendor/lib64/librmp.so
+vendor/lib64/libwvhidl.so
 vendor/lib64/mediadrm/libwvdrmengine.so
-vendor/lib/libbase64.so
-vendor/lib/libcppf.so
-vendor/lib/libdrmfs.so
-vendor/lib/liboemcrypto.so
-vendor/lib/librmp.so
-vendor/lib/libwvhidl.so
-vendor/lib/mediadrm/libwvdrmengine.so
 
 # Widevine-Firmware
 vendor/firmware/widevine.b00
@@ -821,8 +668,6 @@ vendor/firmware/widevine.mdt
 # ESE-Powermanager
 vendor/bin/hw/vendor.qti.esepowermanager@1.0-service
 vendor/etc/init/vendor.qti.esepowermanager@1.0-service.rc
-vendor/lib/hw/vendor.qti.esepowermanager@1.0-impl.so
-vendor/lib/vendor.qti.esepowermanager@1.0.so
 vendor/lib64/hw/vendor.qti.esepowermanager@1.0-impl.so
 vendor/lib64/vendor.qti.esepowermanager@1.0.so
 
@@ -841,50 +686,25 @@ vendor/firmware/goodixfp.mdt
 vendor/lib/hw/fingerprint.goodix_G2.default.so
 vendor/lib/hw/fingerprint.goodix_G3.default.so
 vendor/lib/hw/fingerprint.goodix_G5.default.so
-vendor/lib/hw/fingerprint.silead.default.so
-vendor/lib/hw/fingerprint.silead_16bit.default.so
 vendor/lib/libarm_proxy_skel.so
 vendor/lib/libgf_hal_G2.so
 vendor/lib/libgf_hal_G3.so
 vendor/lib/libgf_hal_G5.so
 vendor/lib/libhvx_proxy_stub.so
 vendor/lib/libhypnusclient.so
-vendor/lib/libsl_fp_algo.so
-vendor/lib/libsl_fp_impl.so
-vendor/lib/libsl_fp_impl_16bit.so
-vendor/lib/libsl_fp_nosec.so
-vendor/lib/libsl_fp_prepro.so
 vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
 vendor/lib64/android.frameworks.fingerprintservice@1.0.so
 vendor/lib64/hw/fingerprint.goodix_G2.default.so
 vendor/lib64/hw/fingerprint.goodix_G3.default.so
 vendor/lib64/hw/fingerprint.goodix_G5.default.so
-vendor/lib64/hw/fingerprint.silead.default.so
-vendor/lib64/hw/fingerprint.silead_16bit.default.so
 vendor/lib64/libarm_proxy_skel.so
 vendor/lib64/libgf_hal_G2.so
 vendor/lib64/libgf_hal_G3.so
 vendor/lib64/libgf_hal_G5.so
 vendor/lib64/libhvx_proxy_stub.so
 vendor/lib64/libhypnusclient.so
-vendor/lib64/libsl_fp_algo.so
-vendor/lib64/libsl_fp_impl.so
-vendor/lib64/libsl_fp_impl_16bit.so
-vendor/lib64/libsl_fp_nosec.so
-vendor/lib64/libsl_fp_prepro.so
 vendor/lib64/vendor.oppo.hardware.biometrics.fingerprint@2.1.so
 vendor/lib64/vendor.qti.hardware.fingerprint@1.0.so
-
-# cryptoeng-Firmware
-vendor/firmware/cryptoeng.b00
-vendor/firmware/cryptoeng.b01
-vendor/firmware/cryptoeng.b02
-vendor/firmware/cryptoeng.b03
-vendor/firmware/cryptoeng.b04
-vendor/firmware/cryptoeng.b05
-vendor/firmware/cryptoeng.b06
-vendor/firmware/cryptoeng.b07
-vendor/firmware/cryptoeng.mdt
 
 # dpAP-Firmware
 vendor/firmware/dpAP_full.mbn
@@ -904,17 +724,6 @@ vendor/firmware/awinic_haptic_params.bin
 vendor/firmware/fastchg/19081/oppo_vooc_fw.bin
 vendor/firmware/fastchg/19781/oppo_vooc_fw.bin
 
-# oppoeid-Firmware
-vendor/firmware/image/oppoeid.b00
-vendor/firmware/image/oppoeid.b01
-vendor/firmware/image/oppoeid.b02
-vendor/firmware/image/oppoeid.b03
-vendor/firmware/image/oppoeid.b04
-vendor/firmware/image/oppoeid.b05
-vendor/firmware/image/oppoeid.b06
-vendor/firmware/image/oppoeid.b07
-vendor/firmware/image/oppoeid.mdt
-
 # leia-Firmware
 vendor/firmware/leia_pfp_470.fw
 vendor/firmware/leia_pm4_470.fw
@@ -925,28 +734,6 @@ vendor/firmware/sem1215s_dvt4g.bin
 vendor/firmware/sem1215s_dvt5g.bin
 vendor/firmware/sem1215s_fixgyro.bin
 
-# tp-Firmware
-vendor/firmware/tp/18115/FW_S3706_SAMSUNG.img
-vendor/firmware/tp/18115/FW_S3706_SAMSUNG_FAE.img
-vendor/firmware/tp/18115/LIMIT_S3706_SAMSUNG.img
-vendor/firmware/tp/19081/FW_S3706_SAMSUNG.img
-vendor/firmware/tp/19081/FW_S3706_SAMSUNG_FAE.img
-vendor/firmware/tp/19081/FW_S3706_SAMSUNG_OLD.img
-vendor/firmware/tp/19081/FW_S3706_SAMSUNG_OLD_FAE.img
-vendor/firmware/tp/19081/LIMIT_S3706_SAMSUNG.img
-vendor/firmware/tp/19081/LIMIT_S3706_SAMSUNG_OLD.img
-vendor/firmware/tp/19696/FW_HX_NF83112A_DSJM.img
-vendor/firmware/tp/19696/FW_HX_NF83112A_DSJM_FAE.img
-vendor/firmware/tp/19696/FW_HX_NF83112A_DSJM_TEST.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_BOE.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_BOE_FAE.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_BOE_TEST.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_JDI.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_JDI_FAE.img
-vendor/firmware/tp/19696/FW_NT36672C_NF_JDI_TEST.img
-vendor/firmware/tp/19696/LIMIT_NT36672C_NF_BOE.img
-vendor/firmware/tp/19696/LIMIT_NT36672C_NF_JDI.img
-
 # ufs-Firmware
 vendor/firmware/ufs/move_target_ufs_fw_to_opporeserve1.sh
 vendor/firmware/ufs/SAMSUNG-KLUCG2K1EA-B0C1.bin
@@ -954,15 +741,10 @@ vendor/firmware/ufs/SAMSUNG-KLUDG4U1EA-B0C1.bin
 vendor/firmware/ufs/SAMSUNG-KLUEG8U1EA-B0C1.bin
 
 # FM
-lib/fm_helium.so
-lib/libfm-hci.so
-lib64/fm_helium.so
-lib64/libfm-hci.so
--system_ext/lib/vendor.qti.hardware.fm@1.0.so
+system_ext/lib64/fm_helium.so
+system_ext/lib64/libfm-hci.so
 -system_ext/lib64/vendor.qti.hardware.fm@1.0.so
 vendor/bin/fm_qsoc_patches
-vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so
-vendor/lib/vendor.qti.hardware.fm@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.fm@1.0.so
 
@@ -1264,55 +1046,35 @@ vendor/lib64/vendor.nxp.hardware.nfc@1.0.so
 vendor/lib64/vendor.nxp.hardware.nfc@1.1.so
 
 # Neural networks
-vendor/bin/hw/android.hardware.neuralnetworks@1.2-service-qti
-vendor/etc/init/android.hardware.neuralnetworks@1.2-service-qti.rc
+vendor/bin/hw/android.hardware.neuralnetworks@1.3-service-qti
+vendor/etc/init/android.hardware.neuralnetworks@1.3-service-qti.rc
 vendor/lib64/libhexagon_nn_stub.so
 vendor/lib64/unnhal-acc-adreno.so
 vendor/lib64/unnhal-acc-common.so
 vendor/lib64/unnhal-acc-hvx.so
 
 # Oppo
-vendor/bin/hw/vendor.oppo.hardware.cryptoeng@1.0-service
-vendor/bin/hw/vendor.oppo.hardware.eid@1.0-service
-vendor/bin/hw/vendor.oppo.hardware.ktv@1.0-service
-vendor/bin/OppoKeybox
-vendor/bin/opposysd
-vendor/etc/init/vendor.oppo.hardware.cryptoeng@1.0-service_FDE.rc
-vendor/etc/init/vendor.oppo.hardware.eid@1.0-service.rc
 vendor/etc/init/vendor.oppo.hardware.hypnus@1.0-service.rc
-vendor/etc/init/vendor.oppo.hardware.ktv@1.0-service.rc
-vendor/etc/permissions/vendor-oppo-hardware.cryptoeng.xml
-vendor/lib/hw/vendor.oppo.hardware.eid@1.0-impl.so
 vendor/lib/hw/vendor.oppo.hardware.hypnus@1.0-impl.so
-vendor/lib/hw/vendor.oppo.hardware.ktv@1.0-impl.so
 vendor/lib/libcom.oppo.calidatacontainer.so
-vendor/lib/vendor.oppo.hardware.commondcs@1.0.so
-vendor/lib/vendor.oppo.hardware.eid@1.0.so
-vendor/lib/vendor.oppo.hardware.hypnus@1.0.so
-vendor/lib/vendor.oppo.hardware.ktv@1.0.so
-vendor/lib/vendor.oppo.hardware.radio.opporadio@1.0.so
-vendor/lib64/hw/vendor.oppo.hardware.eid@1.0-impl.so
 vendor/lib64/hw/vendor.oppo.hardware.hypnus@1.0-impl.so
-vendor/lib64/hw/vendor.oppo.hardware.ktv@1.0-impl.so
 vendor/lib64/libcom.oppo.calidatacontainer.so
 vendor/lib64/libOPPORectify.so
 vendor/lib64/liboppo_aisd.so
 vendor/lib64/liboppo_platform_hwi.so
 vendor/lib64/libqsee_keybox_ca.so
 vendor/lib64/vendor.oppo.hardware.commondcs@1.0.so
-vendor/lib64/vendor.oppo.hardware.cryptoeng@1.0.so
-vendor/lib64/vendor.oppo.hardware.eid@1.0.so
 vendor/lib64/vendor.oppo.hardware.hypnus@1.0.so
-vendor/lib64/vendor.oppo.hardware.ktv@1.0.so
+vendor/lib64/vendor.oppo.hardware.radio.opporadio@1.0.so
 
 # Pasrmanager
 vendor/lib/vendor.qti.power.pasrmanager@1.0.so
 vendor/lib64/vendor.qti.power.pasrmanager@1.0.so
 
 # Perf
-vendor/bin/hw/vendor.qti.hardware.perf@2.0-service
+vendor/bin/hw/vendor.qti.hardware.perf@2.2-service
 vendor/bin/msm_irqbalance
-vendor/etc/init/vendor.qti.hardware.perf@2.0-service.rc
+vendor/etc/init/vendor.qti.hardware.perf@2.2-service.rc
 vendor/etc/lm/AppClassifierFeature.xml
 vendor/etc/perf/commonresourceconfigs.xml
 vendor/etc/perf/perfboostsconfig.xml
@@ -1320,14 +1082,12 @@ vendor/etc/perf/perfconfigstore.xml
 vendor/etc/perf/targetconfig.xml
 vendor/etc/perf/targetresourceconfigs.xml
 vendor/etc/msm_irqbalance.conf
-vendor/etc/powerhint.xml
 vendor/lib/libperfconfig.so
 vendor/lib/libperfgluelayer.so
 vendor/lib/libqti-perfd-client.so
 vendor/lib/libqti-perfd.so
 vendor/lib/libqti-util.so
 vendor/lib/libqti-utils.so
-vendor/lib/vendor.qti.hardware.perf@2.0.so
 vendor/lib64/libadaptlaunch.so
 vendor/lib64/libappclassifier.so
 vendor/lib64/libgameoptfeature.so
@@ -1340,7 +1100,6 @@ vendor/lib64/libqti-perfd-client.so
 vendor/lib64/libqti-perfd.so
 vendor/lib64/libqti-util.so
 vendor/lib64/libqti-utils.so
-vendor/lib64/vendor.qti.hardware.perf@2.0.so
 
 # Peripheral
 vendor/bin/pm-proxy
@@ -1367,7 +1126,6 @@ bin/charger
 # Qdutils
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
 vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
-vendor/lib/vendor.qti.hardware.qdutils_disp@1.0.so
 vendor/lib64/vendor.qti.hardware.qdutils_disp@1.0.so
 
 # Qualcomm Hardware Factory
@@ -1597,117 +1355,24 @@ vendor/bin/hw/vendor.qti.hardware.scve.panorama@1.0-service
 vendor/etc/init/vendor.qti.hardware.scve.objecttracker@1.0-service.rc
 vendor/etc/init/vendor.qti.hardware.scve.panorama@1.0-service.rc
 vendor/etc/scve/facereco/gModel.dat
-vendor/lib/hw/vendor.qti.hardware.scve.objecttracker@1.0-impl.so
-vendor/lib/hw/vendor.qti.hardware.scve.panorama@1.0-impl.so
-vendor/lib/libscveBlobDescriptor.so
-vendor/lib/libscveBlobDescriptor_stub.so
 vendor/lib/libscveCommon.so
 vendor/lib/libscveCommon_stub.so
-vendor/lib/libscveFaceLandmarks.so
-vendor/lib/libscveFaceRecognition.so
 vendor/lib/libscveObjectSegmentation.so
 vendor/lib/libscveObjectSegmentation_stub.so
 vendor/lib/libscveObjectTracker.so
 vendor/lib/libscveObjectTracker_stub.so
-vendor/lib/libscvePanorama.so
-vendor/lib/libscvePanorama_lite.so
-vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
 vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
 vendor/lib/rfsa/adsp/libscveT2T_skel.so
-vendor/lib/vendor.qti.hardware.scve.objecttracker@1.0-halimpl.so
 vendor/lib/vendor.qti.hardware.scve.objecttracker@1.0.so
-vendor/lib/vendor.qti.hardware.scve.panorama@1.0-halimpl.so
 vendor/lib/vendor.qti.hardware.scve.panorama@1.0.so
-vendor/lib64/hw/vendor.qti.hardware.scve.objecttracker@1.0-impl.so
-vendor/lib64/hw/vendor.qti.hardware.scve.panorama@1.0-impl.so
-vendor/lib64/libscveBlobDescriptor.so
-vendor/lib64/libscveBlobDescriptor_stub.so
 vendor/lib64/libscveCommon.so
 vendor/lib64/libscveCommon_stub.so
-vendor/lib64/libscveFaceLandmarks.so
-vendor/lib64/libscveFaceRecognition.so
 vendor/lib64/libscveObjectSegmentation.so
 vendor/lib64/libscveObjectSegmentation_stub.so
 vendor/lib64/libscveObjectTracker.so
 vendor/lib64/libscveObjectTracker_stub.so
-vendor/lib64/libscvePanorama.so
-vendor/lib64/libscvePanorama_lite.so
 vendor/lib64/vendor.qti.hardware.scve.objecttracker@1.0.so
 vendor/lib64/vendor.qti.hardware.scve.panorama@1.0.so
-
-# CarrierSettings from Google Coral RPB1.200504.018 6520161
-system_ext/etc/CarrierSettings/airtel_in.pb|e48ca8834f30e74a1a1a42d1041bb97fdf0f5b58
-system_ext/etc/CarrierSettings/att5g_us.pb|98336eb2c02109e2a34daef9a45e86448dd9a1cd
-system_ext/etc/CarrierSettings/att_us.pb|c4822df6aef0dbf6e239a753d7e0016df94c5d9e
-system_ext/etc/CarrierSettings/bell_ca.pb|5604a49069cdb12adb68778d79b570907dffbf1d
-system_ext/etc/CarrierSettings/bouygues_fr.pb|6cba55484042da7d7c0bfc09dd400b93e9dd00a5
-system_ext/etc/CarrierSettings/btb_gb.pb|c3a1f46191160fc58f084b626627d046c58b899a
-system_ext/etc/CarrierSettings/btc_gb.pb|ea5f2b9f9f7bf301281bd64b0da3a533a853e36e
-system_ext/etc/CarrierSettings/carrier_list.pb|2fd754091c1dd77e06b7d41754bbb0e7b5c8cbb2
-system_ext/etc/CarrierSettings/cellcom_us.pb|245855dc2ee6c93e7a09144fd053e2a39b79c629
-system_ext/etc/CarrierSettings/cht_tw.pb|f98f09b8456671a75643869417b04376c5e75ce2
-system_ext/etc/CarrierSettings/cricket5g_us.pb|b8c5668f353192024c4482b1539a32cff27e4649
-system_ext/etc/CarrierSettings/cricket_us.pb|a9920fb2b7f5e2229ce6bcf19f5897d7c6767dd1
-system_ext/etc/CarrierSettings/cspire_us.pb|ef5e42b2efd4c6796465eb53de80269010661a66
-system_ext/etc/CarrierSettings/default.pb|d1f9a97b3f015a9e8816396d4204eb4c47235f95
-system_ext/etc/CarrierSettings/docomo_jp.pb|cea17897c03ab9a2826443a0a791126e944aa79b
-system_ext/etc/CarrierSettings/ee_gb.pb|0a04a2fca8c1841948c0ad9f005e44360c83ff21
-system_ext/etc/CarrierSettings/eplus_de.pb|4d680484c1663aa88861f06116f4cb35c7202f22
-system_ext/etc/CarrierSettings/fet_tw.pb|7ed5d5ef82a2446416216c2333eb2aa0b15b359b
-system_ext/etc/CarrierSettings/fido_ca.pb|37cbbe7eb1a97374d0cdfa6f78118783517f3f73
-system_ext/etc/CarrierSettings/firstnetpacific_us.pb|e01d4d65f46317df3050f5080bb747a8d9a6d957
-system_ext/etc/CarrierSettings/firstnet_us.pb|5193ecfac5c99b6c76dc39dd3ebe65861db340ff
-system_ext/etc/CarrierSettings/fi_us.pb|1851e46301bbc48b6d49670d5ab2dbfbc6a80747
-system_ext/etc/CarrierSettings/fizz_ca.pb|5d9d0be0252b8a7bf0cdfc0aac9ef0f4df8fd6c2
-system_ext/etc/CarrierSettings/freedommobile_ca.pb|e2d98ae0e4d74e0e820e675a3074d4e04e5fe986
-system_ext/etc/CarrierSettings/h3_gb.pb|27f9c1ab5b39cb120568af1a8889d0e2a4226bec
-system_ext/etc/CarrierSettings/idea_in.pb|ee2bf748bd16d30d310b1ee3bacc7f1737b89a83
-system_ext/etc/CarrierSettings/idmobile_gb.pb|eb76d95605b6305fc11f8dae2d2f67e2bcc46c34
-system_ext/etc/CarrierSettings/kddi_jp.pb|9be15bfae8d389be56c707002886bfe775533fe4
-system_ext/etc/CarrierSettings/kddimvno_jp.pb|13053a7c64770a712272aa2723e94fdb33638f34
-system_ext/etc/CarrierSettings/koodo_ca.pb|3cd0259242f51f2e37051b3c4d2a1d8e4ad36bfc
-system_ext/etc/CarrierSettings/luckymobile_ca.pb|8913ed1e21e7fc27eb8be6159bf3ec171083bb67
-system_ext/etc/CarrierSettings/o2_de.pb|47a6e9a2ffc3adf3d1dae1666dd73781f8d90d18
-system_ext/etc/CarrierSettings/o2postpaid_gb.pb|e93b96d844a3c308ca54197453259d83462d2a81
-system_ext/etc/CarrierSettings/o2prepaid_de.pb|9abc0e81ccea22fb66c4a533f6cfcb4d025b5705
-system_ext/etc/CarrierSettings/o2prepaid_gb.pb|b9304a2c6fa0e3380980ec2fbd2118ae0ec1d71e
-system_ext/etc/CarrierSettings/optus_au.pb|00aedec8c850b33fec6eff1eeed3d0e9e33468ca
-system_ext/etc/CarrierSettings/orange_es.pb|84f7204d682f709b1adc2e413e6ef16924e5b734
-system_ext/etc/CarrierSettings/orange_fr.pb|aab8b018d394ed7b5485f8b753b4c85fa9d416b2
-system_ext/etc/CarrierSettings/others.pb|918cb148d7f38875e25fad0971b8500cb924a776
-system_ext/etc/CarrierSettings/pcmobilebell_ca.pb|90412d7aa544bdc6c95a07325bf5bf866aa4fba4
-system_ext/etc/CarrierSettings/rakuten_jp.pb|c14772b82dfe99ca1a3593532c177ca94fa54acb
-system_ext/etc/CarrierSettings/rjio_in.pb|9d896d9aafd9306aaa92af3143e40c2cd82474a9
-system_ext/etc/CarrierSettings/rogers_ca.pb|36114dabe60500e03f3215a8cea82009d26cdc9c
-system_ext/etc/CarrierSettings/sfr_fr.pb|42bb6fcf6d7bebc345d17b7f399565ef7d015b2c
-system_ext/etc/CarrierSettings/singtel_sg.pb|c098c23df4a0045b73223020a01e940571063c66
-system_ext/etc/CarrierSettings/softbank_jp.pb|507a2728a4b942a0c8397b207061add11aa3aee9
-system_ext/etc/CarrierSettings/solomobile_ca.pb|4bfc1bfbc265d15e48c456b272d30c42d3c83bc4
-system_ext/etc/CarrierSettings/spectrum_us.pb|1df828761d2abd55b1d82b6ead75738206c303fe
-system_ext/etc/CarrierSettings/sprint_us.pb|ae8e0c7b60afaf73ca21931de0cb8561ced500a6
-system_ext/etc/CarrierSettings/sprintwholesale_us.pb|fc6fb54c0250c0210b2852be67d98e105cc243a4
-system_ext/etc/CarrierSettings/starhub_sg.pb|985de12a0cd33fff195588296b1a74588f05b196
-system_ext/etc/CarrierSettings/telekom_de.pb|5dbd830f8a49556cfb94ebf1c7f4e195123dd95c
-system_ext/etc/CarrierSettings/telstra_au.pb|e335d56b4801251b05b3749dc19c873c6856bf1f
-system_ext/etc/CarrierSettings/telus_ca.pb|48c9de85a8558d4fd94c9688a7dad601a74e8d02
-system_ext/etc/CarrierSettings/tmobile_us.pb|9c46f0429f30ec6c6440f4ff87217f2cc493d085
-system_ext/etc/CarrierSettings/tracfonetmo_us.pb|768243be6cd08e96a8dfdb9ed418e6396adb6ab4
-system_ext/etc/CarrierSettings/tracfoneverizon_us.pb|4589e2223583d165e90b7daff5392da34d4a9877
-system_ext/etc/CarrierSettings/twm_tw.pb|f1a2a25b16d7852a4501730cce58df25a6b90c6a
-system_ext/etc/CarrierSettings/uscc_us.pb|21cb48ab755aa957633b7884e9d5e7859adcf15f
-system_ext/etc/CarrierSettings/verizon_us.pb|96ce914b743bc6a3aa4a9e195f830a4c52282239
-system_ext/etc/CarrierSettings/videotron_ca.pb|6b7da46b84923b4f1cbefa0952a4748dadc0d065
-system_ext/etc/CarrierSettings/virgin_ca.pb|44863e8b725ca9ceb14a64a1da6f23a42d1a5463
-system_ext/etc/CarrierSettings/visible_us.pb|93e6c5138416f47d1ac27ce8ecdf832ce8893faa
-system_ext/etc/CarrierSettings/vodafone_au.pb|ebc8e8ac117a419b45c0ca38c3c030a0e1a64bcc
-system_ext/etc/CarrierSettings/vodafone_de.pb|1f1f166b353209f0e4263dd01f967cd784b8a5b6
-system_ext/etc/CarrierSettings/vodafone_es.pb|5b83f119595b13c6b64f042b596939dc5abfdd75
-system_ext/etc/CarrierSettings/vodafone_gb.pb|8aa3de7f871d9adb13d12331a44a339a3ba92738
-system_ext/etc/CarrierSettings/vodafone_in.pb|7eb79c307984f65480aa010fb247ea7b5f5abcb1
-system_ext/etc/CarrierSettings/vodafone_it.pb|60d0d95cf7c594d131f7e324e0e37519b167dcee
-system_ext/etc/CarrierSettings/vodafone_nl.pb|48aedcec52ed2a4ac6641428ca1b3a2f013bd16d
-system_ext/etc/CarrierSettings/xfinity_us.pb|1b4744e6887943248d1a21282f1bc3b0788ee52a
--system_ext/priv-app/CarrierSettings/CarrierSettings.apk|5f6509438fd490f850b19e5295cc92edd19e6d4d
 
 # Sensors
 vendor/bin/sensors.qti
@@ -1819,8 +1484,6 @@ system_ext/lib64/vendor.qti.hardware.soter@1.0.so
 vendor/bin/hw/vendor.qti.hardware.soter@1.0-service
 vendor/bin/vendor.qti.hardware.soter@1.0-provision
 vendor/etc/init/vendor.qti.hardware.soter@1.0-service.rc
-vendor/lib/hw/vendor.qti.hardware.soter@1.0-impl.so
-vendor/lib/vendor.qti.hardware.soter@1.0.so
 vendor/lib64/hw/vendor.qti.hardware.soter@1.0-impl.so
 vendor/lib64/vendor.qti.hardware.soter@1.0.so
 
@@ -1849,13 +1512,6 @@ vendor/lib64/libtime_genoff.so
 vendor/bin/hw/vendor.qti.hardware.tui_comm@1.0-service-qti
 vendor/etc/init/vendor.qti.hardware.tui_comm@1.0-service-qti.rc
 vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
-
-# Touch-improve
--vendor/app/com.qualcomm.qti.improvetouch.service/com.qualcomm.qti.improvetouch.service.apk
-vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so
-vendor/lib/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so
-vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0-service.so
-vendor/lib64/vendor.qti.hardware.improvetouch.touchcompanion@1.0.so
 
 # Touchscreen
 vendor/etc/hbtp/loader.cfg
