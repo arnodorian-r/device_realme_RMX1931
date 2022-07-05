@@ -15,21 +15,19 @@
         android:key="refresh"
         android:title="@string/refresh_title">
 
-        <org.lineageos.settings.device.RadioButtonPreference
-            android:key="refresh_rate_60"
-            android:icon="@drawable/ic_60_refresh_icon"
-            android:summary="@string/i60_refresh_rate_summary"
-            android:title="@string/i60_refresh_rate_title"
-            android:enabled="true"
-            android:checked="false" />
+        <SwitchPreference
+            android:key="auto_refresh_rate"
+            android:icon="@drawable/ic_auto_refresh_icon"
+            android:summary="@string/auto_refresh_rate_summary"
+            android:title="@string/auto_refresh_rate_title"
+            android:persistent="true" />
 
-        <org.lineageos.settings.device.RadioButtonPreference
-            android:key="refresh_rate_90"
-            android:icon="@drawable/ic_90_refresh_icon"
-            android:summary="@string/i90_refresh_rate_summary"
-            android:title="@string/i90_refresh_rate_title"
-            android:enabled="true"
-            android:checked="true" />
+        <SwitchPreference
+            android:key="refresh_rate"
+            android:icon="@drawable/ic_forced_refresh_icon"
+            android:summary="@string/refresh_rate_summary"
+            android:title="@string/refresh_rate_title"
+            android:persistent="false" />
 
         <Preference
             android:icon="@drawable/ic_info_outline_24dp"

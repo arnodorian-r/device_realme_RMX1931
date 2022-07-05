@@ -55,14 +55,15 @@ public class DeviceSettings extends PreferenceFragment
 
     private static final String KEY_CATEGORY_REFRESH = "refresh";
     public static final String KEY_REFRESH_RATE = "refresh_rate";
+    public static final String KEY_AUTO_REFRESH_RATE = "auto_refresh_rate";
     public static final String KEY_SETTINGS_PREFIX = "device_setting_";
 
     private static TwoStatePreference mHBMModeSwitch;
     private static TwoStatePreference mDCModeSwitch;
     private static TwoStatePreference mSRGBModeSwitch;
     private static TwoStatePreference mOTGModeSwitch;
-    public static RadioButtonPreference mRefreshRate90;
-    public static RadioButtonPreference mRefreshRate60;
+    private static TwoStatePreference mRefreshRate;
+    private static SwitchPreference mAutoRefreshRate;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -89,26 +90,20 @@ public class DeviceSettings extends PreferenceFragment
         mOTGModeSwitch.setChecked(OTGModeSwitch.isCurrentlyEnabled(this.getContext()));
         mOTGModeSwitch.setOnPreferenceChangeListener(new OTGModeSwitch());
 
-        mRefreshRate90 = findPreference("refresh_rate_90");
-        mRefreshRate90.setChecked(prefs.getBoolean("refresh_rate_90", false));
-        mRefreshRate90.setOnPreferenceChangeListener(new RefreshRateSwitch(getContext()));
+        mAutoRefreshRate = (SwitchPreference) findPreference(KEY_AUTO_REFRESH_RATE);
+        mAutoRefreshRate.setChecked(AutoRefreshRateSwitch.isCurrentlyEnabled(this.getContext()));
+        mAutoRefreshRate.setOnPreferenceChangeListener(new AutoRefreshRateSwitch(getContext()));
 
-        mRefreshRate60 = findPreference("refresh_rate_60");
-        mRefreshRate60.setChecked(prefs.getBoolean("refresh_rate_60", false));
-        mRefreshRate60.setOnPreferenceChangeListener(new RefreshRateSwitch(getContext()));
-
+        mRefreshRate = (TwoStatePreference) findPreference(KEY_REFRESH_RATE);
+        mRefreshRate.setEnabled(!AutoRefreshRateSwitch.isCurrentlyEnabled(this.getContext()));
+        mRefreshRate.setChecked(RefreshRateSwitch.isCurrentlyEnabled(this.getContext()));
+        mRefreshRate.setOnPreferenceChangeListener(new RefreshRateSwitch(getContext()));
     }
 
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
-        if (preference == mRefreshRate90) {
-            mRefreshRate60.setChecked(false);
-            mRefreshRate90.setChecked(true);
-            return true;
-        } else if (preference == mRefreshRate60) {
-            mRefreshRate60.setChecked(true);
-            mRefreshRate90.setChecked(false);
-            return true;
+        if (preference == mAutoRefreshRate) {
+              mRefreshRate.setEnabled(!AutoRefreshRateSwitch.isCurrentlyEnabled(this.getContext()));
         }
         return super.onPreferenceTreeClick(preference);
     }
