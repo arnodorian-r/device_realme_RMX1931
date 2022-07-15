@@ -4,3 +4,4 @@ type persist_engineer_file, file_type;
 # sysfs
 type sysfs_motor, sysfs_type, fs_type;
 type vendor_sysfs_graphics_ffl, sysfs_type, fs_type;
+type vendor_sysfs_ac_supply, fs_type, sysfs_type;
