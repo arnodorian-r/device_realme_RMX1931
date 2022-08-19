@@ -36,6 +36,11 @@
         android:label="@string/device_title"
         android:theme="@style/Theme.SubSettingsBase">
 
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            tools:replace="android:authorities" />
+
         <!-- Device Settings -->
         <activity
             android:name=".DeviceSettingsActivity" 
