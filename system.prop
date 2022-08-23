@@ -4,15 +4,9 @@ audio.offload.min.duration.secs=30
 use.voice.path.for.pcm.voip=true
 
 # Bluetooth
-ro.bluetooth.library_name=libbluetooth_qti.so
-persist.vendor.bt.a2dp.aac_whitelist=false
-persist.vendor.bt.a2dp.hal.implementation=true
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxtws-aptxhd-aac-ldac
-persist.vendor.bt.aac_frm_ctl.enabled=true
-persist.vendor.btstack.enable.twsplus=true
-persist.vendor.btstack.enable.twsplussho=true
-persist.vendor.btstack.enable.lpa=true
 vendor.bluetooth.soc=cherokee
+persist.bluetooth.a2dp_aac.vbr_supported=true
+persist.vendor.btstack.enable.twsplussho=true
 
 # Camera
 ro.camera.hfr.enable=0
