@@ -19,12 +19,7 @@
 #include "vendor_init.h"
 
 std::vector<std::string> ro_props_default_source_order = {
-    "",
-    "odm.",
-    "product.",
-    "system.",
-    "system_ext.",
-    "vendor.",
+    "", "odm.", "product.", "system.", "system_ext.", "vendor.",
 };
 
 bool isCN()
@@ -98,7 +93,6 @@ void set_device_props(const std::string fingerprint, const std::string descripti
 
     property_override("ro.build.fingerprint", fingerprint.c_str());
     property_override("ro.build.description", description.c_str());
-    property_override("ro.system_ext.build.fingerprint", fingerprint.c_str());
 }
 
 void vendor_load_properties() {
