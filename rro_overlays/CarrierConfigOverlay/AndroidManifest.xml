@@ -15,7 +15,7 @@
 -->
 <!-- Xiaomi sm8150 specific carrier overlays -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.carrierconfig.raphael"
+    package="com.android.carrierconfig.realme"
     android:versionCode="1"
     android:versionName="1.0">
     <application android:hasCode="false" />
