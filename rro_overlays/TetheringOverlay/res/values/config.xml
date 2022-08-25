@@ -67,5 +67,10 @@
         <item>192.168.48.2</item>
         <item>192.168.48.254</item>
         <item>192.168.49.2</item>
+        <item>192.168.49.254</item>
+        <item>192.168.50.2</item>
+        <item>192.168.50.254</item>
+        <item>192.168.51.2</item>
+        <item>192.168.51.254</item>
     </string-array>
 </resources>
