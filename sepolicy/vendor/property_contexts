@@ -41,7 +41,6 @@ adrc.gain                                 u:object_r:exported_system_prop:s0
 darkboost.gain                            u:object_r:exported_system_prop:s0
 
 ro.vold.serialno                 u:object_r:oppo_vendor_prop:s0
-persist.nfc.            u:object_r:oppo_vendor_prop:s0
 
 ro.dolby.model    u:object_r:oppo_vendor_prop:s0
 ro.dolby.device   u:object_r:oppo_vendor_prop:s0
