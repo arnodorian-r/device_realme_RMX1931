@@ -214,9 +214,9 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapperextensions@1.1.vendor
 
 # Doze
-# PRODUCT_PACKAGES += \
-#     RealmeDoze \
-#     devicesettings
+PRODUCT_PACKAGES += \
+    RealmeDoze \
+    devicesettings
 
 # DRM
 PRODUCT_PACKAGES += \
