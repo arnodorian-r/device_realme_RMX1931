@@ -4,9 +4,9 @@ audio.offload.min.duration.secs=30
 use.voice.path.for.pcm.voip=true
 
 # Bluetooth
+bt.max.hfpclient.connections=1
+persist.vendor.btstack.enable.twsplus=true
 vendor.bluetooth.soc=cherokee
-persist.bluetooth.a2dp_aac.vbr_supported=true
-persist.vendor.btstack.enable.twsplussho=true
 
 # Camera
 ro.camera.hfr.enable=0
