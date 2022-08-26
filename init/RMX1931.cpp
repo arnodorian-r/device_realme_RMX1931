@@ -44,28 +44,6 @@ void property_override(char const prop[], char const value[], bool add = true) {
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-void load_dalvik_properties() {
-    struct sysinfo sys;
-
-    sysinfo(&sys);
-    if (sys.totalram > 7168ull * 1024 * 1024) {
-        // 8GB & 12GB RAM
-        property_override("dalvik.vm.heapstartsize", "32m");
-        property_override("dalvik.vm.heapgrowthlimit", "512m");
-        property_override("dalvik.vm.heapsize", "768m");
-        property_override("dalvik.vm.heapmaxfree", "64m");
-    } else {
-        // from - phone-xhdpi-6144-dalvik-heap.mk
-        property_override("dalvik.vm.heapstartsize", "16m");
-        property_override("dalvik.vm.heapgrowthlimit", "256m");
-        property_override("dalvik.vm.heapsize", "512m");
-        property_override("dalvik.vm.heapmaxfree", "32m");
-    }
-
-    property_override("dalvik.vm.heaptargetutilization", "0.5");
-    property_override("dalvik.vm.heapminfree", "8m");
-}
-
 void set_device_props(const std::string fingerprint, const std::string description,
      const std::string brand, const std::string device, const std::string model, const std::string name)
 {
@@ -111,5 +89,4 @@ void vendor_load_properties() {
             fp_desc,
             "realme", "RMX1931L1", "RMX1931", "realme X2 Pro");
     }
-    load_dalvik_properties();
 }
