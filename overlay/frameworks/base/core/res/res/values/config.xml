@@ -863,6 +863,9 @@
         <item>2156</item> <!-- <item>sensorLocationY</item> -->
         <item>95</item>   <!-- <item>sensorRadius</item> -->
     </integer-array>
+
+    <!-- Default fod pressed color -->
+    <integer name="config_fod_pressed_color">0</integer>
     
     <!-- How long it takes for the HW to start illuminating after the illumination is requested. -->
     <integer name="config_udfps_illumination_transition_ms">0</integer>
