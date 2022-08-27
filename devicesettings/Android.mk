@@ -26,6 +26,9 @@ LOCAL_PACKAGE_NAME := devicesettings
 
 LOCAL_USE_AAPT2 := true
 
+LOCAL_STATIC_ANDROID_LIBRARIES := \
+    SettingsLib
+
 LOCAL_RESOURCE_DIR := \
     $(LOCAL_PATH)/res \
     $(TOP)/packages/resources/devicesettings/res
@@ -39,5 +42,4 @@ package_resource_overlays := $(strip \
 LOCAL_RESOURCE_DIR := $(package_resource_overlays) $(LOCAL_RESOURCE_DIR)
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 LOCAL_MODULE_TAGS := optional
-include frameworks/base/packages/SettingsLib/common.mk
 include $(BUILD_PACKAGE)
