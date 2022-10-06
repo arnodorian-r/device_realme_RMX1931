@@ -295,32 +295,12 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.oppo.hardware.biometrics.fingerprint</name>
+        <name>vendor.oplus.hardware.biometrics.fingerprint</name>
         <transport>hwbinder</transport>
         <version>2.1</version>
         <interface>
             <name>IBiometricsFingerprint</name>
             <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.oppo.hardware.hypnus</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IHypnusUtil</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.oppo.hardware.radio.opporadio</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IOppoRadio</name>
-            <instance>oppo_slot1</instance>
-            <name>IOppoRadio</name>
-            <instance>oppo_slot2</instance>
         </interface>
     </hal>
     <hal format="hidl">
