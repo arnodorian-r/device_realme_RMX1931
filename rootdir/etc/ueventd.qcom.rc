@@ -31,7 +31,7 @@
 firmware_directories /vendor/firmware_mnt/image/
 
 # the DIAG device node is not world writable/readable.
-/dev/diag                 0666   system     oem_2901
+/dev/diag                 0660   system     oem_2901
 
 /dev/genlock              0666   system     system
 /dev/wlan                 0660   wifi       wifi
@@ -57,6 +57,9 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/ipa_adpl             0660   system     oem_2905
 /dev/synx_device          0660   root       camera
 /dev/hab                  0666   system     system
+
+#permissions for UFS RPMB BSG device node
+/dev/0:0:0:49476          0600   system     system
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
@@ -124,17 +127,19 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/at_usb0              0640   radio      radio
 /dev/at_mdm0              0640   radio      radio
 /dev/video*               0660   system     camera
+/dev/cvp*                 0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
 /dev/qce                  0660   system     drmrpc
-/dev/smcinvoke            0660   system     system
+/dev/smcinvoke            0660   system     drmrpc
 /dev/qsee_ipc_irq_spss    0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
 /dev/spcom                0660   system     system
 /dev/spss_utils           0660   system     system
 /dev/sp_kernel            0660   system     system
+/dev/sp_nvm               0660   system     system
 /dev/sp_ssr               0660   system     system
 /dev/sp_keymaster         0660   system     system
 /dev/sec_nvm_*            0660   system     system
@@ -171,6 +176,8 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
+/sys/devices/platform/soc/18800000.qcom,icnss/net/wlan*/queues/rx-* rps_cpus      0660   system     system
+/sys/devices/platform/soc/1c00000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan*/queues/rx-* rps_cpus      0660   system     system
 /dev/spidev0.0            0660   system     audio
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
@@ -180,7 +187,6 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/msm_vidc_dec_sec     0660   system     audio
 /dev/msm_vidc_enc         0660   system     audio
 /dev/msm_rotator          0660   system     system
-/dev/hw_random            0600   root       root
 /dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
@@ -295,12 +301,13 @@ firmware_directories /vendor/firmware_mnt/image/
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/queues/rx-0/rps_cpus 0660 system system
 /sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/gro_flush_timeout 0660 system system
 /sys/devices/virtual/net/bond0 queues/rx-0/rps_cpus 0660 system system
-/dev/wigig_sensing        0660   system     system
 
 #nfc permissions
 /dev/nfc-nci              0660    nfc         nfc
 /dev/nq-nci               0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
+/dev/p73                  0660    secure_element         secure_element
+/dev/pn544                0660    nfc         nfc
 
 # UIO devices
 /dev/uio0                 0660   system     system
@@ -317,7 +324,9 @@ firmware_directories /vendor/firmware_mnt/image/
 /dev/ramdump*             0640   system     system
 
 # Fingerprint device
-/dev/qbt1000              0660   system     system
+/dev/qbt*                 0660   system     system
+/sys/class/fts/touch_aoi aoi_set 0660 root system
+/sys/class/fts/touch_aoi power_set 0660 root system
 
 #ImproveTouch device
 /dev/hbtp_input           0660   system     system

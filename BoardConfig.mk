@@ -53,7 +53,7 @@ TARGET_KERNEL_CLANG_VERSION := proton
 TARGET_KERNEL_CLANG_PATH := $(shell pwd)/prebuilts/clang/host/linux-x86/clang-proton
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/realme/RMX1931
+TARGET_KERNEL_SOURCE := kernel/realme/RMX1931-2
 TARGET_KERNEL_CONFIG := RMX1931_defconfig
 TARGET_KERNEL_ADDITIONAL_FLAGS += HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
 TARGET_KERNEL_ADDITIONAL_FLAGS += LLVM=1
