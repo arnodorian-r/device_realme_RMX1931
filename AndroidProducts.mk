@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/arrow_RMX1931.mk
+    $(LOCAL_DIR)/spark_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    arrow_RMX1931-userdebug \
-    arrow_RMX1931-eng
+    spark_RMX1931-userdebug \
+    spark_RMX1931-eng
