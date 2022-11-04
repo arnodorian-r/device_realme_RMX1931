@@ -33,7 +33,7 @@ persist.vendor.dpm.loglevel=0
 persist.vendor.dpm.nsrm.bkg.evt=3955
 
 # Fingerprint
-ro.boot.realme.lockstate=0
+vendor.flash.locked=0
 
 # GBoard Spacing
 ro.com.google.ime.kb_pad_port_b=1

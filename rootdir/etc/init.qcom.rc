@@ -854,6 +854,16 @@ service poweroffhandler /system/vendor/bin/poweroffhandler
     disabled
     oneshot
 
+on property:vendor.display.lcd_density=*
+    setprop ro.sf.lcd_density ${vendor.display.lcd_density}
+
+service insmod_sh /vendor/bin/init.insmod.sh /vendor/etc/init.insmod.cfg
+    class main
+    user root
+    group root system
+    disabled
+    oneshot
+
 service time_daemon /vendor/bin/time_daemon
     class main
     user system

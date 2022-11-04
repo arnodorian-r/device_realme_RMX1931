@@ -10,6 +10,10 @@ $(call inherit-product, vendor/realme/RMX1931/RMX1931-vendor.mk)
 # Setup dalvik vm configs
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
+# Inherit from emulated storege
+# For details to https://source.android.com/devices/storage/sdcardfs-deprecate
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
@@ -334,7 +338,9 @@ PRODUCT_PACKAGES += \
     libavservices_minijail.vendor \
     libavservices_minijail_vendor \
     libcodec2_hidl@1.0.vendor \
-    libcodec2_vndk.vendor
+    libcodec2_vndk.vendor \
+    android.hardware.media.c2@1.0.vendor
+
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media/media_codecs.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs.xml \
