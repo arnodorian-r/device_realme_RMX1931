@@ -58,6 +58,14 @@ if [ -z "${SRC}" ]; then
     SRC="adb"
 fi
 
+function blob_fixup() {
+    case "${1}" in
+       odm/lib/libgf_hal_G3.so | odm/lib64/libgf_hal_G3.so)
+            sed -i "s|ro.boot.flash.locked|vendor.flash.locked\x00|" "${2}"
+            ;;
+    esac
+}
+
 # Initialize the helper
 setup_vendor "${DEVICE}" "${VENDOR}" "${AOSP_ROOT}" true "${CLEAN_VENDOR}"
 
