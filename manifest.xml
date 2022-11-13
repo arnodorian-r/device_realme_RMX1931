@@ -274,15 +274,6 @@
         </interface>
     </hal>
     <hal format="hidl">
-        <name>vendor.dolby_v351.hardware.dms</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IDms</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
         <name>vendor.nxp.hardware.nfc</name>
         <transport>hwbinder</transport>
         <version>1.2</version>
