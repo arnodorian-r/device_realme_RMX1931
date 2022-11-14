@@ -1,43 +1,38 @@
 # Audio
-aaudio.hw_burst_min_usec=2000
-aaudio.mmap_exclusive_policy=2
 aaudio.mmap_policy=2
-af.fast_track_multiplier=2
+aaudio.mmap_exclusive_policy=2
+aaudio.hw_burst_min_usec=2000
 audio.deep_buffer.media=true
-persist.vendor.audio.fluence.speaker=true
-persist.vendor.audio.fluence.voicecall=true
-persist.vendor.audio.fluence.voicecomm=true
-persist.vendor.audio.fluence.voicerec=true
-persist.vendor.audio.hac.enable=false
-persist.vendor.audio.ras.enabled=false
-persist.vendor.audio.voicecall.speaker.stereo=true
-persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
-ro.audio.monitorRotation=true
-ro.config.media_vol_steps=30
-ro.config.vc_call_vol_steps=6
-ro.vendor.audio.sdk.fluencetype=fluence
+ro.vendor.audio.sdk.fluencetype=none
 ro.vendor.audio.sdk.ssr=false
-vendor.audio.adm.buffering.ms=2
-vendor.audio.cts.media=false
-vendor.audio.enable.mirrorlink=false
-vendor.audio.flac.sw.decoder.24bit=true
-vendor.audio.hal.output.suspend.supported=false
+vendor.audio.use.sw.alac.decoder=true
+vendor.audio.use.sw.ape.decoder=true
 vendor.audio.hw.aac.encoder=true
-vendor.audio.offload.buffer.size.kb=32
+vendor.audio.hal.output.suspend.supported=true
+vendor.audio.hal.boot.timeout.ms=20000
+vendor.audio.adm.buffering.ms=2
 vendor.audio.offload.gapless.enabled=true
+vendor.audio.safx.pbe.enabled=false
+vendor.audio.parser.ip.buffer.size=262144
+vendor.audio.flac.sw.decoder.24bit=true
+vendor.audio.offload.buffer.size.kb=32
+vendor.audio.offload.track.enable=true
 vendor.audio.offload.multiaac.enable=true
 vendor.audio.offload.multiple.enabled=false
 vendor.audio.offload.passthrough=false
-vendor.audio.offload.track.enable=true
-vendor.audio.parser.ip.buffer.size=0
-vendor.audio.safx.pbe.enabled=true
-vendor.audio.tunnel.encode=false
-vendor.audio.use.sw.alac.decoder=true
-vendor.audio.use.sw.ape.decoder=true
 vendor.audio.volume.headset.gain.depcal=true
+vendor.audio.enable.mirrorlink=false
 vendor.audio_hal.in_period_size=144
 vendor.audio_hal.period_multiplier=3
 vendor.audio_hal.period_size=192
+vendor.audio.tunnel.encode=false
+persist.vendor.audio.ras.enabled=false
+persist.vendor.audio.voicecall.speaker.stereo=true
+persist.vendor.audio.fluence.voicecall=true
+persist.vendor.audio.fluence.voicerec=false
+persist.vendor.audio.fluence.speaker=true
+persist.vendor.audio.fluence.tmic.enabled=false
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 vendor.voice.path.for.pcm.voip=true
 
 # Bluetooth
@@ -69,8 +64,15 @@ log.tag.CHIUSECASE=ERROR
 persist.vendor.camera.logInfoMask=false
 
 # Crypto
-ro.crypto.allow_encrypt_override=true
 ro.crypto.volume.filenames_mode=aes-256-cts
+ro.crypto.allow_encrypt_override=true
+ro.crypto.set_dun=true
+
+# IncrementalFS
+ro.incremental.enable=1
+
+# FM
+vendor.hw.fm.init=0
 
 # Dalvik
 pm.dexopt.boot=verify
@@ -153,6 +155,9 @@ vendor.gralloc.disable_ubwc=0
 # Gatekeeper
 vendor.gatekeeper.disable_spu=true
 
+# GPS
+persist.backup.ntpServer=0.pool.ntp.org
+
 # IMS
 persist.dbg.volte_avail_ovr=1
 persist.dbg.vt_avail_ovr=1
@@ -201,3 +206,6 @@ ro.soc.model=SM8150
 
 # Shutdown wait time
 sys.vendor.shutdown.waittime=500
+
+# WiFi
+wifi.aware.interface=wifi-aware0
