@@ -17,6 +17,9 @@ type oppo_reserve, file_type;
 # sockets
 type vl53l1_socket, file_type;
 
+# debugfs
+type vendor_debugfs_ipc, debugfs_type, fs_type;
+
 # sysfs
 type sysfs_dtb_model, sysfs_type, fs_type;
 type alpha_sysfs, sysfs_type, fs_type;
