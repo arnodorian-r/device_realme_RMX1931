@@ -100,3 +100,4 @@ enum FingerprintAuthType : int32_t {
   TYPE_PAY = 2,
   TYPE_OTHER = 3,
 };
+
