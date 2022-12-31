@@ -12,7 +12,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_p.mk)
 
 # Inherit some common stuff.
-$(call inherit-product, vendor/aosp/config/common.mk)
+$(call inherit-product, vendor/arrow/config/common.mk)
 
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_SUPPORTS_QUICK_TAP := true
@@ -20,9 +20,14 @@ TARGET_FACE_UNLOCK_SUPPORTED := true
 TARGET_USES_BLUR := true
 
 # Device identifier. This must come after all inclusions.
-PRODUCT_NAME := aosp_RMX1931
+PRODUCT_NAME := arrow_RMX1931
 PRODUCT_DEVICE := RMX1931
 PRODUCT_BRAND := realme
 PRODUCT_MANUFACTURER := realme
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRIVATE_BUILD_DESC="RMX1931-user 11 RKQ1.200928.002 1634728216537 release-keys"
+
+BUILD_FINGERPRINT := realme/RMX1931/RMX1931L1:11/RKQ1.200928.002/1634728216537:user/release-keys
 
 PRODUCT_GMS_CLIENTID_BASE := android-oppo
