@@ -15,8 +15,8 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/arrow_RMX1931.mk
+    $(LOCAL_DIR)/awaken_RMX1931.mk
 
 COMMON_LUNCH_CHOICES := \
-    arrow_RMX1931-userdebug \
-    arrow_RMX1931-eng
+    awaken_RMX1931-userdebug \
+    awaken_RMX1931-eng
