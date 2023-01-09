@@ -50,6 +50,11 @@ ro.launcher.blur.appLaunch=0
 ro.surface_flinger.supports_background_blur=1
 ro.sf.blurs_are_expensive=1
 
+# Camera
+vendor.camera.algo.jpeghwencode=0
+vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram
+vendor.camera.aux.packagelist=com.oppo.camera
+
 # Codec2
 debug.stagefright.omx_default_rank=0
 debug.stagefright.ccodec=4

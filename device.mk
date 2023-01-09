@@ -165,6 +165,25 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.camera.device@1.0.vendor \
     Snap
 
+# OPLUS camera
+$(call inherit-product, vendor/realme/camera/camera-vendor.mk)
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/permissions/oplus_camera_default_grant_permissions_list.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-oplus.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-oplus.xml \
+    $(LOCAL_PATH)/configs/sysconfig/hiddenapi-package-oplus-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hiddenapi-package-oplus-whitelist.xml
+
+# OPLUS framework
+PRODUCT_PACKAGES += \
+    oplus-fwk
+
+PRODUCT_BOOT_JARS += \
+    oplus-fwk
+
+# OPLUS wrapper
+PRODUCT_BOOT_JARS += \
+    coloros-support-wrapper
+
 # Charger
 PRODUCT_PACKAGES += \
     libsuspend
