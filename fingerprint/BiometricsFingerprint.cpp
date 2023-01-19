@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The Android Open Source Project
+ * Copyright (C) 2021 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,24 +14,21 @@
  * limitations under the License.
  */
 #define LOG_TAG "android.hardware.biometrics.fingerprint@2.3-service.RMX1931"
-#define LOG_VERBOSE "android.hardware.biometrics.fingerprint@2.3-service.RMX1931"
 
-#include <hardware/hardware.h>
-#include <hardware/fingerprint.h>
 #include "BiometricsFingerprint.h"
 
+#include <android-base/logging.h>
 #include <inttypes.h>
 #include <unistd.h>
+#include <functional>
 #include <fstream>
+#include <thread>
 
-#define FINGERPRINT_ACQUIRED_VENDOR 6
-
-#define FP_PRESS_PATH "/sys/kernel/oppo_display/notify_fppress"
+#define FOD_STATUS_PATH "/sys/kernel/oppo_display/notify_fppress"
 #define DIMLAYER_PATH "/sys/kernel/oppo_display/dimlayer_hbm"
-#define AOD_MODE_PATH "/sys/kernel/oppo_display/aod_light_mode_set"
-#define NOTIFY_BLANK_PATH "/sys/kernel/oppo_display/notify_panel_blank"
-#define POWER_STATUS "/sys/kernel/oppo_display/power_status"
-#define DC_DIM_PATH "/sys/kernel/oppo_display/dimlayer_bl_en"
+#define STATUS_ON 1
+#define STATUS_OFF 0
+#define BIND(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
 
 namespace android {
 namespace hardware {
@@ -40,39 +37,35 @@ namespace fingerprint {
 namespace V2_3 {
 namespace implementation {
 
-bool volatile dcDimState;
-bool volatile mFodCircleVisible;
-std::string lastStorePath;
-uint32_t lastGid;
-
-BiometricsFingerprint::BiometricsFingerprint() {
-    mOplusBiometricsFingerprint = vendor::oplus::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint::getService();
-    mFodCircleVisible = false;
-}
-
-
-/*
- * Write value to path and close file.
- */
 template <typename T>
-static void set(const std::string& path, const T& value) {
+static inline void set(const std::string& path, const T& value) {
     std::ofstream file(path);
     file << value;
 }
 
-template <typename T>
-static T get(const std::string& path, const T& def) {
-    std::ifstream file(path);
-    T result;
-
-    file >> result;
-    return file.fail() ? def : result;
+BiometricsFingerprint::BiometricsFingerprint() : isEnrolling(false) {
+    mOplusBiometricsFingerprint = vendor::oplus::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint::getService();
+    if (mOplusBiometricsFingerprint == nullptr) {
+        LOG (ERROR) << "BiometricsFingerprint(): Oplus Biometrics hal didn't init trying again, Attempting rescue.";
+        for (int i = 0; i < 10; i++) {
+            mOplusBiometricsFingerprint = vendor::oplus::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint::getService();
+            if (mOplusBiometricsFingerprint != nullptr) {
+                LOG (INFO) << "BiometricsFingerprint(): rescue(): Got service for oplus biometrics hal exiting loop.";
+                break;
+            }
+            LOG (INFO) << "BiometricsFingerprint(): rescue(): Unable to get service in witin: " << i+1 << " attempts.";
+            sleep(15);
+        }
+        if (mOplusBiometricsFingerprint == nullptr) {
+            LOG(ERROR) << "BiometricsFingerprint(): oplus biometrics service didn't start fingerprint hardware won't be available.";
+            exit(0);
+        }
+    }
 }
-
 
 class OplusClientCallback : public vendor::oplus::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback {
 public:
-    OplusClientCallback(sp<android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback> clientCallback) : mClientCallback(clientCallback) {}
+    OplusClientCallback(sp<android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback> clientCallback) : mClientCallback(clientCallback), onAuthenticationSuccess(nullptr) {}
     Return<void> onEnrollResult(uint64_t deviceId, uint32_t fingerId,
         uint32_t groupId, uint32_t remaining) {
         return mClientCallback->onEnrollResult(deviceId, fingerId, groupId, remaining);
@@ -85,18 +78,12 @@ public:
 
     Return<void> onAuthenticated(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         const hidl_vec<uint8_t>& token) {
-        if (token.size() > 0) {
-            if (mFodCircleVisible) {
-                set(DC_DIM_PATH, dcDimState);
+        // FingerID = 0 means authentication failure.
+        if (fingerId != 0) {
+            if (onAuthenticationSuccess != nullptr) {
+                onAuthenticationSuccess();
             }
-
-            set(DIMLAYER_PATH, 0);
-            set(FP_PRESS_PATH, 0);
-            mFodCircleVisible = false;
         }
-
-        ALOGE("onAuthenticated %lu %u %u, isAuthSucceed %d", deviceId, fingerId, groupId, token.size() > 0);
-        
         return mClientCallback->onAuthenticated(deviceId, fingerId, groupId, token);
     }
 
@@ -106,44 +93,34 @@ public:
 
     Return<void> onRemoved(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         uint32_t remaining) {
-        ALOGE("onRemoved %lu %u", deviceId, fingerId);
-        mClientCallback->onRemoved(deviceId, fingerId, groupId, remaining);
-        return Void();
+        return mClientCallback->onRemoved(deviceId, fingerId, groupId, remaining);
     }
 
     Return<void> onEnumerate(uint64_t deviceId, uint32_t fingerId, uint32_t groupId,
         uint32_t remaining) {
-        ALOGE("onEnumerate %lu %u %u %u", deviceId, fingerId, groupId, remaining);
         return mClientCallback->onEnumerate(deviceId, fingerId, groupId, remaining);
     }
 
     Return<void> onTouchUp(uint64_t deviceId) {
-        return mClientCallback->onAcquired(deviceId, android::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInfo::ACQUIRED_VENDOR, 0);
-	}
-    Return<void> onTouchDown(uint64_t deviceId)  {
-        return mClientCallback->onAcquired(deviceId, android::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInfo::ACQUIRED_VENDOR, 1);
-	}
-    Return<void> onSyncTemplates(uint64_t deviceId, const hidl_vec<uint32_t>& fingerId, uint32_t remaining) {
-        ALOGE("onSyncTemplates %lu %zu %u", deviceId, fingerId.size(), remaining);
-
-        size_t nFingers = fingerId.size();
-        if(nFingers > 0) {
-            for(auto finger: fingerId) {
-                mClientCallback->onEnumerate(deviceId, finger, 0, --nFingers);
-            }
-        } else {
-            mClientCallback->onEnumerate(deviceId, 0, 0, 0);
-        }
+        set(FOD_STATUS_PATH, STATUS_ON);
         return Void();
-}
+    }
 
+    Return<void> onTouchDown(uint64_t deviceId) {
+        set(FOD_STATUS_PATH, STATUS_OFF);
+        return Void();
+    }
+
+    Return<void> onSyncTemplates(uint64_t deviceId, const hidl_vec<uint32_t>& fingerId, uint32_t remaining) { return Void(); }
     Return<void> onFingerprintCmd(int32_t deviceId, const hidl_vec<uint32_t>& groupId, uint32_t remaining) { return Void(); }
     Return<void> onImageInfoAcquired(uint32_t type, uint32_t quality, uint32_t match_score) { return Void(); }
     Return<void> onMonitorEventTriggered(uint32_t type, const hidl_string& data) { return Void(); }
     Return<void> onEngineeringInfoUpdated(uint32_t length, const hidl_vec<uint32_t>& keys, const hidl_vec<hidl_string>& values) { return Void(); }
+    void setOnAuthenticationSuccess(const std::function<void()>& callback) { onAuthenticationSuccess = callback; }
 
 private:
     sp<android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprintClientCallback> mClientCallback;
+    std::function<void()> onAuthenticationSuccess;
 
     Return<android::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInfo> OplusToAOSPFingerprintAcquiredInfo(vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintAcquiredInfo info) {
         switch(info) {
@@ -176,25 +153,10 @@ private:
     }
 };
 
-Return<bool> BiometricsFingerprint::isUdfps(uint32_t) {
-    return true;
-}
-
-Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) {
-    set(DIMLAYER_PATH, 1);
-    set(FP_PRESS_PATH, 1);
-    return Void();
-}
-
-Return<void> BiometricsFingerprint::onFingerUp() {
-    set(FP_PRESS_PATH, 0);
-    return Void();
-}
-
-Return<uint64_t> BiometricsFingerprint::setNotify(
-        const sp<IBiometricsFingerprintClientCallback>& clientCallback) {
-    ALOGE("setNotify");
-    mOplusClientCallback = new OplusClientCallback(clientCallback);
+Return<uint64_t> BiometricsFingerprint::setNotify(const sp<IBiometricsFingerprintClientCallback>& clientCallback) {
+    OplusClientCallback* oplusClientCallback = new OplusClientCallback(clientCallback);
+    oplusClientCallback->setOnAuthenticationSuccess(BIND(setFingerprintScreenStateOff));
+    mOplusClientCallback = oplusClientCallback;
     return mOplusBiometricsFingerprint->setNotify(mOplusClientCallback);
 }
 
@@ -218,90 +180,73 @@ Return<RequestStatus> BiometricsFingerprint::OplusToAOSPRequestStatus(vendor::op
     }
 }
 
-Return<uint64_t> BiometricsFingerprint::preEnroll()  {
-    ALOGE("preEnroll");
+void BiometricsFingerprint::setFingerprintScreenState(const bool on) {
+    mOplusBiometricsFingerprint->setScreenState(
+        on ? vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_ON :
+            vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintScreenState::FINGERPRINT_SCREEN_OFF
+        );
+    set(DIMLAYER_PATH, on ? STATUS_ON: STATUS_OFF);
+}
+
+void BiometricsFingerprint::setFingerprintScreenStateOff() {
+    setFingerprintScreenState(false);
+}
+
+Return<uint64_t> BiometricsFingerprint::preEnroll() {
+    setFingerprintScreenState(true);
     return mOplusBiometricsFingerprint->preEnroll();
 }
 
-Return<RequestStatus> BiometricsFingerprint::enroll(const hidl_array<uint8_t, 69>& hat,
-    uint32_t gid, uint32_t timeoutSec)  {
-    if (!mFodCircleVisible) {
-        dcDimState = get(DC_DIM_PATH, 0);
-        set(DC_DIM_PATH, 0);
-    }
-    if (get(POWER_STATUS, 3) || get(POWER_STATUS, 4)) {
-	    set(NOTIFY_BLANK_PATH, 1);
-        set(AOD_MODE_PATH, 0);
-	}
-    mFodCircleVisible = true;
-    set(DIMLAYER_PATH, 1);
+Return<RequestStatus> BiometricsFingerprint::enroll(const hidl_array<uint8_t, 69>& hat, uint32_t gid, uint32_t timeoutSec) {
+    isEnrolling = true;
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->enroll(hat, gid, timeoutSec));
 }
 
-Return<RequestStatus> BiometricsFingerprint::postEnroll()  {
-    if (mFodCircleVisible) {
-        set(DC_DIM_PATH, dcDimState);
-    }
-
-    set(DIMLAYER_PATH, 0);
-	set(FP_PRESS_PATH, 0);
-    mFodCircleVisible = false;
+Return<RequestStatus> BiometricsFingerprint::postEnroll() {
+    isEnrolling = false;
+    setFingerprintScreenState(isEnrolling);
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->postEnroll());
 }
 
-Return<uint64_t> BiometricsFingerprint::getAuthenticatorId()  {
-    ALOGE("getAuthId");
+Return<uint64_t> BiometricsFingerprint::getAuthenticatorId() {
     return mOplusBiometricsFingerprint->getAuthenticatorId();
 }
 
-Return<RequestStatus> BiometricsFingerprint::cancel()  {
-    if (mFodCircleVisible) {
-        set(DC_DIM_PATH, dcDimState);
-    }
-
-    set(DIMLAYER_PATH, 0);
-	set(FP_PRESS_PATH, 0);
-    mFodCircleVisible = false;
-
-    if (mOplusBiometricsFingerprint->cancel() == vendor::oplus::hardware::biometrics::fingerprint::V2_1::RequestStatus::SYS_OK) {
-        mOplusClientCallback->onError(mOplusBiometricsFingerprint->setNotify(mOplusClientCallback), vendor::oplus::hardware::biometrics::fingerprint::V2_1::FingerprintError::ERROR_CANCELED, 0);
-    }
+Return<RequestStatus> BiometricsFingerprint::cancel() {
+    if (isEnrolling)
+        isEnrolling = false;
+    else
+        setFingerprintScreenState(false);
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->cancel());
 }
 
-Return<RequestStatus> BiometricsFingerprint::enumerate()  {
-	RequestStatus ret = OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->enumerate());
-	mOplusBiometricsFingerprint->setActiveGroup(lastGid, lastStorePath);
-    return ret;
+Return<RequestStatus> BiometricsFingerprint::enumerate() {
+    return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->enumerate());
 }
 
-Return<RequestStatus> BiometricsFingerprint::remove(uint32_t gid, uint32_t fid)  {
-    ALOGE("remove");
+Return<RequestStatus> BiometricsFingerprint::remove(uint32_t gid, uint32_t fid) {
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->remove(gid, fid));
 }
 
-Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid,
-    const hidl_string& storePath)  {
-    ALOGE("setActiveGroup");
-	lastStorePath = storePath;
-	lastGid = gid;
+Return<RequestStatus> BiometricsFingerprint::setActiveGroup(uint32_t gid, const hidl_string& storePath) {
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->setActiveGroup(gid, storePath));
 }
 
-Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId, uint32_t gid)  {
-    if (!mFodCircleVisible) {
-        dcDimState = get(DC_DIM_PATH, 0);
-        set(DC_DIM_PATH, 0);
+Return<RequestStatus> BiometricsFingerprint::authenticate(uint64_t operationId, uint32_t gid) {
+    RequestStatus status = OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->authenticate(operationId, gid));
+    if (status == RequestStatus::SYS_OK) {
+        setFingerprintScreenState(true);
     }
-    mFodCircleVisible = true;
-
-    set(DIMLAYER_PATH, 1);
-	set(FP_PRESS_PATH, 0);
-    ALOGE("auth");
     return OplusToAOSPRequestStatus(mOplusBiometricsFingerprint->authenticate(operationId, gid));
 }
 
-} // namespace implementation
+Return<bool> BiometricsFingerprint::isUdfps(uint32_t) { return true; }
+
+Return<void> BiometricsFingerprint::onFingerDown(uint32_t, uint32_t, float, float) { return Void(); }
+
+Return<void> BiometricsFingerprint::onFingerUp() { return Void(); }
+
+}  // namespace implementation
 }  // namespace V2_3
 }  // namespace fingerprint
 }  // namespace biometrics
