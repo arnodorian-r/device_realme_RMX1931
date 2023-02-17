@@ -97,25 +97,19 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@6.0-impl \
     android.hardware.audio.common@6.0-util \
     android.hardware.soundtrigger@2.1-impl \
+    audio.bluetooth.default \
+    audio.primary.default \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler \
-    libaudioroute \
-    libbatterylistener \
-    libcirrusspkrprot \
-    libcomprcapture \
-    libexthwplugin \
-    libhdmiedid \
-    libhfp \
     libqcompostprocbundle \
     libqcomvisualizer \
     libqcomvoiceprocessing \
-    libsndmonitor \
-    libspkrprot \
-    libvolumelistener \
-    tinymix \
+    libaudio-resampler \
     libtinycompress \
-    libtinycompress.vendor
+    libvolumelistener \
+    libtinycompress \
+    libtinycompress.vendor \
+    tinymix
 
 PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/audio/vendor/,$(TARGET_COPY_OUT_VENDOR)/etc) \
