@@ -12,6 +12,7 @@ persist.vendor.audio.ras.enabled=false
 persist.vendor.audio.voicecall.speaker.stereo=true
 ro.vendor.audio.sdk.fluencetype=none
 ro.vendor.audio.sdk.ssr=false
+persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 vendor.audio_hal.in_period_size=144
 vendor.audio_hal.period_multiplier=3
 vendor.audio_hal.period_size=192
