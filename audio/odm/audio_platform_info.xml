@@ -53,6 +53,7 @@
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_STEREO" acdb_id="14"/>
         <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" acdb_id="9"/>
         <device name="SND_DEVICE_OUT_VOICE_HEADSET" acdb_id="9"/>
+        <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="43"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_TMIC" acdb_id="43"/>
         <device name="SND_DEVICE_IN_HEADSET_MIC" acdb_id="23"/>
         <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="46"/>
@@ -109,7 +110,7 @@
         <device name="SND_DEVICE_OUT_BT_A2DP_AUDIO_PLAYBACK_EFFECT" acdb_id="49"/>
         <device name="SND_DEVICE_OUT_SPEAKER_VOICE_PLAYBACK_EFFECT" acdb_id="101"/>
         <device name="SND_DEVICE_OUT_HEADPHONES_VOICE_PLAYBACK_TMGP" acdb_id="10"/>
-	<device name="SND_DEVICE_OUT_HEADPHONES_AND_BT_A2DP" acdb_id="10"/>
+        <device name="SND_DEVICE_OUT_HEADPHONES_AND_BT_A2DP" acdb_id="10"/>
         <device name="SND_DEVICE_OUT_USB_HEADPHONES_AND_BT_A2DP" acdb_id="45"/>
     </acdb_ids>
 
