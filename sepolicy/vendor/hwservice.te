@@ -1,6 +1,5 @@
 type nxpnfc_hwservice, hwservice_manager_type;
 type nxpese_hwservice, hwservice_manager_type;
 type eventprocessor_hwservice, hwservice_manager_type;
-type hal_hypnus_hwservice, hwservice_manager_type;
 type hal_dms_hwservice, hwservice_manager_type;
-type dcs_hwservice, hwservice_manager_type;
+type hal_oppo_hwservice, hwservice_manager_type;

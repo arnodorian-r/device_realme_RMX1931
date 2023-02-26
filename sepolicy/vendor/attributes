@@ -8,9 +8,9 @@ attribute nxpese;
 attribute nxpese_client;
 attribute nxpese_server;
 
-attribute hal_hypnus;
-attribute hal_hypnus_client;
-attribute hal_hypnus_server;
+attribute hal_oppo;
+attribute hal_oppo_client;
+attribute hal_oppo_server;
 
 attribute hal_dms;
 attribute hal_dms_client;

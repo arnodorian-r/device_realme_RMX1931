@@ -65,9 +65,13 @@ persist.console.silent.config   u:object_r:oppo_vendor_prop:s0
 #vendor.all.modules.ready                u:object_r:vendor_device_prop:s0
 vendor.all.devices.ready        u:object_r:vendor_device_prop:s0
 
-# Oppo FP props
-persist.vendor.fingerprint.             u:object_r:oppo_fingerprint_prop:s0
-oppo.optical.             u:object_r:oppo_fingerprint_prop:s0
-vendor.fingerprint.optical.             u:object_r:oppo_fingerprint_prop:s0
+# Optical Fingerprint
+persist.vendor.fingerprint.fp_id                u:object_r:oppo_fingerprint_prop:s0
+oppo.optical.goodix.fp                          u:object_r:oppo_fingerprint_prop:s0
+oppo.fingerprint.factory                        u:object_r:oppo_fingerprint_prop:s0
 oppo.fingerprint.gf.package.version             u:object_r:oppo_fingerprint_prop:s0
-oppo.fingerprint.factory             u:object_r:oppo_fingerprint_prop:s0
+persist.vendor.fingerprint.optical.support      u:object_r:oppo_fingerprint_prop:s0
+persist.vendor.fingerprint.optical.iconlocation u:object_r:oppo_fingerprint_prop:s0
+persist.vendor.fingerprint.optical.iconnumber   u:object_r:oppo_fingerprint_prop:s0
+persist.vendor.fingerprint.optical.iconsize     u:object_r:oppo_fingerprint_prop:s0
+vendor.fingerprint.optical.goodix.hal.retry     u:object_r:oppo_fingerprint_prop:s0
