@@ -175,7 +175,7 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub@1.0-service
 
 PRODUCT_COPY_FILES += \
-	frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
+    frameworks/native/data/etc/android.hardware.context_hub.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.context_hub.xml
 
 # CNE
 PRODUCT_PACKAGES += \
@@ -272,6 +272,8 @@ PRODUCT_PACKAGES += \
     gnss@2.0-xtwifi-inet-agent.policy
 
 PRODUCT_PACKAGES += \
+    libloc_net_iface \
+    liblocdiagiface \
     libbatching \
     libgeofencing \
     libgnss
