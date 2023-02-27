@@ -61,7 +61,6 @@ persist.vendor.camera.logInfoMask=false
 # Crypto
 ro.crypto.volume.filenames_mode=aes-256-cts
 ro.crypto.allow_encrypt_override=true
-ro.crypto.set_dun=true
 
 # IncrementalFS
 ro.incremental.enable=1
