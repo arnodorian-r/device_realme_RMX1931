@@ -306,10 +306,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/hotword-hiddenapi-package-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hotword-hiddenapi-package-whitelist.xml \
     $(LOCAL_PATH)/configs/privapp-permissions-hotword.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-hotword.xml
 
-# Insmod files
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/init.insmod.cfg:$(TARGET_COPY_OUT_VENDOR)/etc/init.insmod.cfg
-
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_SYSTEM)/usr/keylayout/gpio-keys.kl
@@ -491,7 +487,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.sh \
     init.qti.charger.sh \
     init.qti.fm.sh \
-    init.insmod.sh \
     fstab.qcom \
     init.oppo.rc \
     init.qcom.rc \
