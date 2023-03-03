@@ -1,7 +1,0 @@
-# Allow system_server to read Fast Charging status
-allow system_server vendor_sysfs_battery_supply:file { getattr open read };
-dontaudit system_server default_android_hwservice:hwservice_manager find;
-allow system_server system_server:capability { sys_module };
-
-# Allow system_server to getpgid app_zygote
-allow system_server app_zygote:process getpgid;

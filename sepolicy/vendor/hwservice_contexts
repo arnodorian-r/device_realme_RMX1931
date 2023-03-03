@@ -1,9 +1,9 @@
-vendor.nxp.nxpnfc::INxpNfc                                  u:object_r:nxpnfc_hwservice:s0
-vendor.nxp.nxpese::INxpEse                                  u:object_r:nxpese_hwservice:s0
-vendor.nxp.eventprocessor::INxpEseEvtProcessor              u:object_r:eventprocessor_hwservice:s0
-
 # Fingerprint
 vendor.oplus.hardware.biometrics.fingerprint::IBiometricsFingerprint          u:object_r:hal_fingerprint_hwservice:s0
+
+# NFC
+vendor.nxp.nxpnfc::INxpNfc                                      u:object_r:nfc_hwservice:s0
+vendor.nxp.nxpese::INxpEse                                      u:object_r:nfc_hwservice:s0
 
 # Oppo
 vendor.oplus.hardware.commondcs::ICommonDcsHalService            u:object_r:hal_oppo_hwservice:s0
@@ -16,4 +16,4 @@ vendor.oplus.hardware.appradio::IOplusAppRadio        u:object_r:hal_telephony_h
 vendor.oplus.hardware.ims::IOplusImsRadio             u:object_r:hal_telephony_hwservice:s0
 
 # Dolby
-vendor.dolby.hardware.dms::IDms          u:object_r:hal_dms_hwservice:s0
+vendor.dolby.hardware.dms::IDms                                            u:object_r:hal_dms_hwservice:s0

@@ -1,17 +1,9 @@
-# HALs
-
-attribute nxpnfc;
-attribute nxpnfc_client;
-attribute nxpnfc_server;
-
-attribute nxpese;
-attribute nxpese_client;
-attribute nxpese_server;
-
+# OPPO Hal
 attribute hal_oppo;
 attribute hal_oppo_client;
 attribute hal_oppo_server;
 
+# Dolby
 attribute hal_dms;
 attribute hal_dms_client;
 attribute hal_dms_server;

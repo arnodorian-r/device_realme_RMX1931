@@ -1,12 +1,8 @@
-# Allow rild to read, write and create files in vendor_data_file
-allow rild vendor_data_file:dir rw_dir_perms;
-allow rild vendor_data_file:file create_file_perms;
+get_prop(rild, oppo_debug_prop);
 
-get_prop(rild, engineer_vendor_prop)
-set_prop(rild, engineer_vendor_prop)
+r_dir_file(rild, proc_devinfo);
+r_dir_file(rild, proc_oppo_rf);
+r_dir_file(rild, mnt_vendor_file);
 
-# Allow rild to read and write to proc_oppo_extra
-allow rild proc_oppo_extra:dir r_dir_perms;
-allow rild proc_oppo_extra:file rw_file_perms;
+set_prop(rild, oppo_debug_prop);
 
-allow rild proc:file rw_file_perms;
