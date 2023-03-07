@@ -1,0 +1,2 @@
+allow vendor_sensors proc_oppoversion:file { read open getattr };
+

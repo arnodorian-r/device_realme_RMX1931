@@ -1,1 +1,7 @@
 allow init adsprpcd_file:file mounton;
+allow init sysfs:file { open write setattr };
+allow init sysfs_vibrator:lnk_file { read };
+allow init same_process_hal_file:file { execute };
+allow init vndbinder_device:chr_file { ioctl open read write map };
+allow init vendor_file:file { execute execute_no_trans };
+

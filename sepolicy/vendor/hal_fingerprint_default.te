@@ -7,6 +7,7 @@ allow hal_fingerprint_default goodix_device:chr_file rw_file_perms;
 allow hal_fingerprint_default uhid_device:chr_file rw_file_perms;
 allow hal_fingerprint_default vendor_qdsp_device:chr_file rw_file_perms;
 allow hal_fingerprint_default vendor_xdsp_device:chr_file rw_file_perms;
+allow hal_fingerprint_default public_adsprpcd_file:file { read open getattr };
 
 allow hal_fingerprint_default self:netlink_socket create_socket_perms_no_ioctl;
 
