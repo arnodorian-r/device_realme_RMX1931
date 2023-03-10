@@ -182,7 +182,9 @@ TARGET_RIL_VARIANT := caf
 SELINUX_IGNORE_NEVERALLOWS := true
 
 # SELinux
-include device/qcom/sepolicy_vndr/SEPolicy.mk
+TARGET_SEPOLICY_DIR := msmnile
+include device/qcom/sepolicy_vndr-legacy-um/SEPolicy.mk
+SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
 # Security patch level

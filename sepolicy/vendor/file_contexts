@@ -54,3 +54,6 @@
 
 # SecureElement
 /(vendor|odm)/bin/hw/android\.hardware\.secure_element@1\.0-service-disabled      u:object_r:hal_secure_element_default_exec:s0
+
+# Vendor File
+/(vendor|system/vendor)/lib64/libc++.so                  u:object_r:same_process_hal_file:s0

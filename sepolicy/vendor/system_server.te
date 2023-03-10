@@ -1,8 +1,2 @@
-allow system_server block_device:blk_file { read open write getattr ioctl };
 allow system_server sysfs:file { read open getattr };
-
-get_prop(system_server, oppo_debug_prop)
-get_prop(system_server, oppo_fingerprint_prop)
-get_prop(system_server, oppo_wlan_prop)
-get_prop(system_server, vendor_dolby_loglevel_prop)
 

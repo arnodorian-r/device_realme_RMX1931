@@ -1,6 +1,3 @@
-# Wlan
-wifi.active.interface                   u:object_r:exported_wifi_prop:s0
-
 # Oppo Audio props
 persist.oppo.mm.                        u:object_r:vendor_audio_prop:s0
 sys.oppo.mm.record.type                 u:object_r:vendor_audio_prop:s0
