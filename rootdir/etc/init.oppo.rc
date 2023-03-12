@@ -104,7 +104,11 @@ on boot
     chmod 0666 /sys/kernel/oppo_display/aod_light_mode_set
     chmod 0666 /sys/kernel/oppo_display/serial_number
     chmod 0666 /sys/kernel/oppo_display/hdr10
-    
+
+# Touchpanel
+    chown system system /proc/touchpanel/double_tap_enable
+    chmod 0660 /proc/touchpanel/double_tap_enable
+
     #/*Anbao.Shao@Camera.Driver 20190220 add for [aiNight]*/
     chmod 0666 /mnt/vendor/persist/camera/megvii/cache
 
