@@ -217,7 +217,7 @@ PRODUCT_PACKAGES += \
 
 # Doze
 PRODUCT_PACKAGES += \
-    OplusDoze \
+    RealmeDoze \
     devicesettings
 
 # Dolby
