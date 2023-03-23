@@ -73,7 +73,6 @@ public class DozeService extends Service {
         mProximitySensor.disable();
         mTiltSensor.disable();
         mAmdSensor.disable();
-        mFODProxCheck.disable();
     }
 
     @Override
