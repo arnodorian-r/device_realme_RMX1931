@@ -491,6 +491,7 @@ PRODUCT_PACKAGES += \
     init.qti.charger.sh \
     init.qti.fm.sh \
     fstab.qcom \
+    fstab.zram \
     init.oppo.rc \
     init.qcom.rc \
     init.qcom.usb.rc \
