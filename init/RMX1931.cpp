@@ -74,9 +74,9 @@ void set_device_props(const std::string fingerprint, const std::string descripti
 }
 
 void vendor_load_properties() {
-    char const fp[] = "realme/RMX1931/RMX1931L1:11/RKQ1.200928.002/1634728216537:user/release-keys";
-    char const fp_cn[] = "realme/RMX1931/RMX1931CN:11/RKQ1.200928.002/1634728216537:user/release-keys";
-    char const fp_desc[] = "RMX1931-user 11 RKQ1.200928.002 1634728216537 release-keys";
+    char const fp[] = "realme/RMX1931/RMX1931L1:11/RKQ1.200928.002/1621910565600:user/release-keys";
+    char const fp_cn[] = "realme/RMX1931/RMX1931CN:11/RKQ1.200928.002/1621910565600:user/release-keys";
+    char const fp_desc[] = "RMX1931-user 11 RKQ1.200928.002 1621910565600 release-keys";
 
     if (isCN()) {
         set_device_props(
