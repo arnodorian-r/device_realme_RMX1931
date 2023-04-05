@@ -15,5 +15,5 @@ Do NOT include any apps that are updatable via Play Store!
 -->
 <config>
   <hidden-api-whitelisted-app package="com.oppo.camera"/>
-  <hidden-api-whitelisted-app package="com.coloros.gallery2"/>
+  <hidden-api-whitelisted-app package="com.coloros.gallery3d"/>
 </config>
