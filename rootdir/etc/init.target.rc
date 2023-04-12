@@ -67,6 +67,8 @@ on post-fs
 
 on late-fs
     mount_all /vendor/etc/fstab.qcom --late
+    # Hack for Oversized ODM Requirements for camera
+    mount none /vendor/odm /odm bind
 
 on post-fs-data
     mkdir /vendor/data/tombstones 0771 system system
