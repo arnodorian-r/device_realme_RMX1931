@@ -56,8 +56,6 @@ ro.sf.blurs_are_expensive=1
 
 # Camera
 vendor.camera.algo.jpeghwencode=0
-vendor.camera.aux.packageexcludelist=org.telegram.messenger,org.thunderdog.challegram
-vendor.camera.aux.packagelist=com.oppo.camera
 
 # Codec2
 debug.stagefright.omx_default_rank=0
@@ -218,3 +216,5 @@ wifi.aware.interface=wifi-aware0
 persist.sys.oppo.region=IN
 ro.vendor.oppo.region.netlock=IN
 ro.vendor.oplus.regionmark=IN
+ro.com.google.lens.oem_camera_package=com.oppo.camera
+ro.oppo.market.name=realme X2 Pro
